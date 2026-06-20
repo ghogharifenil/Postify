@@ -1,8 +1,9 @@
+
 {% extends "Ac_base/ACbase.html" %}
 {% load static %}
 
 {% block head %}
-<title>Postify | Login</title>
+<title>Postify | Registration</title>
 
 <style>
 
@@ -13,10 +14,10 @@ body{
     margin:0;
 }
 
-/* login box */
+/* center box */
 .box{
-    width:380px;
-    margin:90px auto;
+    width:420px;
+    margin:80px auto;
     background:white;
     padding:30px;
     border-radius:18px;
@@ -29,7 +30,7 @@ body{
 }
 
 /* heading */
-h2{
+.box h2{
     text-align:center;
     margin-bottom:20px;
     font-size:26px;
@@ -42,11 +43,11 @@ input{
     padding:12px 14px;
     margin:10px 0;
     border:1px solid #e3e3e3;
-    border-radius:12px;
+    border-radius:10px;
     font-size:14px;
     outline:none;
-    background:#fafafa;
     transition:.3s;
+    background:#fafafa;
 }
 
 input:focus{
@@ -63,7 +64,7 @@ button{
     background:linear-gradient(135deg,#4a6cf7,#6a5af9);
     color:white;
     border:none;
-    border-radius:12px;
+    border-radius:10px;
     font-size:15px;
     font-weight:600;
     cursor:pointer;
@@ -79,26 +80,16 @@ button:hover{
 .error{
     color:#ff3b3b;
     font-size:13px;
-    text-align:center;
     margin-bottom:10px;
+    text-align:center;
 }
 
-/* helper text */
+/* small text */
 .helper{
     text-align:center;
-    font-size:12px;
+    font-size:13px;
     color:gray;
-    margin-top:15px;
-}
-
-.helper a{
-    color:#4a6cf7;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.helper a:hover{
-    text-decoration:underline;
+    margin-top:10px;
 }
 
 </style>
@@ -109,7 +100,9 @@ button:hover{
 
 <div class="box">
 
-    <h2>Welcome Back</h2>
+    <h2>Create Account</h2>
+
+    <p class="helper">Step 1 - Basic Details</p>
 
     {% if error %}
         <p class="error">{{ error }}</p>
@@ -118,17 +111,16 @@ button:hover{
     <form method="POST">
         {% csrf_token %}
 
-        <input type="text" name="username" placeholder="Username">
+        {{ form.name }}
+        {{ form.username }}
+        {{ form.email }}
+        {{ form.city }}
+        {{ form.password }}
 
-        <input type="password" name="password" placeholder="Password">
-
-        <button type="submit">Login</button>
+        <button type="submit">Continue</button>
     </form>
-
-    <div class="helper">
-        Don’t have an account? <a href="{% url 'register' %}">Create one</a>
-    </div>
 
 </div>
 
 {% endblock content %}
+

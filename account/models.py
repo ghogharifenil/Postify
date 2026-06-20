@@ -10,9 +10,9 @@ class Profile(models.Model):
         unique=True,
         default=""
     )
-
+    city = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
-
+    password = models.CharField(max_length=255)
     bio = models.TextField(blank=True)
 
     profile_pic = models.ImageField(
@@ -24,3 +24,4 @@ class Profile(models.Model):
     def __str__(self):
         return self.username
     
+
