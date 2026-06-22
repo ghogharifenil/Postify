@@ -5,12 +5,19 @@
 <title>POSTIFY | Home</title>
 
 <style>
-
 body{
     margin:0;
     padding:0;
     font-family:"Segoe UI",sans-serif;
-    background:#f4f7fb;
+
+    background:linear-gradient(
+    135deg,
+    #4facfe,
+    #00f2fe,
+    #6a11cb
+    );
+
+    min-height:100vh;
 }
 
 /* Feed container */
@@ -27,17 +34,24 @@ body{
 /* Post card */
 
 .post-card{
-    background:white;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(12px);
+
     border-radius:20px;
     padding:18px;
-    box-shadow:0 4px 20px rgba(0,0,0,.08);
-    border:1px solid #eee;
-    transition:.3s;
+
+    box-shadow:
+    0 8px 30px rgba(0,0,0,.15);
+
+    border:none;
+    transition:.4s;
 }
 
 .post-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    transform:translateY(-5px) scale(1.02);
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.25);
 }
 
 /* Header */
@@ -57,18 +71,20 @@ body{
 /* Profile */
 
 .profile-circle{
-    width:50px;
-    height:50px;
+    width:55px;
+    height:55px;
+
     border-radius:50%;
     overflow:hidden;
+
     display:flex;
     align-items:center;
     justify-content:center;
 
     background:linear-gradient(
     135deg,
-    #667eea,
-    #764ba2
+    #ff512f,
+    #dd2476
     );
 
     color:white;
@@ -89,15 +105,15 @@ body{
 }
 
 .date{
-    color:gray;
+    color:#666;
     font-size:13px;
 }
 
-/* 3 dots */
+/* dots */
 
 .post-menu{
     font-size:24px;
-    color:#777;
+    color:#555;
     cursor:pointer;
     padding:5px 10px;
     border-radius:50%;
@@ -105,8 +121,8 @@ body{
 }
 
 .post-menu:hover{
-    background:#f1f1f1;
-    color:black;
+    background:#ececff;
+    color:#6a11cb;
 }
 
 /* Body */
@@ -117,23 +133,23 @@ body{
 
 .post-title{
     font-size:22px;
-    color:#222;
+    color:#6a11cb;
     margin-bottom:10px;
 }
 
 .post-content{
-    color:#555;
+    color:#444;
     line-height:1.7;
 }
 
 .read-more{
     text-decoration:none;
-    color:#4a6cf7;
+    color:#ff512f;
     font-weight:bold;
 }
 
 .read-more:hover{
-    text-decoration:underline;
+    color:#dd2476;
 }
 
 /* Buttons */
@@ -148,61 +164,49 @@ body{
 .delete-btn{
     text-decoration:none;
     padding:10px 16px;
-    border-radius:10px;
+    border-radius:12px;
     font-size:14px;
     font-weight:600;
     transition:.3s;
 }
 
 .edit-btn{
-    background:#edf2ff;
-    color:#4a6cf7;
+    background:linear-gradient(
+    135deg,
+    #667eea,
+    #764ba2
+    );
+
+    color:white;
 }
 
 .edit-btn:hover{
-    background:#4a6cf7;
-    color:white;
+    transform:scale(1.05);
 }
 
 .delete-btn{
-    background:#ffeaea;
-    color:red;
+    background:linear-gradient(
+    135deg,
+    #ff416c,
+    #ff4b2b
+    );
+
+    color:white;
 }
 
 .delete-btn:hover{
-    background:red;
-    color:white;
+    transform:scale(1.05);
 }
 
 /* No post */
 
 .no-post{
     background:white;
-    padding:30px;
     border-radius:20px;
+    padding:30px;
     text-align:center;
-    color:gray;
+    font-size:18px;
 }
-
-/* Mobile */
-
-@media(max-width:700px){
-
-.feed-container{
-width:95%;
-}
-
-.post-title{
-font-size:18px;
-}
-
-.profile-circle{
-width:45px;
-height:45px;
-}
-
-}
-
 </style>
 
 {% endblock %}

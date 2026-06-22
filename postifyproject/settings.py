@@ -122,3 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Session browser close pachi pan rahe
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Session ketla time sudhi valid rahe (example: 30 days)
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30

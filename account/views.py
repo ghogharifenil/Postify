@@ -1,12 +1,20 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from .models import Profile
 from .forms import RegisterStep1Form, RegisterStep2Form
 
+
+# Landing Page
 def landing(request):
-    return render(request,"profile/landing.html")
+
+    # Jo user login hoy to direct home par moklo
+    if request.session.get("profile_id"):
+        return redirect("home")
+
+    return render(request, "profile/landing.html")
 
 
+# Register Step 1
 def register_step1(request):
 
     if request.method == "POST":
@@ -16,12 +24,10 @@ def register_step1(request):
         if form.is_valid():
 
             user = Profile.objects.create(
-
                 name=form.cleaned_data["name"],
                 username=form.cleaned_data["username"],
                 email=form.cleaned_data["email"],
                 city=form.cleaned_data["city"],
-
                 password=make_password(
                     form.cleaned_data["password"]
                 )
@@ -34,8 +40,14 @@ def register_step1(request):
     else:
         form = RegisterStep1Form()
 
-    return render(request, "profile/register_step1.html", {"form": form})
+    return render(
+        request,
+        "profile/register_step1.html",
+        {"form": form}
+    )
 
+
+# Register Step 2
 def register_step2(request):
 
     customer_id = request.session.get("customer_id")
@@ -43,28 +55,47 @@ def register_step2(request):
     if not customer_id:
         return redirect("register_step1")
 
-    user = Profile.objects.get(id=customer_id)
+    try:
+        user = Profile.objects.get(id=customer_id)
+
+    except Profile.DoesNotExist:
+        return redirect("register_step1")
 
     if request.method == "POST":
 
-        form = RegisterStep2Form(request.POST, request.FILES)
+        form = RegisterStep2Form(
+            request.POST,
+            request.FILES
+        )
 
         if form.is_valid():
 
             user.bio = form.cleaned_data["bio"]
             user.profile_pic = form.cleaned_data["profile_pic"]
+
             user.save()
+
+            # Registration session remove
+            del request.session["customer_id"]
 
             return redirect("login")
 
     else:
         form = RegisterStep2Form()
 
-    return render(request, "profile/register_step2.html", {"form": form})
+    return render(
+        request,
+        "profile/register_step2.html",
+        {"form": form}
+    )
 
-from django.contrib.auth.hashers import check_password
 
+# Login
 def login(request):
+
+    # Jo pehla thi login hoy to login page na dekhado
+    if request.session.get("profile_id"):
+        return redirect("home")
 
     if request.method == "POST":
 
@@ -72,29 +103,69 @@ def login(request):
         password = request.POST.get("password")
 
         try:
-            user = Profile.objects.get(username=username)
+            user = Profile.objects.get(
+                username=username
+            )
 
-            if check_password(password, user.password):
+            if check_password(
+                password,
+                user.password
+            ):
 
                 request.session["profile_id"] = user.id
-                request.session['profile_pic'] = user.profile_pic.url
                 request.session["profile_name"] = user.name
+
+                if user.profile_pic:
+                    request.session["profile_pic"] = user.profile_pic.url
+
+                # 30 divas sudhi login rahe
+                request.session.set_expiry(
+                    60 * 60 * 24 * 30
+                )
 
                 return redirect("home")
 
             else:
-                return render(request, "profile/login.html", {
-                    "error": "Invalid password"
-                })
+
+                return render(
+                    request,
+                    "profile/login.html",
+                    {
+                        "error": "Invalid password"
+                    }
+                )
 
         except Profile.DoesNotExist:
 
-            return render(request, "profile/login.html", {
-                "error": "User not found"
-            })
+            return render(
+                request,
+                "profile/login.html",
+                {
+                    "error": "User not found"
+                }
+            )
 
-    return render(request, "profile/login.html")
+    return render(
+        request,
+        "profile/login.html"
+    )
 
+
+# Logout
 def logout(request):
+
     request.session.flush()
+
     return redirect("landing")
+
+
+# Home page protection
+def home(request):
+
+    if not request.session.get("profile_id"):
+        return redirect("login")
+
+    return render(
+        request,
+        "profile/home.html"
+    )
