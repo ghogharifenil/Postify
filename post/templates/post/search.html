@@ -1,0 +1,190 @@
+{% extends 'base/base.html' %}
+{% block head %}
+  <style>
+    .search-title {
+      color: white;
+    
+      font-size: 30px;
+    
+      font-weight: 700;
+    
+      margin-bottom: 25px;
+    
+      text-align: center;
+    }
+    
+    .search-title span {
+      color: #ffcc70;
+    }
+    
+    .post-card {
+      background: rgba(255, 255, 255, 0.95);
+    
+      padding: 22px;
+    
+      border-radius: 20px;
+    
+      margin-bottom: 20px;
+    
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    
+      transition: 0.4s;
+    
+      color: #222;
+    }
+    
+    .post-card:hover {
+      transform: translateY(-5px);
+    
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+    }
+    
+    .post-card h3 {
+      font-size: 22px;
+    
+      margin-bottom: 12px;
+    
+      color: #6a11cb;
+    }
+    
+    .post-card p {
+      font-size: 15px;
+    
+      line-height: 1.7;
+    
+      margin-bottom: 10px;
+    }
+    
+    .author {
+      font-weight: bold;
+    
+      color: #ff512f;
+    }
+    
+    .no-result {
+      background: rgba(255, 255, 255, 0.95);
+    
+      padding: 30px;
+    
+      border-radius: 20px;
+    
+      text-align: center;
+    
+      font-size: 22px;
+    
+      color: #444;
+    }
+    .user-card {
+      background: rgba(255, 255, 255, 0.95);
+    
+      padding: 25px;
+    
+      border-radius: 20px;
+    
+      margin-bottom: 25px;
+    
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    
+      color: black;
+    }
+    
+    .user-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .user-pic {
+      width: 90px;
+      height: 90px;
+    
+      border-radius: 50%;
+    
+      object-fit: cover;
+    }
+    
+    .default {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+      font-size: 35px;
+    
+      color: white;
+    
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+    }
+    .profile-circle {
+      width: 55px;
+      height: 55px;
+    
+      border-radius: 50%;
+      overflow: hidden;
+    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+    
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .username {
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+    }
+  </style>
+{% endblock %}
+{% block content %}
+  <h2 class="search-title">
+    Search :
+    <span>{{ query }}</span>
+  </h2>
+  {% if profile %}
+    <div class="user-card">
+      <div class="user-left">
+        {% if profile.profile_pic %}
+          <img src="{{ profile.profile_pic.url }}" class="user-pic" />
+        {% else %}
+          <div class="user-pic default">{{ profile.name|first|upper }}</div>
+        {% endif %}
+        
+        <div>
+          <h2>{{ profile.name }}</h2>
+
+          <p>@{{ profile.username }}</p>
+
+          <p>Posts : {{ profile.posts.count }}</p>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  {% for post in posts %}
+    <div class="post-card">
+      <div class="profile-circle">
+        {% if post.user.profile_pic %}
+          <img src="{{ post.user.profile_pic.url }}" class="profile-img" />
+        {% else %}
+          {{ post.user.name|first|upper }}
+        {% endif %}
+        
+      </div>
+       <p class="author">{{ post.user.name }}</p>
+      <h3>{{ post.title }}</h3>
+
+      <p>{{ post.content }}</p>
+    </div>
+  {% empty %}
+    <div class="no-result">No results found 🔍</div>
+  {% endfor %}
+{% endblock %}

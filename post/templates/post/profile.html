@@ -1,0 +1,258 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+  <style>
+    .profile-layout {
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
+    }
+    
+    /* LEFT PROFILE */
+    
+    .profile-left {
+      width: 30%;
+    
+      background: white;
+    
+      padding: 30px;
+    
+      border-radius: 25px;
+    
+      position: sticky;
+    
+      top: 100px;
+    
+      text-align: center;
+    
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+    
+      border-radius: 50%;
+    
+      object-fit: cover;
+    
+      margin-bottom: 15px;
+    }
+    
+    .default-pic {
+      width: 140px;
+      height: 140px;
+    
+      border-radius: 50%;
+    
+      margin: auto;
+    
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
+      font-size: 45px;
+    
+      color: white;
+    
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+    
+      margin-bottom: 15px;
+    }
+    
+    .profile-name {
+      font-size: 25px;
+    
+      font-weight: 700;
+    
+      color: #333;
+    }
+    
+    .profile-posts {
+      margin-top: 15px;
+    
+      font-size: 18px;
+    
+      color: #666;
+    }
+    
+    /* RIGHT POSTS */
+    
+    .profile-right {
+      width: 70%;
+    
+      display: flex;
+      flex-direction: column;
+    
+      gap: 20px;
+    }
+    
+    .post-card {
+      background: white;
+    
+      padding: 20px;
+    
+      border-radius: 20px;
+    
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .post-title {
+      color: #6a11cb;
+    
+      margin-bottom: 10px;
+    }
+    
+    .post-image {
+      width: 100%;
+    
+      max-height: 300px;
+    
+      object-fit: contain;
+    
+      margin-top: 15px;
+    
+      border-radius: 15px;
+    }
+    
+    .post-actions {
+      margin-top: 15px;
+    
+      display: flex;
+    
+      gap: 10px;
+    }
+    
+    .edit-btn,
+    .delete-btn {
+      padding: 10px 15px;
+    
+      border-radius: 10px;
+    
+      text-decoration: none;
+    
+      color: white;
+    
+      font-weight: bold;
+    }
+    
+    .edit-btn {
+      background: #667eea;
+    }
+    
+    .delete-btn {
+      background: #ff4b2b;
+    }
+    .post-content {
+      margin-top: 10px;
+    
+      line-height: 1.8;
+    
+      font-size: 15px;
+    
+      color: #444;
+    
+      word-wrap: break-word;
+    }
+    
+.post-actions{
+
+margin-top:18px;
+
+display:flex;
+
+gap:10px;
+
+}
+
+.edit-btn,
+.delete-btn{
+
+text-decoration:none;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+font-size:14px;
+
+font-weight:600;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.edit-btn{
+
+background:linear-gradient(
+135deg,
+#667eea,
+#764ba2
+);
+
+}
+
+.delete-btn{
+
+background:linear-gradient(
+135deg,
+#ff416c,
+#ff4b2b
+);
+
+}
+
+.edit-btn:hover,
+.delete-btn:hover{
+
+transform:translateY(-4px);
+
+}
+
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="profile-layout">
+    <!-- LEFT -->
+
+    <div class="profile-left">
+      {% if current_user.profile_pic %}
+        <img src="{{ current_user.profile_pic.url }}" class="profile-pic" />
+      {% else %}
+        <div class="default-pic">{{ current_user.name|first|upper }}</div>
+      {% endif %}
+
+      <div class="profile-name">{{ current_user.name }}</div>
+
+      <div class="profile-posts">Posts : {{ posts.count }}</div>
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="profile-right">
+      {% for post in posts %}
+        <div class="post-card">
+          <h2 class="post-title">{{ post.title }}</h2>
+
+          <p class="post-content">{{ post.content|truncatechars:100 }}</p>
+
+          {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-image" />
+          {% endif %}
+
+          <div class="post-actions">
+            <a href="#" class="edit-btn">✏ Edit</a>
+
+            <a href="#" class="delete-btn">🗑 Delete</a>
+          </div>
+        </div>
+      {% empty %}
+        <div class="post-card">No posts yet 🚀</div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

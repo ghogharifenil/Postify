@@ -1,0 +1,154 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+  <title>POSTIFY | Profile</title>
+
+  <style>
+    .profile-box {
+      background: white;
+      padding: 30px;
+    
+      border-radius: 20px;
+    
+      text-align: center;
+    
+      max-width: 700px;
+    
+      margin: auto;
+    
+      color: black;
+    }
+    
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+    
+      border-radius: 50%;
+    
+      object-fit: cover;
+    
+      margin-bottom: 15px;
+    }
+    
+    .post-card {
+      background: white;
+    
+      padding: 20px;
+    
+      margin-top: 20px;
+    
+      border-radius: 15px;
+    
+      color: black;
+    
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .post-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    
+      color: #6a11cb;
+    }
+    .post-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .edit-btn,
+    .delete-btn {
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    
+    .edit-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    
+      color: white;
+    }
+    
+    .edit-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    .delete-btn {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    
+      color: white;
+    }
+    
+    .delete-btn:hover {
+      transform: scale(1.05);
+    }
+    .post-image {
+
+    
+      width: auto;
+      max-width: 300px;
+    
+      height: auto;
+      max-height: 250px;
+    
+      margin: 15px auto;
+    
+      border-radius: 15px;
+    
+      object-fit: contain;
+    
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="profile-box">
+    {% if profile_user.profile_pic %}
+      <img src="{{ profile_user.profile_pic.url }}" class="profile-pic" />
+    {% else %}
+      <div style="
+width:120px;
+height:120px;
+border-radius:50%;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+color:white;
+background:linear-gradient(135deg,#ff512f,#dd2476);
+">{{ profile_user.name|first|upper }}</div>
+    {% endif %}
+
+    <h2>{{ profile_user.name }}</h2>
+
+    <p>Total Posts : {{ posts.count }}</p>
+  </div>
+
+  {% for post in posts %}
+    <div class="post-card">
+      <h3 class="post-title">{{ post.title }}</h3>
+
+      <p>{{ post.content }}</p>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="post-image" />
+      {% endif %}
+      {% if current_user.id == post.user.id %}
+        <div class="post-actions">
+          <a href="#" class="edit-btn">✏ Edit</a>
+
+          <a href="#" class="delete-btn">🗑 Delete</a>
+        </div>
+      {% endif %}
+    </div>
+  {% empty %}
+    <div class="post-card">
+      <h3>No posts yet 🚀</h3>
+    </div>
+  {% endfor %}
+{% endblock %}
