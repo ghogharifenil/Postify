@@ -1,4 +1,3 @@
-
 {% extends "Ac_base/ACbase.html" %}
 {% load static %}
 
@@ -6,218 +5,131 @@
 <title>Postify | Registration</title>
 
 <style>
-/* background */
 
+/* BACKGROUND (same app theme) */
 body{
 font-family:"Segoe UI",sans-serif;
-
-background:linear-gradient(
-135deg,
-#4facfe,
-#00f2fe,
-#6a11cb
-);
-
 min-height:100vh;
 margin:0;
 
 display:flex;
 justify-content:center;
 align-items:center;
+
+background:linear-gradient(135deg,#1e1e2f,#2c2c44);
 }
 
-
-/* center box */
-
+/* GLASS BOX */
 .box{
-
 width:430px;
+padding:40px;
 
-background:rgba(255,255,255,.15);
-
-backdrop-filter:blur(18px);
-
-padding:35px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(14px);
 
 border-radius:25px;
 
-border:1px solid rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,0.08);
 
-box-shadow:
-0 10px 40px rgba(0,0,0,.2);
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
 
-transition:.4s;
+transition:.3s;
 
+text-align:center;
 }
-
 
 .box:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 15px 45px rgba(0,0,0,.3);
-
+transform:translateY(-5px);
 }
 
-
-/* heading */
-
+/* TITLE */
 .box h2{
-
-text-align:center;
-
-margin-bottom:10px;
-
-font-size:30px;
-
-font-weight:800;
-
 color:white;
-
+font-size:30px;
+font-weight:800;
+margin-bottom:8px;
 }
 
-
-/* helper */
-
+/* SUB TEXT */
 .helper{
-
-text-align:center;
-
-font-size:14px;
-
-color:rgba(255,255,255,.8);
-
+color:#bdbdbd;
+font-size:13px;
 margin-bottom:25px;
-
 }
 
-
-/* inputs */
-
+/* INPUTS */
 input{
-
 width:100%;
-
 padding:14px 16px;
 
-margin:12px 0;
+margin:10px 0;
 
 border:none;
-
 border-radius:14px;
 
 font-size:14px;
 
 outline:none;
 
-background:rgba(255,255,255,.2);
-
+background:rgba(255,255,255,0.08);
 color:white;
 
-transition:.4s;
-
+transition:.3s;
 }
-
-
-/* placeholder */
 
 input::placeholder{
-
-color:rgba(255,255,255,.7);
-
+color:rgba(255,255,255,0.6);
 }
-
 
 input:focus{
-
-background:white;
-
-color:#333;
-
-box-shadow:
-0 0 0 4px rgba(255,255,255,.3);
-
+background:rgba(255,255,255,0.15);
+box-shadow:0 0 0 3px rgba(74,108,247,0.3);
 }
 
-
-/* button */
-
+/* BUTTON */
 button{
-
 width:100%;
-
 padding:14px;
 
 margin-top:18px;
 
 border:none;
-
 border-radius:14px;
 
 font-size:15px;
-
 font-weight:700;
 
 cursor:pointer;
 
-background:linear-gradient(
-135deg,
-#ff512f,
-#dd2476
-);
-
+background:linear-gradient(135deg,#4a6cf7,#6a11cb);
 color:white;
 
-transition:.4s;
-
+transition:.3s;
 }
-
 
 button:hover{
-
 transform:translateY(-3px);
-
-box-shadow:
-0 12px 25px rgba(221,36,118,.4);
-
+box-shadow:0 12px 25px rgba(74,108,247,0.35);
 }
 
-
-/* error */
-
+/* ERROR */
 .error{
-
-background:rgba(255,0,0,.15);
-
+background:rgba(255,0,0,0.15);
+color:#ffb3b3;
 padding:10px;
-
 border-radius:10px;
-
-text-align:center;
-
+font-size:13px;
 margin-bottom:15px;
-
-color:white;
-
-font-size:14px;
-
 }
 
-
-/* responsive */
-
+/* MOBILE */
 @media(max-width:500px){
-
 .box{
-
 width:90%;
-
 padding:25px;
-
+}
 }
 
-}
 </style>
 
 {% endblock head %}
@@ -227,8 +139,7 @@ padding:25px;
 <div class="box">
 
     <h2>Create Account</h2>
-
-    <p class="helper">Step 1 - Basic Details</p>
+    <p class="helper">Join POSTIFY community</p>
 
     {% if error %}
         <p class="error">{{ error }}</p>
@@ -249,4 +160,3 @@ padding:25px;
 </div>
 
 {% endblock content %}
-

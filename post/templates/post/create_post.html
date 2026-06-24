@@ -7,23 +7,31 @@
 
 <style>
 
+body{
+background:#27262E;
+}
+
+/* CONTAINER */
+
 .create-container{
 
 max-width:700px;
 margin:auto;
 
-background:rgba(255,255,255,.95);
+background:#32313B;
 
 padding:35px;
 
 border-radius:25px;
 
 box-shadow:
-0 10px 35px rgba(0,0,0,.2);
+0 10px 35px rgba(0,0,0,.35);
 
-color:black;
+color:white;
 
 }
+
+/* TITLE */
 
 .create-title{
 
@@ -35,9 +43,11 @@ font-weight:700;
 
 margin-bottom:25px;
 
-color:#6a11cb;
+color:#E19C63;
 
 }
+
+/* FORM */
 
 .form-group{
 
@@ -55,9 +65,11 @@ font-weight:700;
 
 font-size:16px;
 
-color:#444;
+color:#d8d8d8;
 
 }
+
+/* INPUT */
 
 .form-control{
 
@@ -71,22 +83,40 @@ outline:none;
 
 border-radius:15px;
 
-background:#f2f3f7;
+background:#27262E;
+
+color:white;
 
 font-size:15px;
 
 transition:.4s;
 
+box-sizing:border-box;
+
 }
+
+/* PLACEHOLDER */
+
+.form-control::placeholder{
+
+color:#999;
+
+}
+
+/* FOCUS */
 
 .form-control:focus{
 
 box-shadow:
-0 0 0 3px rgba(106,17,203,.2);
+0 0 0 3px rgba(139,165,190,.4);
 
 transform:scale(1.01);
 
+border:1px solid #8BA5BE;
+
 }
+
+/* TEXTAREA */
 
 textarea.form-control{
 
@@ -95,6 +125,17 @@ resize:none;
 height:200px;
 
 }
+
+/* FILE INPUT */
+
+input[type=file]{
+
+padding:12px;
+cursor:pointer;
+
+}
+
+/* BUTTON */
 
 .post-btn{
 
@@ -116,20 +157,30 @@ color:white;
 
 background:linear-gradient(
 135deg,
-#ff512f,
-#dd2476
+#E19C63,
+#8BA5BE
 );
 
 transition:.4s;
 
 }
 
+/* BUTTON HOVER */
+
 .post-btn:hover{
 
 transform:translateY(-4px);
 
 box-shadow:
-0 8px 25px rgba(0,0,0,.25);
+0 8px 25px rgba(0,0,0,.35);
+
+}
+
+/* ICON */
+
+.post-btn i{
+
+margin-right:8px;
 
 }
 

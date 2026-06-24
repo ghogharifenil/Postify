@@ -1,60 +1,203 @@
+```html
 {% extends 'base/base.html' %}
 {% load static %}
 
 {% block head %}
-
 <title>POSTIFY | Home</title>
 
 <style>
 
-.home-layout{
-display:flex;
-gap:25px;
-align-items:flex-start;
+body{
+background:#27262E;
+margin:0;
+padding:0;
+font-family:"Segoe UI",sans-serif;
+overflow-x:hidden;
 }
 
-/* LEFT FEED */
+
+/* MAIN */
+
+.home-layout{
+
+display:flex;
+gap:25px;
+padding:20px;
+align-items:flex-start;
+
+}
+
+
+/* FEED */
 
 .feed-container{
+
 width:65%;
 display:flex;
 flex-direction:column;
 gap:20px;
+
 }
 
-/* POST CARD */
+
+/* TOP USERS */
+
+.top-container{
+
+background:#32313B;
+padding:20px;
+border-radius:20px;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+}
+
+
+.top-heading{
+
+font-size:22px;
+font-weight:700;
+
+margin-bottom:20px;
+
+color:#E19C63;
+
+}
+
+
+.top-users{
+
+display:flex;
+gap:20px;
+
+overflow-x:auto;
+
+padding:10px 0;
+
+scrollbar-width:none;
+
+}
+
+
+.top-users::-webkit-scrollbar{
+
+display:none;
+
+}
+
+
+.user-item{
+
+display:flex;
+flex-direction:column;
+align-items:center;
+
+text-decoration:none;
+
+min-width:80px;
+
+transition:.4s;
+
+}
+
+
+.user-item:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+.user-round{
+
+width:75px;
+height:75px;
+
+border-radius:50%;
+
+overflow:hidden;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+border:3px solid #E19C63;
+
+background:linear-gradient(
+135deg,
+#E19C63,
+#8BA5BE
+);
+
+color:white;
+
+font-weight:bold;
+
+font-size:22px;
+
+}
+
+
+.user-round img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+
+.user-name{
+
+margin-top:8px;
+
+font-size:13px;
+font-weight:600;
+
+color:white;
+
+}
+
+
+/* POST */
 
 .post-card{
 
-background:white;
+background:#32313B;
+
 padding:20px;
 
 border-radius:20px;
 
 cursor:pointer;
 
-box-shadow:0 8px 25px rgba(0,0,0,.15);
-
 transition:.4s;
 
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+overflow:hidden;
+
 }
+
 
 .post-card:hover{
 
-transform:translateY(-8px) scale(1.02);
-
-box-shadow:
-0 15px 35px rgba(0,0,0,.25);
+transform:translateY(-5px);
 
 }
+
 
 .post-header{
 
 display:flex;
-justify-content:space-between;
 align-items:center;
 
+justify-content:space-between;
+
 }
+
 
 .user-info{
 
@@ -64,188 +207,148 @@ gap:12px;
 
 }
 
+
 .profile-circle{
 
 width:55px;
 height:55px;
 
 border-radius:50%;
+
 overflow:hidden;
 
 display:flex;
+
 justify-content:center;
 align-items:center;
 
 background:linear-gradient(
 135deg,
-#ff512f,
-#dd2476
+#E19C63,
+#8BA5BE
 );
 
 color:white;
+
 font-weight:bold;
 
 }
+
 
 .profile-img{
 
 width:100%;
 height:100%;
+
 object-fit:cover;
 
 }
+
 
 .username{
 
 font-size:16px;
 font-weight:700;
-color:black;
+
+color:white;
 
 }
+
 
 .date{
 
 font-size:13px;
-color:gray;
+color:#bbb;
 
 }
+
 
 .post-title{
 
 margin:15px 0;
-color:#6a11cb;
+
+color:#E19C63;
 
 }
+
 
 .post-content{
 
-line-height:1.6;
-color:#444;
+line-height:1.7;
+
+color:#ddd;
 
 }
 
+
 .post-image{
 
-display:block;
+width:100%;
 
-max-width:300px;
-max-height:250px;
+max-height:300px;
 
-margin:15px auto;
+margin-top:15px;
 
 border-radius:15px;
 
 object-fit:contain;
 
-transition:.4s;
-
-}
-
-.post-image:hover{
-
-transform:scale(1.05);
-
-}
-
-/* BUTTONS */
-
-.post-actions{
-
-margin-top:18px;
-
-display:flex;
-
-gap:10px;
-
-}
-
-.edit-btn,
-.delete-btn{
-
-text-decoration:none;
-
-padding:10px 16px;
-
-border-radius:12px;
-
-font-size:14px;
-
-font-weight:600;
-
-color:white;
-
-transition:.3s;
-
-}
-
-.edit-btn{
-
-background:linear-gradient(
-135deg,
-#667eea,
-#764ba2
-);
-
-}
-
-.delete-btn{
-
-background:linear-gradient(
-135deg,
-#ff416c,
-#ff4b2b
-);
-
-}
-
-.edit-btn:hover,
-.delete-btn:hover{
-
-transform:translateY(-4px);
-
 }
 
 
-/* RIGHT PANEL */
+/* SIDE PANEL */
 
 .side-post{
 
 width:35%;
 
-background:white;
-
-border-radius:25px;
+background:#32313B;
 
 padding:25px;
 
+border-radius:20px;
+
+display:none;
+
 position:sticky;
 
-top:100px;
-
-height:85vh;
-
-overflow-y:auto;
-
-transform:translateX(120%);
-
-opacity:0;
-
-transition:
-transform .5s ease,
-opacity .5s ease;
+top:150px;
 
 box-shadow:
-0 10px 35px rgba(0,0,0,.25);
+0 10px 35px rgba(0,0,0,.4);
 
 }
+
 
 .side-post.show{
 
-transform:translateX(0);
+display:block;
+
+animation:slide .4s;
+
+}
+
+
+@keyframes slide{
+
+from{
+
+opacity:0;
+
+transform:translateX(50px);
+
+}
+
+to{
 
 opacity:1;
 
+transform:translateX(0);
+
 }
+
+}
+
 
 .close-side{
 
@@ -255,36 +358,32 @@ font-size:35px;
 
 cursor:pointer;
 
-transition:.3s;
-color: #444;
-}
-
-.close-side:hover{
-
-transform:rotate(90deg);
+color:#E19C63;
 
 }
+
 
 .popup-title{
 
 margin:20px 0;
 
-color:#6a11cb;
+color:#E19C63;
 
 }
+
 
 .popup-text{
 
 line-height:1.8;
-color:#444;
+
+color:#d8d8d8;
 
 }
+
 
 .popup-image{
 
 width:100%;
-
-max-height:400px;
 
 margin-top:20px;
 
@@ -292,31 +391,32 @@ border-radius:15px;
 
 object-fit:contain;
 
+}
 
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.home-layout{
+
+flex-direction:column;
 
 }
 
-@keyframes zoom{
+.feed-container,
+.side-post{
 
-from{
-
-opacity:0;
-transform:scale(.8);
-
-}
-
-to{
-
-opacity:1;
-transform:scale(1);
+width:100%;
 
 }
 
 }
 
 </style>
-
 {% endblock %}
+
+
 
 {% block content %}
 
@@ -324,18 +424,63 @@ transform:scale(1);
 
 <div class="feed-container">
 
+
+<div class="top-container">
+
+<div class="top-heading">
+
+🔥 Top Creators
+
+</div>
+
+<div class="top-users">
+
+{% for user in top_users %}
+
+<a href="{% url 'user_profile' user.id %}"
+
+class="user-item">
+
+<div class="user-round">
+
+{% if user.profile_pic %}
+
+<img src="{{user.profile_pic.url}}">
+
+{% else %}
+
+{{user.name|first|upper}}
+
+{% endif %}
+
+</div>
+
+<div class="user-name">
+
+{{user.name}}
+
+</div>
+
+</a>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
 {% for post in posts %}
 
 <div class="post-card"
 
+onclick="openPost(this)"
+
 data-name="{{post.user.name}}"
 data-date="{{post.created_at|date:'d M Y'}}"
-data-title="{{post.title|escapejs}}"
-data-content="{{post.content|escapejs}}"
+data-title="{{post.title}}"
+data-content="{{post.content}}"
 data-image="{% if post.image %}{{post.image.url}}{% endif %}"
-data-profile="{% if post.user.profile_pic %}{{post.user.profile_pic.url}}{% endif %}"
-
-onclick="openPost(this)"
 
 >
 
@@ -343,24 +488,36 @@ onclick="openPost(this)"
 
 <div class="user-info">
 
+<a href="{% url 'user_profile' post.user.id %}">
+
 <div class="profile-circle">
 
-{% if post.user.profile_pic %} <img src="{{post.user.profile_pic.url}}" class="profile-img">
+{% if post.user.profile_pic %}
+
+<img src="{{post.user.profile_pic.url}}"
+class="profile-img">
+
 {% else %}
+
 {{post.user.name|first|upper}}
+
 {% endif %}
 
 </div>
+
+</a>
 
 <div>
 
 <div class="username">
+
 {{post.user.name}}
+
 </div>
 
 <div class="date">
+
 {{post.created_at|date:'d M Y'}}
-</div>
 
 </div>
 
@@ -368,43 +525,28 @@ onclick="openPost(this)"
 
 </div>
 
-<div class="post-body">
+</div>
+
 
 <h3 class="post-title">
+
 {{post.title}}
+
 </h3>
 
 <p class="post-content">
+
 {{post.content|truncatechars:100}}
+
 </p>
 
-{% if post.image %} <img src="{{post.image.url}}" class="post-image">
-{% endif %}
+{% if post.image %}
 
-{% if current_user.id == post.user.id %}
+<img src="{{post.image.url}}"
 
-<div class="post-actions"
-onclick="event.stopPropagation()">
-
-<a href="#"
-class="edit-btn">
-
-✏ Edit
-
-</a>
-
-<a href="#"
-class="delete-btn">
-
-🗑 Delete
-
-</a>
-
-</div>
+class="post-image">
 
 {% endif %}
-
-</div>
 
 </div>
 
@@ -412,56 +554,54 @@ class="delete-btn">
 
 </div>
 
+
+
 <div class="side-post"
+
 id="sidePost">
 
 <span
+
 class="close-side"
-onclick="closePost()">
+
+onclick="closePost()"
+
+>
 
 ×
 
 </span>
 
-<div class="popup-header">
-
-<div class="user-info">
-
-<div class="profile-circle"
-id="detailProfile">
-</div>
-
-<div>
-
 <div class="username"
-id="detailName">
-</div>
+
+id="detailName"></div>
 
 <div class="date"
-id="detailDate">
-</div>
 
-</div>
+id="detailDate"></div>
 
-</div>
+<h2
 
-</div>
+class="popup-title"
 
-<h2 class="popup-title"
-id="detailTitle">
-</h2>
+id="detailTitle"></h2>
 
-<p class="popup-text"
-id="detailContent">
-</p>
+<p
+
+class="popup-text"
+
+id="detailContent"></p>
 
 <img
+
 id="detailImage"
+
 class="popup-image">
 
 </div>
 
 </div>
+
 
 <script>
 
@@ -476,26 +616,17 @@ panel.classList.add(
 "show"
 );
 
-document.getElementById(
-"detailName"
-).innerText=
+detailName.innerText=
 card.dataset.name;
 
-document.getElementById(
-"detailDate"
-).innerText=
+detailDate.innerText=
 card.dataset.date;
 
-document.getElementById(
-"detailTitle"
-).innerText=
+detailTitle.innerText=
 card.dataset.title;
 
-document.getElementById(
-"detailContent"
-).innerText=
+detailContent.innerText=
 card.dataset.content;
-
 
 let img=
 document.getElementById(
@@ -510,29 +641,11 @@ card.dataset.image;
 img.style.display=
 "block";
 
-}else{
+}
+else{
 
 img.style.display=
 "none";
-
-}
-
-
-let profile=
-document.getElementById(
-"detailProfile"
-);
-
-if(card.dataset.profile){
-
-profile.innerHTML=
-
-`<img src="${card.dataset.profile}" class="profile-img">`;
-
-}else{
-
-profile.innerHTML=
-card.dataset.name[0];
 
 }
 
@@ -554,3 +667,4 @@ document
 </script>
 
 {% endblock %}
+```

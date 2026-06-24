@@ -3,26 +3,30 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from .models import Post , Profile
 from django.db.models import Q
+from django.db.models import Count
 
 def home(request):
-    
 
-    current_user = None
 
-    if request.session.get("profile_id"):
-        current_user = Profile.objects.get(
-            id=request.session["profile_id"]
-        )
+   
 
     posts = Post.objects.all().order_by('-created_at')
+
+    top_users = Profile.objects.annotate(
+        total_posts=Count('posts')
+    ).order_by('-total_posts')[:10]
+
+    context={
+
+        "posts":posts,
+        "top_users":top_users,
+       
+    }
 
     return render(
         request,
         "post/home.html",
-        {
-            "posts": posts,
-            "current_user": current_user
-        }
+        context
     )
 
 

@@ -5,17 +5,11 @@
 <title>Postify | Login</title>
 
 <style>
-/* background */
+
+/* BACKGROUND */
 
 body{
 font-family:"Segoe UI",sans-serif;
-
-background:linear-gradient(
-135deg,
-#4facfe,
-#00f2fe,
-#6a11cb
-);
 
 margin:0;
 min-height:100vh;
@@ -23,49 +17,50 @@ min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+
+background:linear-gradient(
+135deg,
+#1e1e2f,
+#2c2c44
+);
 }
 
 
-/* login box */
+/* LOGIN CARD */
 
 .box{
 
 width:400px;
 
-background:rgba(255,255,255,.15);
+padding:40px;
 
-backdrop-filter:blur(18px);
+background:rgba(255,255,255,.05);
 
-padding:35px;
+backdrop-filter:blur(14px);
 
 border-radius:25px;
 
-border:1px solid rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.08);
 
 box-shadow:
-0 10px 40px rgba(0,0,0,.2);
+0 20px 60px rgba(0,0,0,.4);
 
-transition:.4s;
+transition:.3s;
+
+text-align:center;
 
 }
 
 .box:hover{
 
-transform:translateY(-6px);
-
-box-shadow:
-0 15px 45px rgba(0,0,0,.3);
+transform:translateY(-5px);
 
 }
 
 
-/* heading */
+/* HEADING */
 
 h2{
-
-text-align:center;
-
-margin-bottom:25px;
 
 font-size:30px;
 
@@ -73,10 +68,25 @@ font-weight:800;
 
 color:white;
 
+margin-bottom:10px;
+
 }
 
 
-/* inputs */
+/* SUBTITLE */
+
+.sub{
+
+font-size:14px;
+
+color:#bdbdbd;
+
+margin-bottom:25px;
+
+}
+
+
+/* INPUTS */
 
 input{
 
@@ -84,7 +94,7 @@ width:100%;
 
 padding:14px 16px;
 
-margin:12px 0;
+margin:10px 0;
 
 border:none;
 
@@ -94,39 +104,33 @@ font-size:14px;
 
 outline:none;
 
-background:rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);
 
 color:white;
 
-transition:.4s;
+transition:.3s;
 
 }
 
-
-/* placeholder */
 
 input::placeholder{
 
-color:rgba(255,255,255,.75);
+color:rgba(255,255,255,.55);
 
 }
 
-
-/* focus */
 
 input:focus{
 
-background:white;
-
-color:#333;
+background:rgba(255,255,255,.15);
 
 box-shadow:
-0 0 0 4px rgba(255,255,255,.3);
+0 0 0 3px rgba(74,108,247,.35);
 
 }
 
 
-/* button */
+/* BUTTON */
 
 button{
 
@@ -148,13 +152,13 @@ cursor:pointer;
 
 background:linear-gradient(
 135deg,
-#ff512f,
-#dd2476
+#4a6cf7,
+#6a11cb
 );
 
 color:white;
 
-transition:.4s;
+transition:.3s;
 
 }
 
@@ -164,12 +168,12 @@ button:hover{
 transform:translateY(-3px);
 
 box-shadow:
-0 12px 25px rgba(221,36,118,.4);
+0 12px 25px rgba(74,108,247,.35);
 
 }
 
 
-/* error */
+/* ERROR */
 
 .error{
 
@@ -181,37 +185,32 @@ border-radius:10px;
 
 margin-bottom:15px;
 
-text-align:center;
+font-size:13px;
 
-color:white;
-
-font-size:14px;
+color:#ffb3b3;
 
 }
 
 
-/* helper */
+/* FOOTER */
 
 .helper{
 
-text-align:center;
+margin-top:20px;
 
-font-size:14px;
+font-size:13px;
 
-color:rgba(255,255,255,.85);
-
-margin-top:18px;
+color:#bdbdbd;
 
 }
 
-
 .helper a{
 
-color:#ffcc70;
-
-font-weight:700;
+color:#E19C63;
 
 text-decoration:none;
+
+font-weight:700;
 
 transition:.3s;
 
@@ -221,12 +220,10 @@ transition:.3s;
 
 color:white;
 
-text-decoration:underline;
-
 }
 
 
-/* responsive */
+/* MOBILE */
 
 @media(max-width:500px){
 
@@ -238,6 +235,7 @@ padding:25px;
 }
 
 }
+
 </style>
 
 {% endblock head %}
@@ -246,25 +244,46 @@ padding:25px;
 
 <div class="box">
 
-    <h2>Welcome Back</h2>
+<h2>Welcome Back</h2>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
+<div class="sub">
+Login to continue to POSTIFY
+</div>
 
-    <form method="POST">
-        {% csrf_token %}
+{% if error %}
+<p class="error">{{error}}</p>
+{% endif %}
 
-        <input type="text" name="username" placeholder="Username">
+<form method="POST">
 
-        <input type="password" name="password" placeholder="Password">
+{% csrf_token %}
 
-        <button type="submit">Login</button>
-    </form>
+<input 
+type="text"
+name="username"
+placeholder="Username"
+required
+>
 
-    <div class="helper">
-        Don’t have an account? <a href="{% url 'register' %}">Create one</a>
-    </div>
+<input
+type="password"
+name="password"
+placeholder="Password"
+required
+>
+
+<button type="submit">
+Login
+</button>
+
+</form>
+
+<div class="helper">
+Don't have an account?
+<a href="{% url 'register' %}">
+Create Account
+</a>
+</div>
 
 </div>
 

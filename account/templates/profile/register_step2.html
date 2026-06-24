@@ -6,17 +6,10 @@
 
 <style>
 
-/* background */
+/* BACKGROUND */
 
 body{
 font-family:"Segoe UI",sans-serif;
-
-background:linear-gradient(
-135deg,
-#4facfe,
-#00f2fe,
-#6a11cb
-);
 
 margin:0;
 min-height:100vh;
@@ -24,49 +17,51 @@ min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+
+background:linear-gradient(
+135deg,
+#1e1e2f,
+#2c2c44
+);
 }
 
 
-/* card */
+/* GLASS CARD */
 
 .box{
 
 width:430px;
 
-background:rgba(255,255,255,.15);
+padding:40px;
 
-backdrop-filter:blur(18px);
+background:rgba(255,255,255,.05);
 
-padding:35px;
+backdrop-filter:blur(14px);
 
 border-radius:25px;
 
-border:1px solid rgba(255,255,255,.2);
+border:1px solid rgba(255,255,255,.08);
 
 box-shadow:
-0 10px 40px rgba(0,0,0,.2);
+0 20px 60px rgba(0,0,0,.4);
 
-transition:.4s;
-
-}
-
-.box:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 15px 45px rgba(0,0,0,.3);
-
-}
-
-
-/* heading */
-
-h2{
+transition:.3s;
 
 text-align:center;
 
-margin-bottom:8px;
+}
+
+
+.box:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+/* HEADING */
+
+h2{
 
 font-size:30px;
 
@@ -74,32 +69,33 @@ font-weight:800;
 
 color:white;
 
+margin-bottom:8px;
+
 }
 
 
 .sub{
 
-text-align:center;
-
 font-size:14px;
 
-color:rgba(255,255,255,.8);
+color:#bdbdbd;
 
 margin-bottom:25px;
 
 }
 
 
-/* textarea */
+/* BIO */
 
 textarea{
 
 width:100%;
+
 height:120px;
 
-padding:14px;
+padding:15px;
 
-margin:12px 0;
+margin-bottom:18px;
 
 border:none;
 
@@ -111,67 +107,67 @@ resize:none;
 
 font-size:14px;
 
-background:rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);
 
 color:white;
 
-transition:.4s;
+transition:.3s;
 
 }
 
 
 textarea::placeholder{
 
-color:rgba(255,255,255,.7);
+color:rgba(255,255,255,.55);
 
 }
 
 
 textarea:focus{
 
-background:white;
-
-color:#333;
+background:rgba(255,255,255,.15);
 
 box-shadow:
-0 0 0 4px rgba(255,255,255,.3);
+0 0 0 3px rgba(74,108,247,.35);
 
 }
 
 
-/* file upload */
+/* FILE INPUT */
 
-input[type="file"]{
+input[type=file]{
 
 width:100%;
 
 padding:14px;
 
-margin-top:12px;
+margin-top:8px;
 
 border-radius:14px;
 
-border:2px dashed rgba(255,255,255,.4);
+border:2px dashed rgba(255,255,255,.15);
 
-background:rgba(255,255,255,.15);
+background:rgba(255,255,255,.06);
 
-color:white;
+color:#d8d8d8;
 
 cursor:pointer;
 
-transition:.4s;
+transition:.3s;
 
 }
 
 
-input[type="file"]:hover{
+input[type=file]:hover{
 
-background:rgba(255,255,255,.25);
+background:rgba(255,255,255,.1);
+
+border-color:#E19C63;
 
 }
 
 
-/* button */
+/* BUTTON */
 
 button{
 
@@ -179,26 +175,27 @@ width:100%;
 
 padding:14px;
 
-margin-top:22px;
+margin-top:25px;
 
 border:none;
 
 border-radius:14px;
 
 font-size:15px;
+
 font-weight:700;
 
 cursor:pointer;
 
 background:linear-gradient(
 135deg,
-#ff512f,
-#dd2476
+#4a6cf7,
+#6a11cb
 );
 
 color:white;
 
-transition:.4s;
+transition:.3s;
 
 }
 
@@ -208,29 +205,27 @@ button:hover{
 transform:translateY(-3px);
 
 box-shadow:
-0 12px 25px rgba(221,36,118,.4);
+0 12px 25px rgba(74,108,247,.35);
 
 }
 
 
-/* helper */
+/* HELPER */
 
 .helper{
 
+margin-top:20px;
+
 font-size:13px;
 
-color:rgba(255,255,255,.85);
-
-text-align:center;
-
-margin-top:18px;
+color:#a8a8a8;
 
 line-height:1.6;
 
 }
 
 
-/* mobile */
+/* MOBILE */
 
 @media(max-width:500px){
 
@@ -242,32 +237,39 @@ padding:25px;
 }
 
 }
+
 </style>
 
 {% endblock head %}
+
 
 {% block content %}
 
 <div class="box">
 
-    <h2>Complete Your Profile</h2>
-    <div class="sub">Step 2 - Add your bio & profile picture</div>
+<h2>Complete Profile</h2>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+<div class="sub">
+Add bio & profile photo to personalize your account
+</div>
 
-        <!-- BIO -->
-        {{ form.bio }}
+<form method="POST" enctype="multipart/form-data">
 
-        <!-- PROFILE PIC -->
-        {{ form.profile_pic }}
+{% csrf_token %}
 
-        <button type="submit">Finish Registration</button>
-    </form>
+{{ form.bio }}
 
-    <div class="helper">
-        Your profile helps others recognize you on POSTIFY 🚀
-    </div>
+{{ form.profile_pic }}
+
+<button type="submit">
+Finish Registration
+</button>
+
+</form>
+
+<div class="helper">
+Your profile helps people connect with you on POSTIFY 🚀
+</div>
 
 </div>
 
