@@ -327,4 +327,3 @@ def delete_account(request):
     return render(request, "post/delete_account.html", {
         "profile": profile
     })
-//////////
