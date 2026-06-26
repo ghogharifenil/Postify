@@ -1,7 +1,7 @@
 from functools import wraps
 from django.shortcuts import redirect
 
-def login_required(view_func):
+def login_require(view_func):
     @wraps(view_func)
     def wrapper(request, *args, **kwargs):
 

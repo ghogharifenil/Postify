@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Profile
 from .forms import RegisterStep1Form, RegisterStep2Form
-
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, get_object_or_404
 
 # Landing Page
 def landing(request):
@@ -169,3 +170,5 @@ def home(request):
         request,
         "profile/home.html"
     )
+
+

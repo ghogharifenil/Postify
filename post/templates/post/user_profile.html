@@ -2,204 +2,163 @@
 {% load static %}
 
 {% block head %}
-  <title>POSTIFY | Profile</title>
+  <title>User Profile</title>
 
   <style>
     body {
       background: #27262e;
     }
     
-    /* PROFILE BOX */
+    /* MAIN LAYOUT */
     
-    .profile-box {
-      background: #32313b;
-    
-      padding: 30px;
-    
-      border-radius: 20px;
-    
-      text-align: center;
-    
-      max-width: 700px;
-    
-      margin: auto;
-    
-      color: white;
-    
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    .profile-layout {
+      display: flex;
+      gap: 25px;
+      align-items: flex-start;
+      padding: 25px;
     }
     
-    /* PROFILE IMAGE */
+    /* LEFT SIDE */
+    
+    .profile-left {
+      width: 30%;
+      background: #32313b;
+      padding: 30px;
+      border-radius: 25px;
+      position: sticky;
+      top: 100px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    }
+    
+    /* PROFILE PIC */
     
     .profile-pic {
-      width: 120px;
-      height: 120px;
-    
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-    
       object-fit: cover;
-    
       margin-bottom: 15px;
-    
       border: 4px solid #e19c63;
     }
     
-    /* DEFAULT PROFILE */
-    
-    .default-profile {
-      width: 120px;
-      height: 120px;
-    
+    .default-pic {
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-    
       margin: auto;
-    
       display: flex;
-    
       align-items: center;
-    
       justify-content: center;
-    
-      font-size: 35px;
-    
+      font-size: 45px;
       font-weight: bold;
-    
       color: white;
-    
       background: linear-gradient(135deg, #e19c63, #8ba5be);
-    
       margin-bottom: 15px;
     }
     
-    /* PROFILE NAME */
+    /* NAME */
     
-    .profile-box h2 {
+    .profile-name {
+      font-size: 24px;
+      font-weight: 700;
       color: #e19c63;
-    
-      margin-bottom: 10px;
+      margin-top: 10px;
     }
     
-    /* PROFILE POSTS */
+    /* CITY */
     
-    .profile-box p {
+    .profile-city {
+      margin-top: 8px;
+      color: #8ba5be;
+      font-size: 14px;
+    }
+    
+    /* POSTS COUNT */
+    
+    .profile-posts {
+      margin-top: 15px;
+      font-size: 16px;
       color: #d8d8d8;
+    }
+    
+    /* RIGHT SIDE */
+    
+    .profile-right {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     
     /* POST CARD */
     
     .post-card {
       background: #32313b;
-    
       padding: 20px;
-    
-      margin-top: 20px;
-    
       border-radius: 20px;
-    
-      color: white;
-    
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
-    
-      transition: 0.4s;
-    
-      overflow: hidden; /* fix */
+      transition: 0.3s;
     }
     
     .post-card:hover {
       transform: translateY(-6px);
-    
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
     }
     
-    /* POST TITLE */
+    /* TITLE */
     
     .post-title {
-      font-size: 20px;
-    
-      margin-bottom: 10px;
-    
       color: #e19c63;
-    
-      display: block;
-      width: 100%;
-      text-align: left; /* fixed */
-    
-      word-wrap: break-word;
-      overflow-wrap: break-word;
+      margin-bottom: 10px;
+      font-size: 20px;
     }
     
-    /* POST CONTENT */
+    /* CONTENT */
     
-    .post-card p {
+    .post-content {
       color: #d8d8d8;
-    
       line-height: 1.7;
-    
+      font-size: 14px;
       word-wrap: break-word;
     }
     
     /* IMAGE */
     
     .post-image {
-      width: auto;
-    
-      max-width: 300px;
-    
-      height: auto;
-    
-      max-height: 250px;
-    
-      margin: 15px auto;
-    
-      border-radius: 15px;
-    
+      width: 100%;
+      max-height: 300px;
       object-fit: contain;
-    
-      transition: 0.4s;
-    
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+      margin-top: 15px;
+      border-radius: 15px;
+      transition: 0.3s;
     }
     
     .post-image:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
     
     /* BUTTONS */
     
     .post-actions {
       margin-top: 18px;
-    
       display: flex;
-    
       gap: 10px;
     }
-    
-    /* COMMON BUTTON */
     
     .edit-btn,
     .delete-btn {
       text-decoration: none;
-    
       padding: 10px 16px;
-    
       border-radius: 12px;
-    
       font-size: 14px;
-    
       font-weight: 600;
-    
-      transition: 0.3s;
-    
       color: white;
+      transition: 0.3s;
     }
-    
-    /* EDIT BUTTON */
     
     .edit-btn {
       background: linear-gradient(135deg, #8ba5be, #708da9);
     }
-    
-    /* DELETE BUTTON */
     
     .delete-btn {
       background: linear-gradient(135deg, #e19c63, #c77f42);
@@ -210,114 +169,60 @@
       transform: translateY(-4px);
     }
     
-    /* EMPTY POSTS */
+    /* EMPTY */
     
-    .post-card h3 {
-      color: #e19c63;
-    
-      text-align: left; /* fixed */
-    }
-    /* SAVE BUTTON */
-    
-    .save-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    
-      padding: 10px 16px;
-    
-      border: none;
-    
-      border-radius: 12px;
-    
-      font-size: 14px;
-      font-weight: 600;
-    
-      cursor: pointer;
-    
-      color: white;
-    
-      background: linear-gradient(135deg, #6c63ff, #4a42e8);
-    
-      transition: 0.3s;
-    }
-    
-    .save-btn:hover {
-      transform: translateY(-4px);
+    .empty {
+      color: #aaa;
+      text-align: center;
+      padding: 30px;
     }
   </style>
 {% endblock %}
 
 {% block content %}
-  <div class="profile-box">
-    {% if profile_user.profile_pic %}
-      <img src="{{ profile_user.profile_pic.url }}" class="profile-pic" />
-    {% else %}
-      <div style="
-width:120px;
-height:120px;
-border-radius:50%;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:35px;
-color:white;
-background:linear-gradient(135deg,#ff512f,#dd2476);
-">{{ profile_user.name|first|upper }}</div>
-    {% endif %}
-
-    <h2>{{ profile_user.name }}</h2>
-
-    <p>Total Posts : {{ posts.count }}</p>
-  </div>
-
-  {% for post in posts %}
-    <div class="post-card">
-      <h3 class="post-title">{{ post.title }}</h3>
-
-      <p>{{ post.content }}</p>
-      {% if post.image %}
-        <img src="{{ post.image.url }}" class="post-image" />
+  <div class="profile-layout">
+    <!-- LEFT PROFILE -->
+    <div class="profile-left">
+      {% if profile_user.profile_pic %}
+        <img src="{{ profile_user.profile_pic.url }}" class="profile-pic" />
+      {% else %}
+        <div class="default-pic">{{ profile_user.name|first|upper }}</div>
       {% endif %}
-      <div class="post-actions">
-        {% if current_user.id == post.user.id %}
-          <a href="#" class="edit-btn">✏ Edit</a>
 
-          <a href="#" class="delete-btn">🗑 Delete</a>
-        {% endif %}
+      <div class="profile-name">{{ profile_user.name }}</div>
 
-        <button class="save-btn" data-id="{{ post.id }}">
-          {% if current_user in post.saved_by.all %}
-            <i class="fa-solid fa-bookmark"></i>
-            <span>Unsave</span>
-          {% else %}
-            <i class="fa-regular fa-bookmark"></i>
-            <span>Save</span>
+      {% if profile_user.show_city and profile_user.city %}
+        <div class="profile-city">
+          <i class="fa-solid fa-location-dot"></i>
+          {{ profile_user.city }}
+        </div>
+      {% endif %}
+
+      <div class="profile-posts">Posts: {{ posts.count }}</div>
+    </div>
+
+    <!-- RIGHT POSTS -->
+    <div class="profile-right">
+      {% for post in posts %}
+        <div class="post-card">
+          <h2 class="post-title">{{ post.title }}</h2>
+
+          <p class="post-content">{{ post.content }}</p>
+
+          {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-image" />
           {% endif %}
-        </button>
-      </div>
+
+          <div class="post-actions">
+            {% if current_user.id == post.user.id %}
+              <a href="#" class="edit-btn">✏ Edit</a>
+              <a href="#" class="delete-btn">🗑 Delete</a>
+            {% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <div class="empty">No posts yet 🚀</div>
+      {% endfor %}
     </div>
-  {% empty %}
-    <div class="post-card">
-      <h3>No posts yet 🚀</h3>
-    </div>
-  {% endfor %}
-  <script>
-    document.querySelectorAll('.save-btn').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        let postId = this.dataset.id
-    
-        fetch(`/save_post/${postId}/`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.saved) {
-              this.innerHTML = '<i class="fa-solid fa-bookmark"></i><span>Unsave</span>'
-            } else {
-              this.innerHTML = '<i class="fa-regular fa-bookmark"></i><span>Save</span>'
-            }
-          })
-      })
-    })
-  </script>
+  </div>
 {% endblock %}

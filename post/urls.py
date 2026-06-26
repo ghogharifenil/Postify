@@ -4,6 +4,12 @@ urlpatterns = [
 
     path('about/',views.about,name="about"),
     path('help/',views.help,name="help"),
+    path('setting/',views.setting,name="setting"),
+    path('setting/edit_profile/',views.edit_profile,name="edit_profile"),
+    path('privacy/',views.privacy,name="privacy"),
+
+    path("delete_account/", views.delete_account, name="delete_account"),
+
     path('home/', views.home, name="home"),
     path('user-profile/<int:id>/', views.user_profile,name="user_profile"),
     path('search/',views.search_page, name="search"),

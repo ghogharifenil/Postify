@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Delete Account</title>
+
+<style>
+body{
+background:#27262E;
+}
+
+.box{
+max-width:500px;
+margin:80px auto;
+background:#32313B;
+padding:40px;
+border-radius:20px;
+text-align:center;
+color:white;
+box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+h1{
+color:#ff4d4d;
+}
+
+p{
+color:#aaa;
+line-height:1.7;
+}
+
+.btn-area{
+margin-top:25px;
+display:flex;
+justify-content:center;
+gap:15px;
+}
+
+.btn{
+padding:12px 18px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+color:white;
+}
+
+.delete{
+background:linear-gradient(135deg,#ff4d4d,#c40000);
+}
+
+.cancel{
+background:linear-gradient(135deg,#8BA5BE,#5f6d7a);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="box">
+
+    <h1>Delete Account?</h1>
+
+    <p>
+        This action is permanent.<br>
+        All your posts, profile data and settings will be deleted.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="btn-area">
+
+            <button type="submit" class="btn delete">
+                Yes, Delete
+            </button>
+
+            <a href="/profile/" class="btn cancel">
+                Cancel
+            </a>
+
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

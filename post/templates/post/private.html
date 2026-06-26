@@ -1,0 +1,146 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Private Profile</title>
+
+<style>
+
+body{
+background:#27262E;
+}
+
+/* MAIN BOX */
+.private-box{
+max-width:650px;
+margin:60px auto;
+text-align:center;
+background:#32313B;
+padding:40px;
+border-radius:25px;
+box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+
+/* PROFILE */
+.profile-mini{
+margin-bottom:25px;
+}
+
+.profile-mini img,
+.profile-mini .avatar{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:bold;
+color:white;
+background:linear-gradient(135deg,#E19C63,#8BA5BE);
+border:3px solid #E19C63;
+}
+
+.profile-mini h2{
+margin-top:12px;
+color:#E19C63;
+font-size:22px;
+}
+
+.post-count{
+margin-top:6px;
+color:#aaa;
+font-size:14px;
+}
+
+/* LOCK ICON */
+.lock-icon{
+font-size:60px;
+color:#E19C63;
+margin:20px 0;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* TEXT */
+.title{
+color:white;
+font-size:22px;
+margin-bottom:10px;
+}
+
+.desc{
+color:#aaa;
+line-height:1.7;
+font-size:14px;
+}
+
+/* BUTTON (optional) */
+.back-btn{
+margin-top:20px;
+display:inline-block;
+padding:10px 18px;
+border-radius:12px;
+background:linear-gradient(135deg,#E19C63,#8BA5BE);
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.back-btn:hover{
+transform:translateY(-3px);
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="private-box">
+
+    <!-- PROFILE INFO -->
+    <div class="profile-mini">
+
+        {% if profile_user.profile_pic %}
+            <img src="{{ profile_user.profile_pic.url }}">
+        {% else %}
+            <div class="avatar">
+                {{ profile_user.name|first|upper }}
+            </div>
+        {% endif %}
+
+        <h2>{{ profile_user.name }}</h2>
+
+        <div class="post-count">
+            Posts : {{ profile_user.posts.count  }}
+        </div>
+
+    </div>
+
+    <!-- LOCK ICON -->
+    <div class="lock-icon">
+        <i class="fa-solid fa-lock"></i>
+    </div>
+
+    <!-- TEXT -->
+    <div class="title">This Account is Private</div>
+
+    <div class="desc">
+        Only approved users can see posts, photos and full profile details.
+    </div>
+
+    <!-- OPTIONAL BUTTON -->
+    <a href="/" class="back-btn">
+        Go Back
+    </a>
+
+</div>
+
+{% endblock %}
