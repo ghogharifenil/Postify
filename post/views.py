@@ -4,12 +4,17 @@ from django.shortcuts import redirect
 from .models import Post , Profile
 from django.db.models import Q
 from django.db.models import Count
+from .decorators import login_required
+from django.http import JsonResponse
 
+def about(request):
+    return render(request , "post/about.html")
+
+def help(request):
+    return render(request , "post/help.html")
+
+@login_required
 def home(request):
-
-
-   
-
     posts = Post.objects.all().order_by('-created_at')
 
     top_users = Profile.objects.annotate(
@@ -30,7 +35,7 @@ def home(request):
     )
 
 
-
+@login_required
 def user_profile(request,id):
 
     user = get_object_or_404(
@@ -51,7 +56,7 @@ def user_profile(request,id):
         }
     )
 
-
+@login_required
 def search_page(request):
 
     query = request.GET.get("q")
@@ -86,7 +91,7 @@ def search_page(request):
             "profile": profile
         }
     )
-
+@login_required
 def create_post(request):
 
     # login check
@@ -124,6 +129,8 @@ def create_post(request):
             "current_user":current_user
         }
     )
+
+@login_required
 def profile(request):
 
     current_user=Profile.objects.get(
@@ -140,5 +147,49 @@ def profile(request):
         {
             'current_user':current_user,
             'posts':posts
+        }
+    )
+@login_required
+def save_post(request,id):
+
+    profile=Profile.objects.get(
+        id=request.session['profile_id']
+    )
+
+    post=Post.objects.get(id=id)
+
+    saved=False
+
+    if profile in post.saved_by.all():
+
+        post.saved_by.remove(profile)
+
+        saved=False
+
+    else:
+
+        post.saved_by.add(profile)
+
+        saved=True
+
+    return JsonResponse({
+        'saved':saved
+    })
+
+@login_required
+def saved_posts(request):
+
+    profile=Profile.objects.get(
+        id=request.session['profile_id']
+    )
+
+    posts=profile.saved_posts.all()
+
+    return render(
+        request,
+        'post/saved.html',
+        {
+            'posts':posts,
+            'current_user':profile
         }
     )

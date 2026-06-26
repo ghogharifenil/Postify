@@ -1,0 +1,421 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+<title>POSTIFY | Help</title>
+
+<style>
+
+.help-container{
+
+max-width:1000px;
+margin:auto;
+
+}
+
+/* HEADER */
+
+.help-header{
+
+text-align:center;
+
+margin-bottom:40px;
+
+}
+
+.help-header h1{
+
+font-size:45px;
+
+color:#E19C63;
+
+margin-bottom:15px;
+
+}
+
+.help-header p{
+
+color:#d8d8d8;
+
+line-height:1.8;
+
+max-width:700px;
+
+margin:auto;
+
+}
+
+/* HELP GRID */
+
+.help-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+/* HELP CARD */
+
+.help-card{
+
+background:#32313B;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.4s;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+}
+
+.help-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 12px 35px rgba(0,0,0,.45);
+
+}
+
+.help-card i{
+
+font-size:35px;
+
+margin-bottom:15px;
+
+color:#E19C63;
+
+}
+
+.help-card h3{
+
+margin-bottom:10px;
+
+color:white;
+
+}
+
+.help-card p{
+
+color:#d8d8d8;
+
+line-height:1.7;
+
+}
+
+/* SUPPORT BOX */
+
+.support-box{
+
+margin-top:50px;
+
+background:#32313B;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+}
+
+.support-box h2{
+
+color:#E19C63;
+
+margin-bottom:15px;
+
+}
+
+.support-box p{
+
+color:#d8d8d8;
+
+line-height:1.8;
+
+}
+
+/* IMAGE MODAL */
+
+.guide-modal{
+
+display:none;
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+background:rgba(0,0,0,.88);
+
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+
+padding:20px;
+
+}
+
+/* IMAGE */
+
+.guide-modal img{
+
+max-width:90%;
+
+max-height:85%;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.5);
+
+animation:zoom .3s ease;
+
+}
+
+@keyframes zoom{
+
+from{
+
+transform:scale(.7);
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+opacity:1;
+
+}
+
+}
+
+/* CLOSE BUTTON */
+
+.close-btn{
+
+position:absolute;
+
+top:20px;
+right:35px;
+
+font-size:45px;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.close-btn:hover{
+
+transform:scale(1.2);
+
+color:#E19C63;
+
+}
+
+</style>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="help-container">
+
+<div class="help-header">
+
+<h1>
+Help Center
+</h1>
+
+<p>
+
+Click any feature card below to open
+a visual guide and learn how POSTIFY works.
+
+</p>
+
+</div>
+
+
+
+<div class="help-grid">
+
+
+<div class="help-card"
+onclick="openGuide('{% static 'images/create_post1.jpg' %}')">
+
+<i class="fa-solid fa-square-plus"></i>
+
+<h3>Create Posts</h3>
+
+<p>
+
+Learn how to create and publish posts.
+
+</p>
+
+</div>
+
+
+
+<div class="help-card"
+onclick="openGuide('{% static 'images/save_delete_edit.png' %}')">
+
+<i class="fa-solid fa-bookmark"></i>
+
+<h3>Save Posts</h3>
+
+<p>
+
+Learn how to save favorite posts.
+
+</p>
+
+</div>
+
+
+
+<div class="help-card"
+onclick="openGuide('{% static 'images/profile.png' %}')">
+
+<i class="fa-solid fa-user"></i>
+
+<h3>Profile</h3>
+
+<p>
+
+Learn profile management and settings.
+
+</p>
+
+</div>
+    
+
+
+<div class="help-card"
+onclick="openGuide('{% static 'images/search1.jpg' %}')">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<h3>Search</h3>
+
+<p>
+
+Learn how to search users and posts.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<div class="support-box">
+
+<h2>
+
+<i class="fa-solid fa-headset"></i>
+
+ Need Assistance?
+
+</h2>
+
+<p>
+
+POSTIFY is built to keep things simple and easy.
+Open feature guides anytime and explore the platform.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- IMAGE POPUP -->
+
+<div class="guide-modal"
+id="guideModal">
+
+<span
+class="close-btn"
+onclick="closeGuide()">
+
+&times;
+
+</span>
+
+<img id="guideImage">
+
+</div>
+
+
+<script>
+
+function openGuide(imagePath){
+
+document.getElementById(
+"guideModal"
+).style.display="flex";
+
+document.getElementById(
+"guideImage"
+).src=imagePath;
+
+}
+
+
+function closeGuide(){
+
+document.getElementById(
+"guideModal"
+).style.display="none";
+
+}
+
+
+/* CLICK OUTSIDE CLOSE */
+
+document.getElementById(
+"guideModal"
+).onclick=function(e){
+
+if(e.target===this){
+
+closeGuide();
+
+}
+
+}
+
+</script>
+
+{% endblock %}

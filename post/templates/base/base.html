@@ -425,7 +425,103 @@ width:100%;
 }
 
 }
+/* DROPDOWN */
 
+.dropdown{
+width:100%;
+margin-top:10px;
+}
+
+.dropdown-btn{
+
+width:100%;
+
+background:transparent;
+
+border:none;
+
+padding:14px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+color:#d8d8d8;
+
+border-radius:14px;
+
+cursor:pointer;
+
+font-size:16px;
+font-weight:600;
+
+transition:.4s;
+
+}
+
+.dropdown-btn div{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+}
+
+.dropdown-btn i{
+color:#8BA5BE;
+}
+
+.dropdown-btn:hover{
+
+background:rgba(139,165,190,.15);
+
+transform:translateX(5px);
+
+color:white;
+
+}
+
+.dropdown-content{
+
+display:none;
+
+padding-left:15px;
+
+}
+
+.dropdown-content a{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+padding:12px;
+
+text-decoration:none;
+
+color:#d8d8d8;
+
+border-radius:12px;
+
+margin-top:5px;
+
+transition:.4s;
+
+}
+
+.dropdown-content a:hover{
+
+background:rgba(139,165,190,.15);
+
+color:white;
+
+}
+
+.dropdown.active .dropdown-content{
+
+display:block;
+
+}
 </style>
 
 {% block head %}
@@ -462,6 +558,54 @@ POST<span>IFY</span>
 <span>Create</span>
 </a>
 
+<!-- OTHER DROPDOWN HERE -->
+
+<div class="dropdown">
+
+<button class="dropdown-btn">
+
+<div>
+<i class="fa-solid fa-bars"></i>
+<span>Other</span>
+</div>
+
+<i class="fa-solid fa-chevron-down"></i>
+
+</button>
+
+<div class="dropdown-content">
+
+<a href="#">
+<i class="fa-solid fa-gear"></i>
+<span>Settings</span>
+</a>
+
+<a href="{% url 'saved_posts' %}">
+<i class="fa-solid fa-bookmark"></i>
+<span>Saved Posts</span>
+</a>
+
+<a href="{% url 'help' %}">
+<i class="fa-solid fa-circle-question"></i>
+<span>Help</span>
+</a>
+
+<a href="{% url 'about' %}">
+<i class="fa-solid fa-circle-info"></i>
+<span>About</span>
+</a>
+
+{% if request.session.profile_id %}
+<a href="{% url 'logout' %}">
+<i class="fa-solid fa-right-from-bracket"></i>
+<span>Logout</span>
+</a>
+{% endif %}
+
+</div>
+
+</div>
+
 </div>
 
 
@@ -489,9 +633,6 @@ Hi, {{ current_user.name }}
 
 </div>
 
-<a href="{% url 'logout' %}" class="btn btn-logout">
-Logout
-</a>
 
 {% else %}
 
@@ -540,6 +681,17 @@ required
 {% endblock %}
 
 </div>
+<script>
 
+const dropdown=document.querySelector(".dropdown");
+const btn=document.querySelector(".dropdown-btn");
+
+btn.onclick=()=>{
+
+dropdown.classList.toggle("active");
+
+}
+
+</script>
 </body>
 </html>

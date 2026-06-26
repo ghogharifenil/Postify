@@ -4,263 +4,248 @@
 {% block head %}
   <title>POSTIFY | Profile</title>
 
-<style>
-
-body{
-background:#27262E;
-}
-
-/* PROFILE BOX */
-
-.profile-box{
-
-background:#32313B;
-
-padding:30px;
-
-border-radius:20px;
-
-text-align:center;
-
-max-width:700px;
-
-margin:auto;
-
-color:white;
-
-box-shadow:
-0 8px 30px rgba(0,0,0,.35);
-
-}
-
-/* PROFILE IMAGE */
-
-.profile-pic{
-
-width:120px;
-height:120px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-margin-bottom:15px;
-
-border:4px solid #E19C63;
-
-}
-
-/* DEFAULT PROFILE */
-
-.default-profile{
-
-width:120px;
-height:120px;
-
-border-radius:50%;
-
-margin:auto;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:35px;
-
-font-weight:bold;
-
-color:white;
-
-background:linear-gradient(
-135deg,
-#E19C63,
-#8BA5BE
-);
-
-margin-bottom:15px;
-
-}
-
-/* PROFILE NAME */
-
-.profile-box h2{
-
-color:#E19C63;
-
-margin-bottom:10px;
-
-}
-
-/* PROFILE POSTS */
-
-.profile-box p{
-
-color:#d8d8d8;
-
-}
-
-
-/* POST CARD */
-
-.post-card{
-
-background:#32313B;
-
-padding:20px;
-
-margin-top:20px;
-
-border-radius:20px;
-
-color:white;
-
-box-shadow:
-0 8px 25px rgba(0,0,0,.35);
-
-transition:.4s;
-
-}
-
-.post-card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 12px 35px rgba(0,0,0,.45);
-
-}
-
-/* POST TITLE */
-
-.post-title{
-
-font-size:20px;
-
-margin-bottom:10px;
-
-color:#E19C63;
-
-}
-
-/* POST CONTENT */
-
-.post-card p{
-
-color:#d8d8d8;
-
-line-height:1.7;
-
-}
-
-/* IMAGE */
-
-.post-image{
-
-
-
-width:auto;
-
-max-width:300px;
-
-height:auto;
-
-max-height:250px;
-
-margin:15px auto;
-
-border-radius:15px;
-
-object-fit:contain;
-
-transition:.4s;
-
-box-shadow:
-0 5px 15px rgba(0,0,0,.25);
-
-}
-
-.post-image:hover{
-
-transform:scale(1.03);
-
-}
-
-/* BUTTONS */
-
-.post-actions{
-
-margin-top:18px;
-
-display:flex;
-
-gap:10px;
-
-}
-
-/* COMMON BUTTON */
-
-.edit-btn,
-.delete-btn{
-
-text-decoration:none;
-
-padding:10px 16px;
-
-border-radius:12px;
-
-font-size:14px;
-
-font-weight:600;
-
-transition:.3s;
-
-color:white;
-
-}
-
-/* EDIT BUTTON */
-
-.edit-btn{
-
-background:linear-gradient(
-135deg,
-#8BA5BE,
-#708DA9
-);
-
-}
-
-/* DELETE BUTTON */
-
-.delete-btn{
-
-background:linear-gradient(
-135deg,
-#E19C63,
-#c77f42
-);
-
-}
-
-.edit-btn:hover,
-.delete-btn:hover{
-
-transform:translateY(-4px);
-
-}
-
-/* EMPTY POSTS */
-
-.post-card h3{
-
-color:#E19C63;
-text-align:center;
-
-}
-
-</style>
+  <style>
+    body {
+      background: #27262e;
+    }
+    
+    /* PROFILE BOX */
+    
+    .profile-box {
+      background: #32313b;
+    
+      padding: 30px;
+    
+      border-radius: 20px;
+    
+      text-align: center;
+    
+      max-width: 700px;
+    
+      margin: auto;
+    
+      color: white;
+    
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+    
+    /* PROFILE IMAGE */
+    
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+    
+      border-radius: 50%;
+    
+      object-fit: cover;
+    
+      margin-bottom: 15px;
+    
+      border: 4px solid #e19c63;
+    }
+    
+    /* DEFAULT PROFILE */
+    
+    .default-profile {
+      width: 120px;
+      height: 120px;
+    
+      border-radius: 50%;
+    
+      margin: auto;
+    
+      display: flex;
+    
+      align-items: center;
+    
+      justify-content: center;
+    
+      font-size: 35px;
+    
+      font-weight: bold;
+    
+      color: white;
+    
+      background: linear-gradient(135deg, #e19c63, #8ba5be);
+    
+      margin-bottom: 15px;
+    }
+    
+    /* PROFILE NAME */
+    
+    .profile-box h2 {
+      color: #e19c63;
+    
+      margin-bottom: 10px;
+    }
+    
+    /* PROFILE POSTS */
+    
+    .profile-box p {
+      color: #d8d8d8;
+    }
+    
+    /* POST CARD */
+    
+    .post-card {
+      background: #32313b;
+    
+      padding: 20px;
+    
+      margin-top: 20px;
+    
+      border-radius: 20px;
+    
+      color: white;
+    
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    
+      transition: 0.4s;
+    
+      overflow: hidden; /* fix */
+    }
+    
+    .post-card:hover {
+      transform: translateY(-6px);
+    
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    }
+    
+    /* POST TITLE */
+    
+    .post-title {
+      font-size: 20px;
+    
+      margin-bottom: 10px;
+    
+      color: #e19c63;
+    
+      display: block;
+      width: 100%;
+      text-align: left; /* fixed */
+    
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    /* POST CONTENT */
+    
+    .post-card p {
+      color: #d8d8d8;
+    
+      line-height: 1.7;
+    
+      word-wrap: break-word;
+    }
+    
+    /* IMAGE */
+    
+    .post-image {
+      width: auto;
+    
+      max-width: 300px;
+    
+      height: auto;
+    
+      max-height: 250px;
+    
+      margin: 15px auto;
+    
+      border-radius: 15px;
+    
+      object-fit: contain;
+    
+      transition: 0.4s;
+    
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+    }
+    
+    .post-image:hover {
+      transform: scale(1.03);
+    }
+    
+    /* BUTTONS */
+    
+    .post-actions {
+      margin-top: 18px;
+    
+      display: flex;
+    
+      gap: 10px;
+    }
+    
+    /* COMMON BUTTON */
+    
+    .edit-btn,
+    .delete-btn {
+      text-decoration: none;
+    
+      padding: 10px 16px;
+    
+      border-radius: 12px;
+    
+      font-size: 14px;
+    
+      font-weight: 600;
+    
+      transition: 0.3s;
+    
+      color: white;
+    }
+    
+    /* EDIT BUTTON */
+    
+    .edit-btn {
+      background: linear-gradient(135deg, #8ba5be, #708da9);
+    }
+    
+    /* DELETE BUTTON */
+    
+    .delete-btn {
+      background: linear-gradient(135deg, #e19c63, #c77f42);
+    }
+    
+    .edit-btn:hover,
+    .delete-btn:hover {
+      transform: translateY(-4px);
+    }
+    
+    /* EMPTY POSTS */
+    
+    .post-card h3 {
+      color: #e19c63;
+    
+      text-align: left; /* fixed */
+    }
+    /* SAVE BUTTON */
+    
+    .save-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    
+      padding: 10px 16px;
+    
+      border: none;
+    
+      border-radius: 12px;
+    
+      font-size: 14px;
+      font-weight: 600;
+    
+      cursor: pointer;
+    
+      color: white;
+    
+      background: linear-gradient(135deg, #6c63ff, #4a42e8);
+    
+      transition: 0.3s;
+    }
+    
+    .save-btn:hover {
+      transform: translateY(-4px);
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -295,17 +280,44 @@ background:linear-gradient(135deg,#ff512f,#dd2476);
       {% if post.image %}
         <img src="{{ post.image.url }}" class="post-image" />
       {% endif %}
-      {% if current_user.id == post.user.id %}
-        <div class="post-actions">
+      <div class="post-actions">
+        {% if current_user.id == post.user.id %}
           <a href="#" class="edit-btn">✏ Edit</a>
 
           <a href="#" class="delete-btn">🗑 Delete</a>
-        </div>
-      {% endif %}
+        {% endif %}
+
+        <button class="save-btn" data-id="{{ post.id }}">
+          {% if current_user in post.saved_by.all %}
+            <i class="fa-solid fa-bookmark"></i>
+            <span>Unsave</span>
+          {% else %}
+            <i class="fa-regular fa-bookmark"></i>
+            <span>Save</span>
+          {% endif %}
+        </button>
+      </div>
     </div>
   {% empty %}
     <div class="post-card">
       <h3>No posts yet 🚀</h3>
     </div>
   {% endfor %}
+  <script>
+    document.querySelectorAll('.save-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        let postId = this.dataset.id
+    
+        fetch(`/save_post/${postId}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.saved) {
+              this.innerHTML = '<i class="fa-solid fa-bookmark"></i><span>Unsave</span>'
+            } else {
+              this.innerHTML = '<i class="fa-regular fa-bookmark"></i><span>Save</span>'
+            }
+          })
+      })
+    })
+  </script>
 {% endblock %}

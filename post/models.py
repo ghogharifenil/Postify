@@ -21,6 +21,11 @@ class Post(models.Model):
         null=True,
         blank=True
     )
+    saved_by=models.ManyToManyField(
+        Profile,
+        related_name='saved_posts',
+        blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

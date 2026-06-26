@@ -275,7 +275,7 @@ color:#E19C63;
 .post-content{
 
 line-height:1.7;
-
+margin-bottom: 15px;
 color:#ddd;
 
 }
@@ -283,7 +283,6 @@ color:#ddd;
 
 .post-image{
 
-width:100%;
 
 max-height:300px;
 
@@ -410,6 +409,105 @@ flex-direction:column;
 width:100%;
 
 }
+
+}
+/* BUTTONS */
+
+.post-actions{
+
+margin-top:18px;
+margin-bottom: 25px;
+display:flex;
+
+gap:10px;
+
+}
+
+/* COMMON BUTTON */
+
+.edit-btn,
+.delete-btn{
+
+text-decoration:none;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+font-size:14px;
+
+font-weight:600;
+
+transition:.3s;
+
+color:white;
+
+}
+
+/* EDIT BUTTON */
+
+.edit-btn{
+
+background:linear-gradient(
+135deg,
+#8BA5BE,
+#708DA9
+);
+
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+
+background:linear-gradient(
+135deg,
+#E19C63,
+#c77f42
+);
+
+}
+
+.edit-btn:hover,
+.delete-btn:hover{
+
+transform:translateY(-4px);
+
+}
+
+/* SAVE BUTTON */
+.save-btn{
+
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:10px 16px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+color:white;
+
+background:linear-gradient(
+135deg,
+#6C63FF,
+#4A42E8
+);
+
+font-size:14px;
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.save-btn:hover{
+
+transform:translateY(-4px);
 
 }
 
@@ -547,6 +645,39 @@ class="profile-img">
 class="post-image">
 
 {% endif %}
+<div class="post-actions">
+
+{% if current_user.id == post.user.id %}
+
+<a href="#" class="edit-btn">
+✏ Edit
+</a>
+
+<a href="#" class="delete-btn">
+🗑 Delete
+</a>
+
+{% endif %}
+
+<button
+class="save-btn"
+data-id="{{post.id}}">
+
+{% if current_user in post.saved_by.all %}
+
+<i class="fa-solid fa-bookmark"></i>
+<span>Unsave</span>
+
+{% else %}
+
+<i class="fa-regular fa-bookmark"></i>
+<span>Save</span>
+
+{% endif %}
+
+</button>
+
+</div>
 
 </div>
 
@@ -664,7 +795,42 @@ document
 
 }
 
+
+
+
+document.querySelectorAll(".save-btn")
+.forEach(btn=>{
+
+btn.addEventListener("click",function(){
+
+let postId=this.dataset.id;
+
+fetch(`/save_post/${postId}/`)
+.then(response=>response.json())
+.then(data=>{
+
+if(data.saved){
+
+this.innerHTML=
+'<i class="fa-solid fa-bookmark"></i><span>Unsave</span>';
+
+}
+else{
+
+this.innerHTML=
+'<i class="fa-regular fa-bookmark"></i><span>Save</span>';
+
+}
+
+})
+
+})
+
+})
+
+
+
 </script>
 
 {% endblock %}
-```
+

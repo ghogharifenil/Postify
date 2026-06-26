@@ -159,7 +159,7 @@ def logout(request):
     return redirect("landing")
 
 
-# Home page protection
+
 def home(request):
 
     if not request.session.get("profile_id"):

@@ -1,0 +1,293 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>POSTIFY | Saved Posts</title>
+
+<style>
+
+.saved-title{
+
+text-align:center;
+margin-bottom:30px;
+color:#E19C63;
+font-size:32px;
+
+}
+
+/* CARD */
+
+.post-card{
+
+background:#32313B;
+
+padding:20px;
+
+margin-bottom:25px;
+
+border-radius:20px;
+
+color:white;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+transition:.4s;
+
+}
+
+.post-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+/* TOP USER INFO */
+
+.post-header{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+margin-bottom:15px;
+
+}
+
+/* PROFILE PIC */
+
+.profile-pic{
+
+width:50px;
+height:50px;
+
+border-radius:50%;
+
+overflow:hidden;
+
+background:linear-gradient(
+135deg,
+#E19C63,
+#8BA5BE
+);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+font-weight:bold;
+
+}
+
+.profile-pic img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.user-info h4{
+
+color:#E19C63;
+margin-bottom:5px;
+
+}
+
+.user-info small{
+
+color:#aaa;
+
+}
+
+/* TITLE */
+
+.post-title{
+
+font-size:22px;
+
+margin-bottom:10px;
+
+color:#E19C63;
+
+}
+
+/* CONTENT */
+
+.post-content{
+
+line-height:1.7;
+color:#d8d8d8;
+
+}
+
+/* IMAGE */
+
+.post-image{
+
+display:block;
+
+max-width:300px;
+
+max-height:250px;
+
+margin:15px auto;
+
+border-radius:15px;
+
+}
+
+/* BUTTON */
+
+.unsave-btn{
+
+display:inline-block;
+
+margin-top:15px;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:600;
+
+background:linear-gradient(
+135deg,
+#D41F26,
+#ff5757
+);
+
+transition:.4s;
+
+}
+
+.unsave-btn:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* EMPTY */
+
+.empty-box{
+
+background:#32313B;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+color:#E19C63;
+
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<h1 class="saved-title">
+🔖 Saved Posts
+</h1>
+
+{% for post in posts %}
+
+<div class="post-card">
+
+<div class="post-header">
+
+<div class="profile-pic">
+
+{% if post.user.profile_pic %}
+<img src="{{ post.user.profile_pic.url }}">
+{% else %}
+{{ post.user.name|first|upper }}
+{% endif %}
+
+</div>
+
+<div class="user-info">
+
+<h4>
+{{ post.user.name }}
+</h4>
+
+<small>
+{{ post.created_at }}
+</small>
+
+</div>
+
+</div>
+
+
+<h3 class="post-title">
+{{ post.title }}
+</h3>
+
+<p class="post-content">
+{{ post.content }}
+</p>
+
+
+{% if post.image %}
+
+<img src="{{ post.image.url }}"
+class="post-image">
+
+{% endif %}
+
+<button
+class="unsave-btn save-btn"
+data-id="{{post.id}}">
+
+<i class="fa-solid fa-bookmark"></i>
+ Unsave
+
+</button>
+
+</div>
+
+{% empty %}
+
+<div class="empty-box">
+
+No Saved Posts Yet 🚀
+
+</div>
+
+{% endfor %}
+<script>
+
+document.querySelectorAll(".save-btn")
+.forEach(btn=>{
+
+btn.addEventListener("click",function(){
+
+let postId=this.dataset.id;
+
+fetch(`/save_post/${postId}/`)
+.then(response=>response.json())
+.then(data=>{
+
+if(!data.saved){
+
+this.closest(".post-card").remove();
+
+}
+
+})
+
+})
+
+})
+
+</script>
+{% endblock %}
