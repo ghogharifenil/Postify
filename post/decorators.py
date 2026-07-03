@@ -8,7 +8,7 @@ def login_require(view_func):
         customer_id = request.session.get("profile_id")
 
         if not customer_id:
-            return redirect("login")
+            return redirect("landing")
 
         return view_func(request, *args, **kwargs)
 

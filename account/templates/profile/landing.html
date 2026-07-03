@@ -5,7 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>POSTIFY</title>
-
+<link rel="icon" type="image/png"
+          href="{% static 'images/weblogo.png' %}">
 <style>
 
 /* RESET */
@@ -114,7 +115,57 @@ margin-top:25px;
 font-size:12px;
 color:#aaa;
 }
+/* LOGO */
 
+.logo{
+display:flex;
+justify-content:center;
+align-items:center;
+
+margin-bottom:25px;
+
+text-decoration:none;
+
+/* hover zoom remove */
+transform:none !important;
+transition:none !important;
+}
+
+.logo:hover{
+transform:none !important;
+}
+
+.logo-img{
+width:340px;
+height:90px;
+
+display:block;
+
+object-fit:contain;
+
+/* remove extra space */
+margin:0;
+padding:0;
+
+/* remove hover effect */
+transform:none !important;
+transition:none !important;
+
+
+.logo-img:hover{
+transform:none !important;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.logo-img{
+width:50px;
+height:50px;
+}
+
+}
 </style>
 </head>
 
@@ -124,12 +175,12 @@ color:#aaa;
 
     <!-- LOGO -->
     <div class="logo">
-        <img src="{% static 'img/web3.png' %}" alt="POSTIFY Logo">
+        <img src="{% static 'img/weblogo1.png' %}" alt="POSTIFY Logo">
     </div>
 
     <!-- TITLE -->
     <div class="logo-text">
-        POST<span>IFY</span>
+        <img src="{% static 'images/logo1.png' %}" alt="POSTIFY Logo" class="logo-img">
     </div>
 
     <!-- TAGLINE -->
