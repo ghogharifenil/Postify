@@ -6,17 +6,17 @@
 <title>POSTIFY | Home</title>
 
 <style>
-
 body{
-background:#27262E;
+background:#14131B;
 margin:0;
 padding:0;
 font-family:"Segoe UI",sans-serif;
 overflow-x:hidden;
+color:#fff;
 }
 
 
-/* MAIN */
+/* MAIN LAYOUT */
 
 .home-layout{
 
@@ -40,16 +40,33 @@ gap:20px;
 }
 
 
-/* TOP USERS */
+/* TOP CONTAINER */
 
 .top-container{
 
-background:#32313B;
+background:rgba(31,29,43,.95);
+
 padding:20px;
+
 border-radius:20px;
 
+border:1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
 box-shadow:
-0 8px 25px rgba(0,0,0,.35);
+0 8px 30px rgba(138,71,214,.15);
+
+transition:.4s;
+
+}
+
+.top-container:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+0 0 30px rgba(225,85,168,.25);
 
 }
 
@@ -61,14 +78,27 @@ font-weight:700;
 
 margin-bottom:20px;
 
-color:#E19C63;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
 }
 
 
+/* TOP USERS */
+
 .top-users{
 
 display:flex;
+
 gap:20px;
 
 overflow-x:auto;
@@ -78,7 +108,6 @@ padding:10px 0;
 scrollbar-width:none;
 
 }
-
 
 .top-users::-webkit-scrollbar{
 
@@ -90,7 +119,9 @@ display:none;
 .user-item{
 
 display:flex;
+
 flex-direction:column;
+
 align-items:center;
 
 text-decoration:none;
@@ -100,7 +131,6 @@ min-width:80px;
 transition:.4s;
 
 }
-
 
 .user-item:hover{
 
@@ -119,22 +149,26 @@ border-radius:50%;
 overflow:hidden;
 
 display:flex;
+
 justify-content:center;
 align-items:center;
 
-border:3px solid #E19C63;
-
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
 color:white;
 
+font-size:22px;
 font-weight:bold;
 
-font-size:22px;
+box-shadow:
+0 0 20px rgba(225,85,168,.4);
 
 }
 
@@ -143,6 +177,7 @@ font-size:22px;
 
 width:100%;
 height:100%;
+
 object-fit:cover;
 
 }
@@ -153,48 +188,58 @@ object-fit:cover;
 margin-top:8px;
 
 font-size:13px;
+
 font-weight:600;
 
-color:white;
+color:#ddd;
 
 }
 
 
-/* POST */
+/* POST CARD */
 
 .post-card{
 
-background:#32313B;
+background:rgba(31,29,43,.95);
 
 padding:20px;
 
 border-radius:20px;
+
+border:1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
 
 cursor:pointer;
 
 transition:.4s;
 
 box-shadow:
-0 8px 25px rgba(0,0,0,.35);
+0 8px 30px rgba(138,71,214,.15);
 
 overflow:hidden;
 
 }
 
-
 .post-card:hover{
 
 transform:translateY(-5px);
 
+box-shadow:
+0 0 30px rgba(225,85,168,.25);
+
 }
 
+
+/* POST HEADER */
 
 .post-header{
 
 display:flex;
-align-items:center;
 
 justify-content:space-between;
+
+align-items:center;
 
 }
 
@@ -202,7 +247,9 @@ justify-content:space-between;
 .user-info{
 
 display:flex;
+
 align-items:center;
+
 gap:12px;
 
 }
@@ -222,15 +269,21 @@ display:flex;
 justify-content:center;
 align-items:center;
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
 color:white;
 
 font-weight:bold;
+
+box-shadow:
+0 0 20px rgba(225,85,168,.4);
 
 }
 
@@ -245,44 +298,62 @@ object-fit:cover;
 }
 
 
+/* TEXT */
+
 .username{
 
 font-size:16px;
+
 font-weight:700;
 
 color:white;
 
 }
 
-
 .date{
 
 font-size:13px;
-color:#bbb;
+
+color:#8D8D99;
 
 }
-
 
 .post-title{
 
 margin:15px 0;
 
-color:#E19C63;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+font-weight:700;
 
 }
-
 
 .post-content{
 
 line-height:1.7;
-margin-bottom: 15px;
-color:#ddd;
+
+margin-bottom:15px;
+
+color:#B8B8C8;
 
 }
 
 
+/* POST IMAGE */
+
 .post-image{
 
+width:100%;
 
 max-height:300px;
 
@@ -291,6 +362,102 @@ margin-top:15px;
 border-radius:15px;
 
 object-fit:contain;
+
+border:2px solid rgba(255,255,255,.05);
+
+}
+
+
+/* BUTTONS */
+
+.post-actions{
+
+margin-top:18px;
+
+display:flex;
+
+gap:10px;
+
+}
+
+
+.edit-btn,
+.delete-btn,
+.save-btn{
+
+text-decoration:none;
+
+padding:10px 16px;
+
+border-radius:12px;
+
+font-size:14px;
+
+font-weight:600;
+
+border:none;
+
+cursor:pointer;
+
+color:white;
+
+transition:.3s;
+
+}
+
+
+.edit-btn{
+
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6
+);
+
+}
+
+
+.delete-btn{
+
+background:
+linear-gradient(
+135deg,
+#E155A8,
+#FF9567
+);
+
+}
+
+
+.save-btn{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+}
+
+
+.edit-btn:hover,
+.delete-btn:hover,
+.save-btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 8px 20px rgba(225,85,168,.35);
 
 }
 
@@ -301,7 +468,7 @@ object-fit:contain;
 
 width:35%;
 
-background:#32313B;
+background:rgba(31,29,43,.95);
 
 padding:25px;
 
@@ -313,8 +480,12 @@ position:sticky;
 
 top:150px;
 
+border:1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
 box-shadow:
-0 10px 35px rgba(0,0,0,.4);
+0 8px 30px rgba(138,71,214,.15);
 
 }
 
@@ -357,7 +528,15 @@ font-size:35px;
 
 cursor:pointer;
 
-color:#E19C63;
+color:#E155A8;
+
+transition:.3s;
+
+}
+
+.close-side:hover{
+
+transform:rotate(90deg);
 
 }
 
@@ -366,7 +545,17 @@ color:#E19C63;
 
 margin:20px 0;
 
-color:#E19C63;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
 }
 
@@ -375,7 +564,7 @@ color:#E19C63;
 
 line-height:1.8;
 
-color:#d8d8d8;
+color:#B8B8C8;
 
 }
 
@@ -411,106 +600,35 @@ width:100%;
 }
 
 }
-/* BUTTONS */
 
-.post-actions{
 
-margin-top:18px;
-margin-bottom: 25px;
-display:flex;
+/* SCROLLBAR */
 
-gap:10px;
+::-webkit-scrollbar{
+
+width:8px;
 
 }
 
-/* COMMON BUTTON */
+::-webkit-scrollbar-track{
 
-.edit-btn,
-.delete-btn{
-
-text-decoration:none;
-
-padding:10px 16px;
-
-border-radius:12px;
-
-font-size:14px;
-
-font-weight:600;
-
-transition:.3s;
-
-color:white;
+background:#1F1D2B;
 
 }
 
-/* EDIT BUTTON */
+::-webkit-scrollbar-thumb{
 
-.edit-btn{
-
-background:linear-gradient(
-135deg,
-#8BA5BE,
-#708DA9
+background:
+linear-gradient(
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
-}
-
-/* DELETE BUTTON */
-
-.delete-btn{
-
-background:linear-gradient(
-135deg,
-#E19C63,
-#c77f42
-);
+border-radius:20px;
 
 }
-
-.edit-btn:hover,
-.delete-btn:hover{
-
-transform:translateY(-4px);
-
-}
-
-/* SAVE BUTTON */
-.save-btn{
-
-display:flex;
-align-items:center;
-gap:8px;
-
-padding:10px 16px;
-
-border:none;
-
-border-radius:12px;
-
-cursor:pointer;
-
-color:white;
-
-background:linear-gradient(
-135deg,
-#6C63FF,
-#4A42E8
-);
-
-font-size:14px;
-font-weight:600;
-
-transition:.3s;
-
-}
-
-.save-btn:hover{
-
-transform:translateY(-4px);
-
-}
-
 </style>
 {% endblock %}
 

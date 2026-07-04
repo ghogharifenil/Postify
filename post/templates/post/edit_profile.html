@@ -5,51 +5,83 @@
 <title>POSTIFY | Edit Profile</title>
 
 <style>
+body{
+
+background:#14131B;
+
+}
+
+
+/* MAIN */
 
 .edit-container{
 
 max-width:700px;
+
 margin:auto;
 
 }
 
-.edit-box{
 
-background:#32313B;
+/* BOX */
+
+.edit-box{
 
 padding:35px;
 
+background:rgba(31,29,43,.95);
+
 border-radius:25px;
 
+border:1px solid rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
 box-shadow:
-0 8px 30px rgba(0,0,0,.35);
+0 8px 30px rgba(138,71,214,.15);
 
 }
+
 
 /* HEADER */
 
 .edit-header{
 
 text-align:center;
+
 margin-bottom:30px;
 
 }
 
+
 .edit-header h1{
 
-color:#E19C63;
-
-font-size:38px;
+font-size:40px;
 
 margin-bottom:10px;
 
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
 }
+
 
 .edit-header p{
 
-color:#aaa;
+color:#B8B8C8;
 
 }
+
 
 /* PROFILE IMAGE */
 
@@ -60,9 +92,11 @@ position:relative;
 width:130px;
 
 margin:auto;
+
 margin-bottom:35px;
 
 }
+
 
 .preview{
 
@@ -73,28 +107,41 @@ border-radius:50%;
 
 overflow:hidden;
 
-border:4px solid #E19C63;
-
 display:flex;
+
 justify-content:center;
 align-items:center;
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
+padding:4px;
+
+box-shadow:
+0 0 25px rgba(225,85,168,.35);
+
 }
+
 
 .preview img{
 
 width:100%;
 height:100%;
 
+border-radius:50%;
+
 object-fit:cover;
 
+background:#14131B;
+
 }
+
 
 /* CAMERA BUTTON */
 
@@ -105,8 +152,8 @@ position:absolute;
 bottom:0;
 right:0;
 
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 
 border-radius:50%;
 
@@ -117,41 +164,50 @@ align-items:center;
 
 cursor:pointer;
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
 color:white;
 
 font-size:15px;
 
-border:3px solid #32313B;
+border:3px solid #1F1D2B;
 
-transition:.3s;
+transition:.4s;
 
 }
+
 
 .circle-btn:hover{
 
 transform:scale(1.1);
 
+box-shadow:
+0 0 20px rgba(225,85,168,.4);
+
 }
+
 
 /* INPUTS */
 
 .input-group{
 
-margin-bottom:20px;
+margin-bottom:22px;
 
 }
+
 
 .input-group label{
 
 display:block;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 font-weight:600;
 
@@ -159,13 +215,26 @@ color:#ddd;
 
 }
 
+
 .input-group label i{
 
 margin-right:8px;
 
-color:#E19C63;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
 
 }
+
 
 .input-group input,
 .input-group textarea{
@@ -174,19 +243,22 @@ width:100%;
 
 padding:15px;
 
-border:none;
+border-radius:15px;
+
+border:1px solid rgba(255,255,255,.05);
 
 outline:none;
 
-border-radius:15px;
-
-background:#27262E;
+background:#1F1D2B;
 
 color:white;
 
 font-size:15px;
 
+transition:.4s;
+
 }
+
 
 .input-group textarea{
 
@@ -196,6 +268,28 @@ resize:none;
 
 }
 
+
+.input-group input:focus,
+.input-group textarea:focus{
+
+border:1px solid #8A47D6;
+
+box-shadow:
+0 0 20px rgba(225,85,168,.25);
+
+transform:scale(1.01);
+
+}
+
+
+.input-group input::placeholder,
+.input-group textarea::placeholder{
+
+color:#8D8D99;
+
+}
+
+
 /* BUTTONS */
 
 .btn-group{
@@ -204,9 +298,10 @@ display:flex;
 
 gap:15px;
 
-margin-top:25px;
+margin-top:30px;
 
 }
+
 
 .save-btn,
 .cancel-btn{
@@ -224,47 +319,82 @@ text-decoration:none;
 text-align:center;
 
 font-size:16px;
-font-weight:bold;
+
+font-weight:700;
 
 cursor:pointer;
 
 color:white;
 
-transition:.3s;
+transition:.4s;
 
 }
+
 
 /* SAVE */
 
 .save-btn{
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6
 );
 
 }
+
 
 /* CANCEL */
 
 .cancel-btn{
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#D41F26,
-#ff5757
+#E155A8,
+#FF9567
 );
 
 }
+
+
+/* HOVER */
 
 .save-btn:hover,
 .cancel-btn:hover{
 
 transform:translateY(-4px);
 
+box-shadow:
+0 10px 25px rgba(225,85,168,.35);
+
 }
 
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.edit-box{
+
+padding:25px;
+
+}
+
+.edit-header h1{
+
+font-size:30px;
+
+}
+
+.btn-group{
+
+flex-direction:column;
+
+}
+
+}
 </style>
 {% endblock %}
 

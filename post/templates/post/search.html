@@ -1,77 +1,76 @@
 {% extends 'base/base.html' %}
 {% block head %}
 <style>
-
 body{
-background:#27262E;
+background:#14131B;
+font-family:"Segoe UI",sans-serif;
+color:white;
 }
-
-/* SEARCH BAR WHITE FOCUS REMOVE */
-
-input:focus,
-textarea:focus,
-select:focus{
-outline:none;
-background:#27262E !important;
-color:white !important;
-
-box-shadow:
-0 0 0 3px rgba(139,165,190,.4);
-}
-
 
 /* TITLE */
 
 .search-title{
-color:white;
-
-font-size:30px;
-
+font-size:34px;
 font-weight:700;
-
-margin-bottom:25px;
-
 text-align:center;
+margin-bottom:35px;
+
+background:linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .search-title span{
-color:#E19C63;
+-webkit-text-fill-color:white;
 }
 
 /* USER CARD */
 
-.user-card{
+.user-card,
+.post-card,
+.no-result{
 
-background:#32313B;
+background:rgba(31,29,43,.95);
+
+backdrop-filter:blur(15px);
+
+border-radius:25px;
+
+border:1px solid rgba(255,255,255,.05);
 
 padding:25px;
-
-border-radius:20px;
 
 margin-bottom:25px;
 
 box-shadow:
-0 8px 30px rgba(0,0,0,.35);
-
-color:white;
+0 8px 30px rgba(138,71,214,.15);
 
 transition:.4s;
 }
 
-.user-card:hover{
+.user-card:hover,
+.post-card:hover{
 
-transform:translateY(-5px);
+transform:translateY(-6px);
 
+box-shadow:
+0 0 30px rgba(225,85,168,.25);
 }
+
+/* USER AREA */
 
 .user-left{
 
 display:flex;
-
 align-items:center;
-
 gap:20px;
-
 }
 
 /* PROFILE IMAGE */
@@ -82,33 +81,44 @@ width:90px;
 height:90px;
 
 border-radius:50%;
-
 object-fit:cover;
 
-border:3px solid #E19C63;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
+
+padding:3px;
+
+box-shadow:
+0 0 20px rgba(225,85,168,.4);
 
 }
 
-/* DEFAULT PROFILE */
+/* DEFAULT */
 
 .default{
 
 display:flex;
-
+justify-content:center;
 align-items:center;
 
-justify-content:center;
-
 font-size:35px;
-
 font-weight:bold;
 
 color:white;
 
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
 }
@@ -117,82 +127,53 @@ background:linear-gradient(
 
 .user-card h2{
 
-color:#E19C63;
+font-size:24px;
 margin-bottom:8px;
-
+color:white;
 }
 
 .user-card p{
 
-color:#d8d8d8;
-
+color:#B8B8C8;
+line-height:1.7;
 }
-
 
 /* POST CARD */
 
-.post-card{
-
-background:#32313B;
-
-padding:22px;
-
-border-radius:20px;
-
-margin-bottom:20px;
-
-box-shadow:
-0 8px 30px rgba(0,0,0,.35);
-
-transition:.4s;
-
-color:white;
-
-}
-
-.post-card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 12px 35px rgba(0,0,0,.45);
-
-}
-
 .post-card h3{
 
-font-size:22px;
+font-size:24px;
+margin:15px 0;
 
-margin-bottom:12px;
+background:
+linear-gradient(
+135deg,
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
 
-color:#E19C63;
-
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .post-card p{
 
-font-size:15px;
-
+color:#B8B8C8;
 line-height:1.7;
-
-margin-bottom:10px;
-
-color:#d8d8d8;
-
 }
 
 /* AUTHOR */
 
 .author{
 
-font-weight:bold;
-
-color:#8BA5BE;
-
+font-weight:700;
+color:white;
+margin-bottom:10px;
 }
 
-
-/* PROFILE CIRCLE */
+/* PROFILE SMALL */
 
 .profile-circle{
 
@@ -200,29 +181,26 @@ width:55px;
 height:55px;
 
 border-radius:50%;
-
 overflow:hidden;
 
 display:flex;
-
+justify-content:center;
 align-items:center;
 
-justify-content:center;
-
-background:linear-gradient(
+background:
+linear-gradient(
 135deg,
-#E19C63,
-#8BA5BE
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
 );
 
 color:white;
-
-font-size:18px;
-
 font-weight:bold;
 
-margin-bottom:12px;
-
+box-shadow:
+0 0 20px rgba(225,85,168,.4);
 }
 
 .profile-img{
@@ -230,38 +208,61 @@ margin-bottom:12px;
 width:100%;
 height:100%;
 object-fit:cover;
-
 }
 
+/* IMAGE */
+
+.post-image{
+
+width:100%;
+max-height:300px;
+
+object-fit:contain;
+
+margin-top:15px;
+
+border-radius:15px;
+
+border:2px solid rgba(255,255,255,.05);
+
+transition:.4s;
+}
+
+.post-image:hover{
+
+transform:scale(1.02);
+}
 
 /* NO RESULT */
 
 .no-result{
 
-background:#32313B;
+text-align:center;
+font-size:22px;
+color:#B8B8C8;
+}
 
-padding:30px;
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-track{
+background:#1F1D2B;
+}
+
+::-webkit-scrollbar-thumb{
+
+background:
+linear-gradient(
+#0E67B8,
+#8A47D6,
+#E155A8,
+#FF9567
+);
 
 border-radius:20px;
-
-text-align:center;
-
-font-size:22px;
-
-color:#d8d8d8;
-
-box-shadow:
-0 8px 30px rgba(0,0,0,.35);
-
-}
-.post-image{
-
-max-width:300px;
-max-height:250px;
-margin:15px auto;
-border-radius:15px;
-object-fit:contain;
-transition:.4s;
 }
 
 </style>
@@ -272,7 +273,7 @@ transition:.4s;
     <span>{{ query }}</span>
   </h2>
   {% if profile %}
-    <div class="user-card">
+   <a href="#"> <div class="user-card">
       <div class="user-left">
         {% if profile.profile_pic %}
           <img src="{{ profile.profile_pic.url }}" class="user-pic" />
@@ -288,7 +289,7 @@ transition:.4s;
           <p>Posts : {{ profile.posts.count }}</p>
         </div>
       </div>
-    </div>
+    </div></a>
   {% endif %}
   {% for post in posts %}
     <div class="post-card">
