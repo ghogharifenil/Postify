@@ -1,0 +1,270 @@
+body {
+  background: #14131b;
+}
+
+/* MAIN */
+
+.edit-container {
+  max-width: 700px;
+
+  margin: auto;
+}
+
+/* BOX */
+
+.edit-box {
+  padding: 35px;
+
+  background: rgba(31, 29, 43, 0.95);
+
+  border-radius: 25px;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
+}
+
+/* HEADER */
+
+.edit-header {
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+.edit-header h1 {
+  font-size: 40px;
+
+  margin-bottom: 10px;
+
+  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.edit-header p {
+  color: #b8b8c8;
+}
+
+/* PROFILE IMAGE */
+
+.preview-container {
+  position: relative;
+
+  width: 130px;
+
+  margin: auto;
+
+  margin-bottom: 35px;
+}
+
+.preview {
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+
+  padding: 4px;
+
+  box-shadow: 0 0 25px rgba(225, 85, 168, 0.35);
+}
+
+.preview img {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  background: #14131b;
+}
+
+/* CAMERA BUTTON */
+
+.circle-btn {
+  position: absolute;
+
+  bottom: 0;
+  right: 0;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+
+  color: white;
+
+  font-size: 15px;
+
+  border: 3px solid #1f1d2b;
+
+  transition: 0.4s;
+}
+
+.circle-btn:hover {
+  transform: scale(1.1);
+
+  box-shadow: 0 0 20px rgba(225, 85, 168, 0.4);
+}
+
+/* INPUTS */
+
+.input-group {
+  margin-bottom: 22px;
+}
+
+.input-group label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-weight: 600;
+
+  color: #ddd;
+}
+
+.input-group label i {
+  margin-right: 8px;
+
+  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  outline: none;
+
+  background: #1f1d2b;
+
+  color: white;
+
+  font-size: 15px;
+
+  transition: 0.4s;
+}
+
+.input-group textarea {
+  height: 120px;
+
+  resize: none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border: 1px solid #8a47d6;
+
+  box-shadow: 0 0 20px rgba(225, 85, 168, 0.25);
+
+  transform: scale(1.01);
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: #8d8d99;
+}
+
+/* BUTTONS */
+
+.btn-group {
+  display: flex;
+
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.save-btn,
+.cancel-btn {
+  flex: 1;
+
+  padding: 15px;
+
+  border: none;
+
+  border-radius: 15px;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  color: white;
+
+  transition: 0.4s;
+}
+
+/* SAVE */
+
+.save-btn {
+  background: linear-gradient(135deg, #0e67b8, #8a47d6);
+}
+
+/* CANCEL */
+
+.cancel-btn {
+  background: linear-gradient(135deg, #e155a8, #ff9567);
+}
+
+/* HOVER */
+
+.save-btn:hover,
+.cancel-btn:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 10px 25px rgba(225, 85, 168, 0.35);
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .edit-box {
+    padding: 25px;
+  }
+
+  .edit-header h1 {
+    font-size: 30px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}

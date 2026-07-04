@@ -2,595 +2,97 @@
 {% load static %}
 
 {% block head %}
-<title>POSTIFY | Edit Profile</title>
+  <title>POSTIFY | Edit Profile</title>
 
-<style>
-body{
-
-background:#14131B;
-
-}
-
-
-/* MAIN */
-
-.edit-container{
-
-max-width:700px;
-
-margin:auto;
-
-}
-
-
-/* BOX */
-
-.edit-box{
-
-padding:35px;
-
-background:rgba(31,29,43,.95);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-/* HEADER */
-
-.edit-header{
-
-text-align:center;
-
-margin-bottom:30px;
-
-}
-
-
-.edit-header h1{
-
-font-size:40px;
-
-margin-bottom:10px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.edit-header p{
-
-color:#B8B8C8;
-
-}
-
-
-/* PROFILE IMAGE */
-
-.preview-container{
-
-position:relative;
-
-width:130px;
-
-margin:auto;
-
-margin-bottom:35px;
-
-}
-
-
-.preview{
-
-width:130px;
-height:130px;
-
-border-radius:50%;
-
-overflow:hidden;
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
-padding:4px;
-
-box-shadow:
-0 0 25px rgba(225,85,168,.35);
-
-}
-
-
-.preview img{
-
-width:100%;
-height:100%;
-
-border-radius:50%;
-
-object-fit:cover;
-
-background:#14131B;
-
-}
-
-
-/* CAMERA BUTTON */
-
-.circle-btn{
-
-position:absolute;
-
-bottom:0;
-right:0;
-
-width:42px;
-height:42px;
-
-border-radius:50%;
-
-display:flex;
-
-justify-content:center;
-align-items:center;
-
-cursor:pointer;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
-color:white;
-
-font-size:15px;
-
-border:3px solid #1F1D2B;
-
-transition:.4s;
-
-}
-
-
-.circle-btn:hover{
-
-transform:scale(1.1);
-
-box-shadow:
-0 0 20px rgba(225,85,168,.4);
-
-}
-
-
-/* INPUTS */
-
-.input-group{
-
-margin-bottom:22px;
-
-}
-
-
-.input-group label{
-
-display:block;
-
-margin-bottom:10px;
-
-font-weight:600;
-
-color:#ddd;
-
-}
-
-
-.input-group label i{
-
-margin-right:8px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.input-group input,
-.input-group textarea{
-
-width:100%;
-
-padding:15px;
-
-border-radius:15px;
-
-border:1px solid rgba(255,255,255,.05);
-
-outline:none;
-
-background:#1F1D2B;
-
-color:white;
-
-font-size:15px;
-
-transition:.4s;
-
-}
-
-
-.input-group textarea{
-
-height:120px;
-
-resize:none;
-
-}
-
-
-.input-group input:focus,
-.input-group textarea:focus{
-
-border:1px solid #8A47D6;
-
-box-shadow:
-0 0 20px rgba(225,85,168,.25);
-
-transform:scale(1.01);
-
-}
-
-
-.input-group input::placeholder,
-.input-group textarea::placeholder{
-
-color:#8D8D99;
-
-}
-
-
-/* BUTTONS */
-
-.btn-group{
-
-display:flex;
-
-gap:15px;
-
-margin-top:30px;
-
-}
-
-
-.save-btn,
-.cancel-btn{
-
-flex:1;
-
-padding:15px;
-
-border:none;
-
-border-radius:15px;
-
-text-decoration:none;
-
-text-align:center;
-
-font-size:16px;
-
-font-weight:700;
-
-cursor:pointer;
-
-color:white;
-
-transition:.4s;
-
-}
-
-
-/* SAVE */
-
-.save-btn{
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6
-);
-
-}
-
-
-/* CANCEL */
-
-.cancel-btn{
-
-background:
-linear-gradient(
-135deg,
-#E155A8,
-#FF9567
-);
-
-}
-
-
-/* HOVER */
-
-.save-btn:hover,
-.cancel-btn:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 10px 25px rgba(225,85,168,.35);
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.edit-box{
-
-padding:25px;
-
-}
-
-.edit-header h1{
-
-font-size:30px;
-
-}
-
-.btn-group{
-
-flex-direction:column;
-
-}
-
-}
-</style>
+  <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}" />
 {% endblock %}
 
-
-
 {% block content %}
-
-<div class="edit-container">
-
-<div class="edit-box">
-
-<div class="edit-header">
-
-<h1>Edit Profile</h1>
-
-<p>
-
-Update your profile information
-
-</p>
-
-</div>
-
-<form method="POST"
-enctype="multipart/form-data">
-
-{% csrf_token %}
-
-
-<div class="preview-container">
-
-<div class="preview">
-
-{% if profile.profile_pic %}
-
-<img
-id="preview-image"
-src="{{profile.profile_pic.url}}">
-
-{% else %}
-
-<img
-id="preview-image"
-src="{% static 'images/default.png' %}">
-
-{% endif %}
-
-</div>
-
-<label
-for="profile-input"
-class="circle-btn">
-
-<i class="fa-solid fa-camera"></i>
-
-</label>
-
-</div>
-
-
-<input
-type="file"
-name="profile_pic"
-id="profile-input"
-hidden>
-
-
-<!-- NAME -->
-
-<div class="input-group">
-
-<label>
-
-<i class="fa-solid fa-user"></i>
-
-Name
-
-</label>
-
-<input
-type="text"
-name="name"
-value="{{profile.name}}"
-placeholder="Enter your name"
-required>
-
-</div>
-
-
-<!-- CITY -->
-
-<div class="input-group">
-
-<label>
-
-<i class="fa-solid fa-location-dot"></i>
-
-City
-
-</label>
-
-<input
-type="text"
-name="city"
-value="{{profile.city}}"
-placeholder="Enter your city">
-
-</div>
-
-
-<!-- BIO -->
-
-<div class="input-group">
-
-<label>
-
-<i class="fa-solid fa-pen"></i>
-
-Bio
-
-</label>
-
-<textarea
-name="bio"
-placeholder="Write something about yourself...">{{profile.bio}}</textarea>
-
-</div>
-
-
-<div class="btn-group">
-
-<button
-type="submit"
-class="save-btn">
-
-Save Changes
-
-</button>
-
-
-<a
-href="{% url 'profile' %}"
-class="cancel-btn">
-
-Cancel
-
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-
-
-<script>
-
-let input=
-document.getElementById(
-"profile-input"
-);
-
-input.addEventListener(
-"change",
-function(){
-
-let file=
-this.files[0];
-
-if(file){
-
-let reader=
-new FileReader();
-
-reader.onload=
-function(e){
-
-document.getElementById(
-"preview-image"
-).src=
-e.target.result;
-
-}
-
-reader.readAsDataURL(
-file
-);
-
-}
-
-}
-);
-
-</script>
-
+  <div class="edit-container">
+    <div class="edit-box">
+      <div class="edit-header">
+        <h1>Edit Profile</h1>
+
+        <p>Update your profile information</p>
+      </div>
+
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="preview-container">
+          <div class="preview">
+            {% if profile.profile_pic %}
+              <img id="preview-image" src="{{ profile.profile_pic.url }}" />
+            {% else %}
+              <img id="preview-image" src="{% static 'images/default.png' %}" />
+            {% endif %}
+          </div>
+
+          <label for="profile-input" class="circle-btn"><i class="fa-solid fa-camera"></i></label>
+        </div>
+
+        <input type="file" name="profile_pic" id="profile-input" hidden />
+
+        <!-- NAME -->
+
+        <div class="input-group">
+          <label>
+            <i class="fa-solid fa-user"></i>
+
+            Name
+          </label>
+
+          <input type="text" name="name" value="{{ profile.name }}" placeholder="Enter your name" required />
+        </div>
+
+        <!-- CITY -->
+
+        <div class="input-group">
+          <label>
+            <i class="fa-solid fa-location-dot"></i>
+
+            City
+          </label>
+
+          <input type="text" name="city" value="{{ profile.city }}" placeholder="Enter your city" />
+        </div>
+
+        <!-- BIO -->
+
+        <div class="input-group">
+          <label>
+            <i class="fa-solid fa-pen"></i>
+
+            Bio
+          </label>
+
+          <textarea name="bio" placeholder="Write something about yourself...">{{ profile.bio }}</textarea>
+        </div>
+
+        <div class="btn-group">
+          <button type="submit" class="save-btn">Save Changes</button>
+
+          <a href="{% url 'profile' %}" class="cancel-btn">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let input = document.getElementById('profile-input')
+    
+    input.addEventListener('change', function () {
+      let file = this.files[0]
+    
+      if (file) {
+        let reader = new FileReader()
+    
+        reader.onload = function (e) {
+          document.getElementById('preview-image').src = e.target.result
+        }
+    
+        reader.readAsDataURL(file)
+      }
+    })
+  </script>
 {% endblock %}

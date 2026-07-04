@@ -2,340 +2,39 @@
 {% load static %}
 
 {% block head %}
-
-<title>POSTIFY | Create Post</title>
-
-<style>
-body{
-
-background:#14131B;
-
-}
-
-
-/* CONTAINER */
-
-.create-container{
-
-max-width:700px;
-
-margin:auto;
-
-padding:35px;
-
-background:rgba(31,29,43,.95);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-color:white;
-
-}
-
-
-/* TITLE */
-
-.create-title{
-
-text-align:center;
-
-font-size:32px;
-
-font-weight:700;
-
-margin-bottom:30px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-/* FORM */
-
-.form-group{
-
-margin-bottom:22px;
-
-}
-
-
-.form-group label{
-
-display:block;
-
-margin-bottom:10px;
-
-font-size:16px;
-
-font-weight:700;
-
-color:#d8d8d8;
-
-}
-
-
-/* INPUTS */
-
-.form-control{
-
-width:100%;
-
-padding:15px;
-
-border-radius:15px;
-
-border:1px solid rgba(255,255,255,.05);
-
-outline:none;
-
-background:#1F1D2B;
-
-color:white;
-
-font-size:15px;
-
-transition:.4s;
-
-box-sizing:border-box;
-
-}
-
-
-/* PLACEHOLDER */
-
-.form-control::placeholder{
-
-color:#8D8D99;
-
-}
-
-
-/* FOCUS */
-
-.form-control:focus{
-
-border:1px solid #8A47D6;
-
-box-shadow:
-0 0 20px rgba(225,85,168,.25);
-
-transform:scale(1.01);
-
-}
-
-
-/* TEXTAREA */
-
-textarea.form-control{
-
-resize:none;
-
-height:200px;
-
-}
-
-
-/* FILE INPUT */
-
-input[type=file]{
-
-cursor:pointer;
-
-padding:12px;
-
-}
-
-
-/* FILE BUTTON */
-
-input[type=file]::file-selector-button{
-
-padding:10px 15px;
-
-border:none;
-
-border-radius:10px;
-
-margin-right:12px;
-
-cursor:pointer;
-
-color:white;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6
-);
-
-}
-
-
-/* SUBMIT BUTTON */
-
-.post-btn{
-
-width:100%;
-
-padding:15px;
-
-border:none;
-
-border-radius:15px;
-
-cursor:pointer;
-
-font-size:16px;
-
-font-weight:700;
-
-color:white;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
-transition:.4s;
-
-}
-
-
-/* BUTTON HOVER */
-
-.post-btn:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 10px 25px rgba(225,85,168,.35);
-
-}
-
-
-/* ICON */
-
-.post-btn i{
-
-margin-right:8px;
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.create-container{
-
-padding:20px;
-
-}
-
-.create-title{
-
-font-size:25px;
-
-}
-
-}
-
-</style>
-
+  <title>POSTIFY | Create Post</title>
+  <link rel="stylesheet" href="{% static 'css/create_post.css' %}" />
 {% endblock %}
 
-
 {% block content %}
+  <div class="create-container">
+    <h2 class="create-title">Create New Post</h2>
 
-<div class="create-container">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
 
-<h2 class="create-title">
-Create New Post
-</h2>
+      <div class="form-group">
+        <label>Post Title</label>
 
-<form method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" class="form-control" required />
+      </div>
 
-{% csrf_token %}
+      <div class="form-group">
+        <label>Post Content</label>
 
-<div class="form-group">
+        <textarea name="content" class="form-control" required></textarea>
+      </div>
 
-<label>
-Post Title
-</label>
+      <div class="form-group">
+        <label>Upload Image</label>
 
-<input
-type="text"
-name="title"
-class="form-control"
-required
->
+        <input type="file" name="image" class="form-control" accept="image/*" />
+      </div>
 
-</div>
-
-
-<div class="form-group">
-
-<label>
-Post Content
-</label>
-
-<textarea
-name="content"
-class="form-control"
-required
-></textarea>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Upload Image
-</label>
-
-<input
-type="file"
-name="image"
-class="form-control"
-accept="image/*"
->
-
-</div>
-
-
-<button
-type="submit"
-class="post-btn">
-<i class="fa-solid fa-paper-plane"></i>
-Publish Post
-
-</button>
-
-</form>
-
-</div>
-
+      <button type="submit" class="post-btn">
+        <i class="fa-solid fa-paper-plane"></i>
+        Publish Post
+      </button>
+    </form>
+  </div>
 {% endblock %}

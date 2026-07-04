@@ -2,362 +2,56 @@
 {% load static %}
 
 {% block head %}
-<title>POSTIFY | About</title>
-
-<style>
-.about-container{
-
-width:100%;
-min-height:75vh;
-
-display:flex;
-flex-direction:column;
-justify-content:center;
-
-}
-
-
-/* HERO */
-
-.about-hero{
-
-text-align:center;
-
-margin-bottom:50px;
-
-padding:30px;
-
-background:rgba(31,29,43,.95);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-.about-title{
-
-font-size:55px;
-
-font-weight:900;
-
-margin-bottom:15px;
-
-letter-spacing:2px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-
-.about-desc{
-
-max-width:850px;
-
-margin:auto;
-
-line-height:1.9;
-
-font-size:17px;
-
-color:#B8B8C8;
-
-}
-
-
-/* FEATURE SECTION */
-
-.feature-container{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
-margin-top:40px;
-
-}
-
-
-/* CARDS */
-
-.feature-card{
-
-background:rgba(31,29,43,.95);
-
-padding:30px;
-
-border-radius:25px;
-
-text-align:center;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-transition:.4s;
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-.feature-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:
-0 0 30px rgba(225,85,168,.25);
-
-}
-
-
-.feature-card i{
-
-font-size:38px;
-
-margin-bottom:15px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-
-.feature-card h3{
-
-margin-bottom:12px;
-
-color:white;
-
-font-size:22px;
-
-}
-
-
-.feature-card p{
-
-line-height:1.8;
-
-color:#B8B8C8;
-
-}
-
-
-/* FOOTER */
-
-.about-footer{
-
-margin-top:60px;
-
-padding:35px;
-
-background:rgba(31,29,43,.95);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-text-align:center;
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-.about-footer h3{
-
-margin-bottom:15px;
-
-font-size:28px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-}
-
-
-.about-footer p{
-
-color:#B8B8C8;
-
-line-height:1.8;
-
-max-width:700px;
-
-margin:auto;
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.about-title{
-
-font-size:38px;
-
-}
-
-.about-desc{
-
-font-size:15px;
-
-}
-
-.feature-card{
-
-padding:20px;
-
-}
-
-}
-
-</style>
-
+  <title>POSTIFY | About</title>
+  <link rel="stylesheet" href="{% static 'css/about.css' %}" />
 {% endblock %}
 
 {% block content %}
+  <div class="about-container">
+    <div class="about-hero">
+      <h1 class="about-title">POSTIFY</h1>
 
-<div class="about-container">
+      <p class="about-desc">POSTIFY is a modern social platform designed for sharing ideas, creating posts and connecting with content in a clean and engaging way. Users can create posts, upload images, save favorite content and manage personal profiles with a smooth experience.</p>
+    </div>
 
-<div class="about-hero">
+    <div class="feature-container">
+      <div class="feature-card">
+        <i class="fa-solid fa-pen-to-square"></i>
 
-<h1 class="about-title">
-POSTIFY
-</h1>
+        <h3>Create Posts</h3>
 
-<p class="about-desc">
+        <p>Create and share thoughts, moments and ideas instantly.</p>
+      </div>
 
-POSTIFY is a modern social platform designed for sharing ideas,
-creating posts and connecting with content in a clean and engaging way.
-Users can create posts, upload images, save favorite content and
-manage personal profiles with a smooth experience.
+      <div class="feature-card">
+        <i class="fa-solid fa-bookmark"></i>
 
-</p>
+        <h3>Save Content</h3>
 
-</div>
+        <p>Save your favorite posts and access them later anytime.</p>
+      </div>
 
+      <div class="feature-card">
+        <i class="fa-solid fa-user"></i>
 
-<div class="feature-container">
+        <h3>Personal Profile</h3>
 
-<div class="feature-card">
+        <p>Manage profile details and organize your own content.</p>
+      </div>
 
-<i class="fa-solid fa-pen-to-square"></i>
+      <div class="feature-card">
+        <i class="fa-solid fa-image"></i>
 
-<h3>Create Posts</h3>
+        <h3>Media Sharing</h3>
 
-<p>
+        <p>Upload images and create visually engaging posts.</p>
+      </div>
+    </div>
 
-Create and share thoughts, moments and ideas instantly.
+    <div class="about-footer">
+      <h3>Built for Better Sharing</h3>
 
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<i class="fa-solid fa-bookmark"></i>
-
-<h3>Save Content</h3>
-
-<p>
-
-Save your favorite posts and access them later anytime.
-
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<i class="fa-solid fa-user"></i>
-
-<h3>Personal Profile</h3>
-
-<p>
-
-Manage profile details and organize your own content.
-
-</p>
-
-</div>
-
-
-<div class="feature-card">
-
-<i class="fa-solid fa-image"></i>
-
-<h3>Media Sharing</h3>
-
-<p>
-
-Upload images and create visually engaging posts.
-
-</p>
-
-</div>
-
-</div>
-
-
-<div class="about-footer">
-
-<h3>Built for Better Sharing</h3>
-
-<p>
-
-POSTIFY is designed to create a seamless experience where users can
-share ideas, discover content and organize their favorite posts in
-one place. Built with a focus on simplicity, usability and modern design.
-
-</p>
-
-</div>
-
-</div>
-
+      <p>POSTIFY is designed to create a seamless experience where users can share ideas, discover content and organize their favorite posts in one place. Built with a focus on simplicity, usability and modern design.</p>
+    </div>
+  </div>
 {% endblock %}

@@ -2,553 +2,89 @@
 {% load static %}
 
 {% block head %}
-<title>POSTIFY | Help</title>
+  <title>POSTIFY | Help</title>
 
-<style>
-body{
-
-background:#14131B;
-
-}
-
-
-/* MAIN */
-
-.help-container{
-
-max-width:1000px;
-
-margin:auto;
-
-}
-
-
-/* HEADER */
-
-.help-header{
-
-text-align:center;
-
-margin-bottom:45px;
-
-padding:30px;
-
-background:rgba(31,29,43,.95);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-.help-header h1{
-
-font-size:45px;
-
-margin-bottom:15px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.help-header p{
-
-color:#B8B8C8;
-
-line-height:1.8;
-
-max-width:700px;
-
-margin:auto;
-
-}
-
-
-/* GRID */
-
-.help-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
-}
-
-
-/* CARD */
-
-.help-card{
-
-padding:30px;
-
-cursor:pointer;
-
-text-align:center;
-
-border-radius:25px;
-
-background:rgba(31,29,43,.95);
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-transition:.4s;
-
-}
-
-
-.help-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:
-0 0 30px rgba(225,85,168,.25);
-
-}
-
-
-/* ICON */
-
-.help-card i{
-
-font-size:38px;
-
-margin-bottom:15px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-/* TEXT */
-
-.help-card h3{
-
-margin-bottom:12px;
-
-font-size:22px;
-
-color:white;
-
-}
-
-.help-card p{
-
-color:#B8B8C8;
-
-line-height:1.7;
-
-}
-
-
-/* SUPPORT BOX */
-
-.support-box{
-
-margin-top:50px;
-
-padding:35px;
-
-text-align:center;
-
-border-radius:25px;
-
-background:rgba(31,29,43,.95);
-
-border:1px solid rgba(255,255,255,.05);
-
-backdrop-filter:blur(15px);
-
-box-shadow:
-0 8px 30px rgba(138,71,214,.15);
-
-}
-
-
-.support-box h2{
-
-margin-bottom:15px;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.support-box p{
-
-color:#B8B8C8;
-
-line-height:1.8;
-
-}
-
-
-/* IMAGE MODAL */
-
-.guide-modal{
-
-display:none;
-
-position:fixed;
-
-top:0;
-left:0;
-
-width:100%;
-height:100%;
-
-background:rgba(0,0,0,.92);
-
-justify-content:center;
-align-items:center;
-
-z-index:9999;
-
-padding:20px;
-
-backdrop-filter:blur(10px);
-
-}
-
-
-/* IMAGE */
-
-.guide-modal img{
-
-max-width:90%;
-
-max-height:85%;
-
-border-radius:20px;
-
-border:2px solid rgba(255,255,255,.08);
-
-box-shadow:
-0 0 35px rgba(225,85,168,.25);
-
-animation:zoom .3s ease;
-
-}
-
-
-@keyframes zoom{
-
-from{
-
-transform:scale(.7);
-
-opacity:0;
-
-}
-
-to{
-
-transform:scale(1);
-
-opacity:1;
-
-}
-
-}
-
-
-/* CLOSE BUTTON */
-
-.close-btn{
-
-position:absolute;
-
-top:20px;
-right:35px;
-
-font-size:45px;
-
-cursor:pointer;
-
-transition:.4s;
-
-background:
-linear-gradient(
-135deg,
-#0E67B8,
-#8A47D6,
-#E155A8,
-#FF9567
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-}
-
-
-.close-btn:hover{
-
-transform:scale(1.2);
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-.help-header h1{
-
-font-size:35px;
-
-}
-
-.help-card{
-
-padding:20px;
-
-}
-
-.support-box{
-
-padding:25px;
-
-}
-
-.close-btn{
-
-right:20px;
-
-font-size:35px;
-
-}
-
-}
-
-</style>
-
+  <link rel="stylesheet" href="{% static 'css/help.css' %}" />
 {% endblock %}
 
-
-
 {% block content %}
+  <div class="help-container">
+    <div class="help-header">
+      <h1>Help Center</h1>
 
-<div class="help-container">
+      <p>Click any feature card below to open a visual guide and learn how POSTIFY works.</p>
+    </div>
 
-<div class="help-header">
+    <div class="help-grid">
+      <div class="help-card" onclick="openGuide('{% static 'images/create_post1.jpg' %}')">
+        <i class="fa-solid fa-square-plus"></i>
 
-<h1>
-Help Center
-</h1>
+        <h3>Create Posts</h3>
 
-<p>
+        <p>Learn how to create and publish posts.</p>
+      </div>
 
-Click any feature card below to open
-a visual guide and learn how POSTIFY works.
+      <div class="help-card" onclick="openGuide('{% static 'images/save_delete_edit.png' %}')">
+        <i class="fa-solid fa-bookmark"></i>
 
-</p>
+        <h3>Save Posts</h3>
 
-</div>
+        <p>Learn how to save favorite posts.</p>
+      </div>
 
+      <div class="help-card" onclick="openGuide('{% static 'images/profile.png' %}')">
+        <i class="fa-solid fa-user"></i>
 
+        <h3>Profile</h3>
 
-<div class="help-grid">
+        <p>Learn profile management and settings.</p>
+      </div>
 
+      <div class="help-card" onclick="openGuide('{% static 'images/search1.jpg' %}')">
+        <i class="fa-solid fa-magnifying-glass"></i>
 
-<div class="help-card"
-onclick="openGuide('{% static 'images/create_post1.jpg' %}')">
+        <h3>Search</h3>
 
-<i class="fa-solid fa-square-plus"></i>
+        <p>Learn how to search users and posts.</p>
+      </div>
+    </div>
 
-<h3>Create Posts</h3>
+    <div class="support-box">
+      <h2>
+        <i class="fa-solid fa-headset"></i>
 
-<p>
+        Need Assistance?
+      </h2>
 
-Learn how to create and publish posts.
+      <p>POSTIFY is built to keep things simple and easy. Open feature guides anytime and explore the platform.</p>
+    </div>
+  </div>
 
-</p>
+  <!-- IMAGE POPUP -->
 
-</div>
+  <div class="guide-modal" id="guideModal">
+    <span class="close-btn" onclick="closeGuide()">&times;</span>
 
+    <img id="guideImage" />
+  </div>
 
-
-<div class="help-card"
-onclick="openGuide('{% static 'images/save_delete_edit.png' %}')">
-
-<i class="fa-solid fa-bookmark"></i>
-
-<h3>Save Posts</h3>
-
-<p>
-
-Learn how to save favorite posts.
-
-</p>
-
-</div>
-
-
-
-<div class="help-card"
-onclick="openGuide('{% static 'images/profile.png' %}')">
-
-<i class="fa-solid fa-user"></i>
-
-<h3>Profile</h3>
-
-<p>
-
-Learn profile management and settings.
-
-</p>
-
-</div>
+  <script>
+    function openGuide(imagePath) {
+      document.getElementById('guideModal').style.display = 'flex'
     
-
-
-<div class="help-card"
-onclick="openGuide('{% static 'images/search1.jpg' %}')">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<h3>Search</h3>
-
-<p>
-
-Learn how to search users and posts.
-
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<div class="support-box">
-
-<h2>
-
-<i class="fa-solid fa-headset"></i>
-
- Need Assistance?
-
-</h2>
-
-<p>
-
-POSTIFY is built to keep things simple and easy.
-Open feature guides anytime and explore the platform.
-
-</p>
-
-</div>
-
-</div>
-
-
-
-<!-- IMAGE POPUP -->
-
-<div class="guide-modal"
-id="guideModal">
-
-<span
-class="close-btn"
-onclick="closeGuide()">
-
-&times;
-
-</span>
-
-<img id="guideImage">
-
-</div>
-
-
-<script>
-
-function openGuide(imagePath){
-
-document.getElementById(
-"guideModal"
-).style.display="flex";
-
-document.getElementById(
-"guideImage"
-).src=imagePath;
-
-}
-
-
-function closeGuide(){
-
-document.getElementById(
-"guideModal"
-).style.display="none";
-
-}
-
-
-/* CLICK OUTSIDE CLOSE */
-
-document.getElementById(
-"guideModal"
-).onclick=function(e){
-
-if(e.target===this){
-
-closeGuide();
-
-}
-
-}
-
-</script>
-
+      document.getElementById('guideImage').src = imagePath
+    }
+    
+    function closeGuide() {
+      document.getElementById('guideModal').style.display = 'none'
+    }
+    
+    /* CLICK OUTSIDE CLOSE */
+    
+    document.getElementById('guideModal').onclick = function (e) {
+      if (e.target === this) {
+        closeGuide()
+      }
+    }
+  </script>
 {% endblock %}
