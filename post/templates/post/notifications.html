@@ -1,0 +1,189 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block head %}
+  <title>POSTIFY | Notifications</title>
+
+  <style>
+    .notifications-container {
+      max-width: 850px;
+      margin: auto;
+    }
+    
+    .notifications-title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    
+      background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+    
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .notification-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+    
+      padding: 18px;
+      margin-bottom: 18px;
+    
+      background: #1f1d2b;
+    
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    
+      border-radius: 18px;
+    
+      transition: 0.3s;
+    }
+    
+    .notification-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(225, 85, 168, 0.18);
+    }
+    
+    .notification-avatar {
+      width: 60px;
+      height: 60px;
+    
+      border-radius: 50%;
+    
+      overflow: hidden;
+    
+      flex-shrink: 0;
+    
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    
+      background: #2b2938;
+    
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .notification-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .notification-body {
+      flex: 1;
+    }
+    
+    .notification-body h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    
+    .notification-body p {
+      color: #bdbdbd;
+      line-height: 1.6;
+    }
+    
+    .notification-time {
+      margin-top: 8px;
+      color: #888;
+      font-size: 13px;
+    }
+    
+    .notification-post {
+      margin-top: 15px;
+    
+      padding: 15px;
+    
+      border-radius: 12px;
+    
+      background: #14131b;
+    
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .notification-post strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+    
+    .notification-post img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+    
+      border-radius: 10px;
+    
+      margin-top: 10px;
+    }
+    
+    .empty {
+      text-align: center;
+      padding: 80px 20px;
+    
+      background: #1f1d2b;
+    
+      border-radius: 20px;
+    }
+    
+    .empty i {
+      font-size: 70px;
+      color: #8a47d6;
+      margin-bottom: 20px;
+    }
+    
+    .empty h2 {
+      margin-bottom: 10px;
+    }
+    
+    .empty p {
+      color: #999;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="notifications-container">
+    <h1 class="notifications-title">Notifications</h1>
+
+    {% if notifications %}
+      {% for notification in notifications %}
+        <div class="notification-card">
+          <div class="notification-avatar">
+            {% if notification.sender.profile_pic %}
+              <img src="{{ notification.sender.profile_pic.url }}" alt="" />
+            {% else %}
+              {{ notification.sender.name|first|upper }}
+            {% endif %}
+          </div>
+
+          <div class="notification-body">
+            <h4><strong>{{ notification.sender.name }}</strong> created a new post.</h4>
+
+            <div class="notification-time">{{ notification.created_at|naturaltime }}</div>
+
+            {% if notification.post %}
+              <div class="notification-post">
+                <strong>{{ notification.post.title }}</strong>
+
+                <p>{{ notification.post.content|truncatewords:25 }}</p>
+
+                {% if notification.post.image %}
+                  <img src="{{ notification.post.image.url }}" alt="" />
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty">
+        <i class="fa-solid fa-bell-slash"></i>
+
+        <h2>No Notifications</h2>
+
+        <p>You don't have any notifications yet.</p>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

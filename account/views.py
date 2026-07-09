@@ -3,19 +3,19 @@ from django.contrib.auth.hashers import make_password, check_password
 from .models import Profile
 from .forms import RegisterStep1Form, RegisterStep2Form
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, get_object_or_404
 
-# Landing Page
 def landing(request):
 
-    # Jo user login hoy to direct home par moklo
+
     if request.session.get("profile_id"):
         return redirect("home")
 
     return render(request, "profile/landing.html")
 
+# --------------------------------------------------------------------------------
+# -------------------------+ Register Step 1 +------------------------------------
+# --------------------------------------------------------------------------------
 
-# Register Step 1
 def register_step1(request):
 
     if request.method == "POST":
@@ -47,8 +47,11 @@ def register_step1(request):
         {"form": form}
     )
 
+# --------------------------------------------------------------------------------
+# -------------------------+ Register Step 2 +------------------------------------
+# --------------------------------------------------------------------------------
 
-# Register Step 2
+
 def register_step2(request):
 
     customer_id = request.session.get("customer_id")
@@ -91,10 +94,13 @@ def register_step2(request):
     )
 
 
-# Login
+
+# --------------------------------------------------------------------------------
+# ----------------------------+ LOGIN +-------------------------------------------
+# --------------------------------------------------------------------------------
+
 def login(request):
 
-    # Jo pehla thi login hoy to login page na dekhado
     if request.session.get("profile_id"):
         return redirect("home")
 
@@ -152,7 +158,10 @@ def login(request):
     )
 
 
-# Logout
+# --------------------------------------------------------------------------------
+# ----------------------------+ LOG OUT +-----------------------------------------
+# --------------------------------------------------------------------------------
+
 def logout(request):
 
     request.session.flush()

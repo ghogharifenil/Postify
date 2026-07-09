@@ -20,7 +20,6 @@ class Profile(models.Model):
         default=True
     )
 
-
     show_city = models.BooleanField(
         default=True
     )

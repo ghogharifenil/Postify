@@ -1,109 +1,60 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block head %}
-<title>POSTIFY | Saved Posts</title>
-<link rel="stylesheet" href="{% static "css/saved.css" %}">
-
+  <title>POSTIFY | Saved Posts</title>
+  <link rel="stylesheet" href="{% static 'css/saved.css' %}" />
 {% endblock %}
 
-
 {% block content %}
+  <h1 class="saved-title"><i class="fa-solid fa-bookmark"></i> Saved Posts</h1>
 
-<h1 class="saved-title">
-<i class="fa-solid fa-bookmark"></i>Saved Posts
-</h1>
+  {% for post in posts %}
+    <div class="post-card">
+      <div class="post-header">
+        <div class="profile-pic">
+          {% if post.user.profile_pic %}
+            <img src="{{ post.user.profile_pic.url }}" />
+          {% else %}
+            {{ post.user.name|first|upper }}
+          {% endif %}
+        </div>
 
-{% for post in posts %}
+        <div class="user-info">
+          <h4>{{ post.user.name }}</h4>
 
-<div class="post-card">
+          <small>{{ post.created_at }}</small>
+        </div>
+      </div>
 
-<div class="post-header">
+      <h3 class="post-title">{{ post.title }}</h3>
 
-<div class="profile-pic">
+      <p class="post-content">{{ post.content }}</p>
 
-{% if post.user.profile_pic %}
-<img src="{{ post.user.profile_pic.url }}">
-{% else %}
-{{ post.user.name|first|upper }}
-{% endif %}
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="post-image" />
+      {% endif %}
 
-</div>
-
-<div class="user-info">
-
-<h4>
-{{ post.user.name }}
-</h4>
-
-<small>
-{{ post.created_at }}
-</small>
-
-</div>
-
-</div>
-
-
-<h3 class="post-title">
-{{ post.title }}
-</h3>
-
-<p class="post-content">
-{{ post.content }}
-</p>
-
-
-{% if post.image %}
-
-<img src="{{ post.image.url }}"
-class="post-image">
-
-{% endif %}
-
-<button
-class="unsave-btn save-btn"
-data-id="{{post.id}}">
-
-<i class="fa-solid fa-bookmark"></i>
- Unsave
-
-</button>
-
-</div>
-
-{% empty %}
-
-<div class="empty-box">
-
-No Saved Posts Yet 🚀
-
-</div>
-
-{% endfor %}
-<script>
-
-document.querySelectorAll(".save-btn")
-.forEach(btn=>{
-
-btn.addEventListener("click",function(){
-
-let postId=this.dataset.id;
-
-fetch(`/save_post/${postId}/`)
-.then(response=>response.json())
-.then(data=>{
-
-if(!data.saved){
-
-this.closest(".post-card").remove();
-
-}
-
-})
-
-})
-
-})
-
-</script>
+      <button class="unsave-btn save-btn" data-id="{{ post.id }}">
+        <i class="fa-solid fa-bookmark"></i>
+        Unsave
+      </button>
+    </div>
+  {% empty %}
+    <div class="empty-box">No Saved Posts Yet 🚀</div>
+  {% endfor %}
+  <script>
+    document.querySelectorAll('.save-btn').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        let postId = this.dataset.id
+    
+        fetch(`/save_post/${postId}/`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (!data.saved) {
+              this.closest('.post-card').remove()
+            }
+          })
+      })
+    })
+  </script>
 {% endblock %}

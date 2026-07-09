@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static "css/search.css" %}">
+  <link rel="stylesheet" href="{% static 'css/search.css' %}" />
 {% endblock %}
 {% block content %}
   <h2 class="search-title">
@@ -8,23 +9,25 @@
     <span>{{ query }}</span>
   </h2>
   {% if profile %}
-   <a href="#"> <div class="user-card">
-      <div class="user-left">
-        {% if profile.profile_pic %}
-          <img src="{{ profile.profile_pic.url }}" class="user-pic" />
-        {% else %}
-          <div class="user-pic default">{{ profile.name|first|upper }}</div>
-        {% endif %}
-        
-        <div>
-          <h2>{{ profile.name }}</h2>
+    <a href="#">
+      <div class="user-card">
+        <div class="user-left">
+          {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" class="user-pic" />
+          {% else %}
+            <div class="user-pic default">{{ profile.name|first|upper }}</div>
+          {% endif %}
 
-          <p>@{{ profile.username }}</p>
+          <div>
+            <h2>{{ profile.name }}</h2>
 
-          <p>Posts : {{ profile.posts.count }}</p>
+            <p>@{{ profile.username }}</p>
+
+            <p>Posts : {{ profile.posts.count }}</p>
+          </div>
         </div>
       </div>
-    </div></a>
+    </a>
   {% endif %}
   {% for post in posts %}
     <div class="post-card">
@@ -34,16 +37,15 @@
         {% else %}
           {{ post.user.name|first|upper }}
         {% endif %}
-        
       </div>
-       <p class="author">{{ post.user.name }}</p>
+      <p class="author">{{ post.user.name }}</p>
       <h3>{{ post.title }}</h3>
 
       <p>{{ post.content }}</p>
- {% if post.image %} <img src="{{post.image.url}}" class="post-image">
-{% endif %}
+      {% if post.image %}
+        <img src="{{ post.image.url }}" class="post-image" />
+      {% endif %}
     </div>
-   
   {% empty %}
     <div class="no-result">No results found 🔍</div>
   {% endfor %}

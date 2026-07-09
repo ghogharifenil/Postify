@@ -8,7 +8,9 @@ from .decorators import login_require
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, get_object_or_404
-
+from .models import Notification
+from django.utils import timezone
+from datetime import timedelta
 
 
 def about(request):
@@ -200,12 +202,12 @@ def search_page(request):
     )
 
 
+from account.models import Profile
+from .models import Post, Notification
+
+
 @login_require
 def create_post(request):
-
-    # login check
-    if not request.session.get("profile_id"):
-        return redirect("login")
 
     current_user = Profile.objects.get(
         id=request.session["profile_id"]
@@ -217,7 +219,8 @@ def create_post(request):
         content = request.POST.get("content")
         image = request.FILES.get("image")
 
-        Post.objects.create(
+        # Post Save
+        post = Post.objects.create(
 
             user=current_user,
             title=title,
@@ -226,7 +229,21 @@ def create_post(request):
 
         )
 
-        return redirect("/")
+        # SEND NOTIFICATION FOR ALL USSERS
+        users = Profile.objects.exclude(id=current_user.id)
+
+        for user in users:
+
+            Notification.objects.create(
+
+                sender=current_user,
+                receiver=user,
+                post=post,
+                notification_type="new_post"
+
+            )
+
+        return redirect("home")
 
     return render(
         request,
@@ -326,4 +343,51 @@ def delete_account(request):
 
     return render(request, "post/delete_account.html", {
         "profile": profile
+    })
+
+@login_require
+def notifications(request):
+
+    if "profile_id" not in request.session:
+        return redirect("login")
+
+    # 24 કલાકથી જૂની notifications delete
+    Notification.objects.filter(
+        created_at__lt=timezone.now() - timedelta(hours=24)
+    ).delete()
+
+    profile = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+
+    notifications = Notification.objects.filter(
+        receiver=profile
+    )
+
+    notifications.update(is_read=True)
+
+    return render(
+        request,
+        "post/notifications.html",
+        {
+            "notifications": notifications,
+            "current_user": profile,
+        },
+    )
+
+
+@login_require
+def notification_count_api(request):
+
+    current_user = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+
+    count = Notification.objects.filter(
+        receiver=current_user,
+        is_read=False
+    ).count()
+
+    return JsonResponse({
+        "count": count
     })

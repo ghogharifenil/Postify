@@ -1,144 +1,75 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block head %}
-<title>POSTIFY | Settings</title>
+  <title>POSTIFY | Settings</title>
 
-<link rel="stylesheet" href="{% static "css/setting.css" %}">
-
+  <link rel="stylesheet" href="{% static 'css/setting.css' %}" />
 {% endblock %}
 
-
 {% block content %}
+  <div class="settings-container">
+    <div class="settings-header">
+      <h1>Settings</h1>
 
-<div class="settings-container">
+      <p>Manage your account and preferences</p>
+    </div>
 
-<div class="settings-header">
+    <div class="settings-box">
+      <div class="setting-item">
+        <div class="left-side">
+          <i class="fa-solid fa-user"></i>
 
-<h1>Settings</h1>
+          <div>
+            <h3>Edit Profile</h3>
 
-<p>
-Manage your account and preferences
-</p>
+            <p>Update profile information</p>
+          </div>
+        </div>
 
-</div>
+        <a href="{% url 'edit_profile' %}" class="setting-btn">Open</a>
+      </div>
 
+      <div class="setting-item">
+        <div class="left-side">
+          <i class="fa-solid fa-lock"></i>
 
-<div class="settings-box">
+          <div>
+            <h3>Privacy</h3>
 
-<div class="setting-item">
+            <p>Manage account privacy</p>
+          </div>
+        </div>
 
-<div class="left-side">
+        <a href="{% url 'privacy' %}" class="setting-btn">Open</a>
+      </div>
 
-<i class="fa-solid fa-user"></i>
+      <div class="setting-item">
+        <div class="left-side">
+          <i class="fa-solid fa-bell"></i>
 
-<div>
+          <div>
+            <h3>Notifications</h3>
 
-<h3>Edit Profile</h3>
+            <p>Manage notification preferences</p>
+          </div>
+        </div>
 
-<p>
-Update profile information
-</p>
+        <a href="#" class="setting-btn">Open</a>
+      </div>
 
-</div>
+      <div class="setting-item">
+        <div class="left-side">
+          <i class="fa-solid fa-right-from-bracket"></i>
 
-</div>
+          <div>
+            <h3>Logout</h3>
 
-<a href="{% url 'edit_profile' %}" class="setting-btn">
+            <p>Sign out from your account</p>
+          </div>
+        </div>
 
-Open
-
-</a>
-
-</div>
-
-
-
-<div class="setting-item">
-
-<div class="left-side">
-
-<i class="fa-solid fa-lock"></i>
-
-<div>
-
-<h3>Privacy</h3>
-
-<p>
-Manage account privacy
-</p>
-
-</div>
-
-</div>
-
-<a href="{% url 'privacy' %}" class="setting-btn">
-
-Open
-
-</a>
-
-</div>
-
-
-
-<div class="setting-item">
-
-<div class="left-side">
-
-<i class="fa-solid fa-bell"></i>
-
-<div>
-
-<h3>Notifications</h3>
-
-<p>
-Manage notification preferences
-</p>
-
-</div>
-
-</div>
-
-<a href="#" class="setting-btn">
-
-Open
-
-</a>
-
-</div>
-
-
-
-
-<div class="setting-item">
-
-<div class="left-side">
-
-<i class="fa-solid fa-right-from-bracket"></i>
-
-<div>
-
-<h3>Logout</h3>
-
-<p>
-Sign out from your account
-</p>
-
-</div>
-
-</div>
-
-<a href="{% url 'logout' %}"
-class="setting-btn logout-btn">
-
-Logout
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
+        <a href="{% url 'logout' %}" class="setting-btn logout-btn">Logout</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}
