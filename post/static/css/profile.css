@@ -118,7 +118,7 @@ body {
 .profile-city i {
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
 
- background-clip: text;
+  background-clip: text;
 
   -webkit-text-fill-color: transparent;
 }
