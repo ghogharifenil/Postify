@@ -34,7 +34,7 @@
         <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{% if post.image %}{{ post.image.url }}{% endif %}">
           <div class="post-header">
             <div class="user-info">
-              <a href="{% url 'user_profile' post.user.id %}">
+              <a href="{% url 'user_profile' post.user.id %}" style="text-decoration: none;">
                 <div class="profile-circle">
                   {% if post.user.profile_pic %}
                     <img src="{{ post.user.profile_pic.url }}" class="profile-img" />
@@ -61,9 +61,9 @@
           {% endif %}
           <div class="post-actions">
             {% if current_user.id == post.user.id %}
-              <a href="#" class="edit-btn">✏ Edit</a>
+              <a href="{% url 'edit_post' post.id %}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
 
-              <a href="#" class="delete-btn">🗑 Delete</a>
+              <a href="{% url 'delete_post' post.id %}" class="delete-btn"><i class="fa-solid fa-trash-can"></i> Delete</a>
             {% endif %}
 
             <button class="save-btn" data-id="{{ post.id }}">

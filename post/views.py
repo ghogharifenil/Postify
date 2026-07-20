@@ -1,3 +1,5 @@
+from .models import Post, Notification
+from account.models import Profile
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -59,7 +61,7 @@ def privacy(request):
 
         profile.public_profile = request.POST.get("public_profile") == "on"
         profile.show_city = request.POST.get("show_city") == "on"
-        
+
         profile.save()
 
         return redirect("privacy")
@@ -67,6 +69,7 @@ def privacy(request):
     return render(request, "post/privacy.html", {
         "profile": profile
     })
+
 
 def edit_profile(request):
 
@@ -202,10 +205,6 @@ def search_page(request):
     )
 
 
-from account.models import Profile
-from .models import Post, Notification
-
-
 @login_require
 def create_post(request):
 
@@ -322,8 +321,6 @@ def saved_posts(request):
     )
 
 
-
-
 def delete_account(request):
 
     profile = get_object_or_404(
@@ -344,6 +341,7 @@ def delete_account(request):
     return render(request, "post/delete_account.html", {
         "profile": profile
     })
+
 
 @login_require
 def notifications(request):
@@ -391,3 +389,65 @@ def notification_count_api(request):
     return JsonResponse({
         "count": count
     })
+
+
+@login_require
+def edit_post(request, post_id):
+
+    current_user = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+
+    post = get_object_or_404(
+        Post,
+        id=post_id,
+        user=current_user
+    )
+
+    if request.method == "POST":
+
+        post.title = request.POST.get("title")
+        post.content = request.POST.get("content")
+
+        if request.FILES.get("image"):
+            post.image = request.FILES.get("image")
+
+        post.save()
+
+        return redirect("home")   # અથવા home
+
+    return render(
+        request,
+        "post/edit_post.html",
+        {
+            "post": post,
+            "current_user": current_user
+        }
+    )
+
+
+@login_require
+def delete_post(request, post_id):
+
+    current_user = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+
+    post = get_object_or_404(
+        Post,
+        id=post_id,
+        user=current_user
+    )
+
+    if request.method == "POST":
+        post.delete()
+        return redirect("home")   # અથવા home
+
+    return render(
+        request,
+        "post/delete_post.html",
+        {
+            "post": post,
+            "current_user": current_user
+        }
+    )

@@ -1,0 +1,224 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block head %}
+<title>POSTIFY | Edit Post</title>
+
+<style>
+body{
+    background:#14131b;
+}
+
+.create-container{
+    max-width:700px;
+    margin:40px auto;
+    padding:35px;
+    background:rgba(31,29,43,.95);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.05);
+    backdrop-filter:blur(15px);
+    box-shadow:0 8px 30px rgba(138,71,214,.15);
+    color:#fff;
+}
+
+.create-title{
+    text-align:center;
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:30px;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    font-size:16px;
+    font-weight:700;
+    color:#d8d8d8;
+}
+
+.form-control{
+    width:100%;
+    padding:15px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.05);
+    background:#1f1d2b;
+    color:#fff;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+    box-sizing:border-box;
+}
+
+.form-control:focus{
+    border:1px solid #8a47d6;
+    box-shadow:0 0 20px rgba(225,85,168,.25);
+}
+
+textarea.form-control{
+    resize:none;
+    height:200px;
+}
+
+input[type=file]{
+    cursor:pointer;
+}
+
+input[type=file]::file-selector-button{
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    margin-right:10px;
+    color:#fff;
+    cursor:pointer;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6);
+}
+
+.image-preview{
+    margin-top:10px;
+}
+
+.image-preview img{
+    width:100%;
+    max-height:350px;
+    object-fit:cover;
+    border-radius:15px;
+    border:2px solid rgba(255,255,255,.08);
+}
+
+.post-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:700;
+    color:#fff;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    transition:.3s;
+}
+
+.post-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(225,85,168,.35);
+}
+
+.post-btn i{
+    margin-right:8px;
+}
+
+@media(max-width:700px){
+
+.create-container{
+    margin:20px;
+    padding:20px;
+}
+
+.create-title{
+    font-size:25px;
+}
+
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="create-container">
+
+    <h2 class="create-title">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Edit Post
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Post Title</label>
+
+            <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="{{ post.title }}"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label>Post Content</label>
+
+            <textarea
+                name="content"
+                class="form-control"
+                required>{{ post.content }}</textarea>
+        </div>
+
+        <div class="form-group">
+
+            <label>Current Image</label>
+
+            <div class="image-preview">
+
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" id="previewImage">
+                {% else %}
+                    <img id="previewImage" style="display:none;">
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Upload New Image (Optional)</label>
+
+            <input
+                type="file"
+                name="image"
+                id="imageInput"
+                class="form-control"
+                accept="image/*">
+
+        </div>
+
+        <button class="post-btn" type="submit">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Update Post
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+const imageInput=document.getElementById("imageInput");
+const preview=document.getElementById("previewImage");
+
+imageInput.addEventListener("change",function(){
+
+    const file=this.files[0];
+
+    if(file){
+
+        preview.src=URL.createObjectURL(file);
+        preview.style.display="block";
+
+    }
+
+});
+
+</script>
+
+{% endblock %}
