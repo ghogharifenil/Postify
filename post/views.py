@@ -1,52 +1,60 @@
-from .models import Post, Notification
 from account.models import Profile
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
-from django.shortcuts import redirect
-from .models import Post, Profile
-from django.db.models import Q
-from django.db.models import Count
+from django.shortcuts import get_object_or_404, redirect, render
+from .models import Post, Profile, Notification, Like, PostImage
+from django.db.models import Q,  Count
 from .decorators import login_require
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, get_object_or_404
-from .models import Notification
 from django.utils import timezone
 from datetime import timedelta
 
 
+@login_require
+def home(request):
+
+    current_user = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+
+    posts = Post.objects.filter(
+        user__public_profile=True
+    ).order_by("-created_at")
+
+    top_users = Profile.objects.annotate(
+        total_posts=Count("posts")
+    ).order_by("-total_posts")[:10]
+
+    liked_posts = Like.objects.filter(
+        user=current_user
+    ).values_list("post_id", flat=True)
+
+    context = {
+        "posts": posts,
+        "top_users": top_users,
+        "current_user": current_user,
+        "liked_posts": liked_posts,
+    }
+
+    return render(
+        request,
+        "post/home.html",
+        context
+    )
+
+
+@login_require
 def about(request):
     return render(request, "post/about.html")
 
 
+@login_require
 def help(request):
     return render(request, "post/help.html")
 
 
+@login_require
 def setting(request):
     return render(request, "post/setting.html")
-
-
-# @login_required
-# def privacy(request):
-
-#     profile = get_object_or_404(
-#         Profile,
-#         id=request.session["profile_id"]
-#     )
-
-#     if request.method == "POST":
-
-#         profile.public_profile = bool(request.POST.get("public_profile"))
-#         profile.show_city = bool(request.POST.get("show_city"))
-
-#         profile.save()
-
-#         return redirect("privacy")
-
-#     return render(request, "post/privacy.html", {
-#         "profile_user": profile
-#     })
 
 
 @login_require
@@ -71,6 +79,7 @@ def privacy(request):
     })
 
 
+@login_require
 def edit_profile(request):
 
     profile = Profile.objects.get(
@@ -100,50 +109,6 @@ def edit_profile(request):
 
 
 @login_require
-def home(request):
-    posts = Post.objects.filter(
-        user__public_profile=True
-    ).order_by("-created_at")
-
-    top_users = Profile.objects.annotate(
-        total_posts=Count('posts')
-    ).order_by('-total_posts')[:10]
-
-    context = {
-
-        "posts": posts,
-        "top_users": top_users,
-
-    }
-
-    return render(
-        request,
-        "post/home.html",
-        context
-    )
-
-
-# @login_required
-# def user_profile(request,id):
-
-#     user = get_object_or_404(
-#         Profile,
-#         id=id
-#     )
-
-#     posts = Post.objects.filter(
-#         user=user
-#     ).order_by("-created_at")
-
-#     return render(
-#         request,
-#         "post/user_profile.html",
-#         {
-#             "profile_user":user,
-#             "posts":posts
-#         }
-#     )
-@login_require
 def user_profile(request, id):
 
     user = get_object_or_404(Profile, id=id)
@@ -152,6 +117,10 @@ def user_profile(request, id):
         Profile,
         id=request.session["profile_id"]
     )
+
+    liked_posts = Like.objects.filter(
+        user=current_user
+    ).values_list("post_id", flat=True)
 
     # PRIVATE CHECK
     if not user.public_profile and user.id != current_user.id:
@@ -164,7 +133,8 @@ def user_profile(request, id):
     return render(request, "post/user_profile.html", {
         "profile_user": user,
         "posts": posts,
-        "current_user": current_user
+        "current_user": current_user,
+        'liked_posts': liked_posts
     })
 
 
@@ -204,7 +174,6 @@ def search_page(request):
         }
     )
 
-
 @login_require
 def create_post(request):
 
@@ -216,19 +185,30 @@ def create_post(request):
 
         title = request.POST.get("title")
         content = request.POST.get("content")
-        image = request.FILES.get("image")
 
-        # Post Save
+        # Multiple Images
+        images = request.FILES.getlist("images")
+
+        # Backward compatibility (single image)
+        single_image = request.FILES.get("image")
+
         post = Post.objects.create(
 
             user=current_user,
             title=title,
             content=content,
-            image=image
+            image=single_image
 
         )
 
-        # SEND NOTIFICATION FOR ALL USSERS
+        # Save Multiple Images
+        for image in images:
+            PostImage.objects.create(
+                post=post,
+                image=image
+            )
+
+        # Notification
         users = Profile.objects.exclude(id=current_user.id)
 
         for user in users:
@@ -264,12 +244,17 @@ def profile(request):
         user=current_user
     ).order_by('-id')
 
+    liked_posts = Like.objects.filter(
+        user=current_user
+    ).values_list("post_id", flat=True)
+
     return render(
         request,
         'post/profile.html',
         {
             'current_user': current_user,
-            'posts': posts
+            'posts': posts,
+            'liked_posts': liked_posts,
         }
     )
 
@@ -321,6 +306,7 @@ def saved_posts(request):
     )
 
 
+@login_require
 def delete_account(request):
 
     profile = get_object_or_404(
@@ -451,3 +437,25 @@ def delete_post(request, post_id):
             "current_user": current_user
         }
     )
+
+
+@login_require
+def toggle_like(request, post_id):
+    profile = Profile.objects.get(
+        id=request.session["profile_id"]
+    )
+    post = get_object_or_404(Post, id=post_id)
+
+    like = Like.objects.filter(user=profile, post=post)
+
+    if like.exists():
+        like.delete()
+        liked = False
+    else:
+        Like.objects.create(user=profile, post=post)
+        liked = True
+
+    return JsonResponse({
+        "liked": liked,
+        "total_likes": post.total_likes(),
+    })

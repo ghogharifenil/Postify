@@ -272,6 +272,34 @@ body {
   box-shadow: 0 8px 20px rgba(225, 85, 168, 0.35);
 }
 
+.post-actions {
+  margin-top: 18px;
+
+  display: flex;
+
+  gap: 10px;
+}
+
+.save-btn {
+  text-decoration: none;
+
+  padding: 10px 16px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  border: none;
+
+  cursor: pointer;
+
+  color: white;
+
+  transition: 0.3s;
+}
+
 /* EMPTY */
 
 .empty {

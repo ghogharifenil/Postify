@@ -2,71 +2,111 @@
 {% load static %}
 
 {% block head %}
-<title>POSTIFY | Profile</title>
+  <title>POSTIFY | Profile</title>
 
-<link rel="stylesheet" href="{% static "css/profile.css" %}">
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+   <style>
+    .like-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    color:#fff;
+    font-size:15px;
+}
+
+.like-btn i{
+    font-size:20px;
+    transition:.3s;
+}
+
+.like-btn:hover i{
+    transform:scale(1.15);
+}
+
+.like-btn .fa-solid{
+    color:#ff3040;
+}
+  </style>
 {% endblock %}
 
 {% block content %}
-
-<div class="profile-layout">
-
-  <!-- LEFT -->
-  <div class="profile-left">
-
-    {% if current_user.profile_pic %}
-      <img src="{{ current_user.profile_pic.url }}" class="profile-pic">
-    {% else %}
-      <div class="default-pic">
-        {{ current_user.name|first|upper }}
-      </div>
-    {% endif %}
-
-    <div class="profile-name">
-      {{ current_user.name }}
-    </div>
-
-    {% if current_user.city %}
-    <div class="profile-city">
-      <i class="fa-solid fa-location-dot"></i>
-      {{ current_user.city }}
-    </div>
-    {% endif %}
-
-    <div class="profile-posts">
-      Posts: {{ posts.count }}
-    </div>
-
-  </div>
-
-  <!-- RIGHT -->
-  <div class="profile-right">
-
-    {% for post in posts %}
-    <div class="post-card">
-
-      <h2 class="post-title">{{ post.title }}</h2>
-
-      <p class="post-content">{{ post.content }}</p>
-
-      {% if post.image %}
-      <img src="{{ post.image.url }}" class="post-image">
+  <div class="profile-layout">
+    <!-- LEFT -->
+    <div class="profile-left">
+      {% if current_user.profile_pic %}
+        <img src="{{ current_user.profile_pic.url }}" class="profile-pic" />
+      {% else %}
+        <div class="default-pic">{{ current_user.name|first|upper }}</div>
       {% endif %}
 
-      <div class="post-actions">
+      <div class="profile-name">{{ current_user.name }}</div>
 
-        <a href="{% url 'edit_post' post.id %}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
-        <a href="#" class="delete-btn">🗑 Delete</a>
+      {% if current_user.city %}
+        <div class="profile-city">
+          <i class="fa-solid fa-location-dot"></i>
+          {{ current_user.city }}
+        </div>
+      {% endif %}
 
-      </div>
-
+      <div class="profile-posts">Posts: {{ posts.count }}</div>
     </div>
-    {% empty %}
-      <div class="post-card">No posts yet 🚀</div>
-    {% endfor %}
 
+    <!-- RIGHT -->
+    <div class="profile-right">
+      {% for post in posts %}
+        <div class="post-card">
+          <h2 class="post-title">{{ post.title }}</h2>
+
+          <p class="post-content">{{ post.content }}</p>
+
+          {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-image" />
+          {% endif %}
+
+          <div class="post-actions">
+            <a href="{% url 'edit_post' post.id %}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
+            <a href="#" class="delete-btn">🗑 Delete</a>
+            <button class="like-btn" data-id="{{ post.id }}">
+              {% if post.id in liked_posts %}
+                <i class="fa-solid fa-heart"></i>
+                <span>{{ post.total_likes }}</span>
+              {% else %}
+                <i class="fa-regular fa-heart"></i>
+                <span>{{ post.total_likes }}</span>
+              {% endif %}
+            </button>
+          </div>
+        </div>
+      {% empty %}
+        <div class="post-card">No posts yet 🚀</div>
+      {% endfor %}
+    </div>
   </div>
 
-</div>
-
+  <script>
+    document.querySelectorAll('.like-btn').forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation()
+    
+        let postId = this.dataset.id
+    
+        fetch(`/like/${postId}/`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Request failed')
+            }
+            return response.json()
+          })
+          .then((data) => {
+            this.innerHTML = data.liked ? `<i class="fa-solid fa-heart" style="color:red;"></i><span>${data.total_likes}</span>` : `<i class="fa-regular fa-heart"></i><span>${data.total_likes}</span>`
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
+    })
+  </script>
 {% endblock %}

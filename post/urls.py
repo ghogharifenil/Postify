@@ -33,5 +33,5 @@ urlpatterns = [
     path('notifications/',views.notifications,name="notifications"),
     path("notification-count/",views.notification_count_api,name="notification_count_api",),
 
-
+    path('like/<int:post_id>/', views.toggle_like, name="toggle_like"),
 ]

@@ -1,8 +1,9 @@
-# post (second app)
-
-
 from django.db import models
 from account.models import Profile
+
+# --------------------------------------------------------------------------------
+# -------------------------+ POST MODEL +-----------------------------------------
+# --------------------------------------------------------------------------------
 
 
 class Post(models.Model):
@@ -28,13 +29,50 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def total_likes(self):
+        return self.likes.count()
+
+    def is_liked_by(self, profile):
+        return self.likes.filter(user=profile).exists()
+
+    @property
+    def first_image(self):
+        image = self.images.first()
+
+        if image:
+            return image.image.url
+
+        if self.image:
+            return self.image.url
+
+        return None
+
+
+    @property
+    def total_images(self):
+        return self.images.count()
+
+# -------------------------+ MULTIPLE IMAGES UPLODE MODEL +----------------------
+
+
+class PostImage(models.Model):
+    post = models.ForeignKey(
+        'Post',
+        on_delete=models.CASCADE,
+        related_name='images'
+    )
+
+    image = models.ImageField(upload_to='post_images/')
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Post {self.post.id} - Image {self.id}"
 
 
 # --------------------------------------------------------------------------------
 # -------------------------+ NOTIFICATION MODEL +---------------------------------
 # --------------------------------------------------------------------------------
-
-
 
 
 class Notification(models.Model):
@@ -66,3 +104,20 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+
+# --------------------------------------------------------------------------------
+# -------------------------+ LIKE MODEL +-----------------------------------------
+# --------------------------------------------------------------------------------
+
+class Like(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post = models.ForeignKey(
+        'Post', on_delete=models.CASCADE, related_name='likes')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
+
+    def __str__(self):
+        return f"{self.user.user.username} liked {self.post.id}"
