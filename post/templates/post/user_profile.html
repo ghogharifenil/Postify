@@ -5,68 +5,239 @@
   <title>User Profile</title>
   <link rel="stylesheet" href="{% static 'css/user_profile.css' %}" />
 
-    <style>
-    .like-btn{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:none;
-    border:none;
-    cursor:pointer;
-    color:#fff;
-    font-size:15px;
-}
-
-.like-btn i{
-    font-size:20px;
-    transition:.3s;
-}
-
-.like-btn:hover i{
-    transform:scale(1.15);
-}
-
-.like-btn .fa-solid{
-    color:#ff3040;
-}
-
-.post-actions {
-  margin-top: 18px;
-
-  display: flex;
-
-  gap: 10px;
-}
-
-.save-btn {
-  text-decoration: none;
-
-  padding: 10px 16px;
-
-  border-radius: 12px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  border: none;
-
-  cursor: pointer;
-
-  color: white;
-
-  transition: 0.3s;
-}
-
-.save-btn {
-  display: flex;
-
-  align-items: center;
-
-  gap: 8px;
-
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-}
+  <style>
+    .like-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      font-size: 15px;
+    }
+    
+    .like-btn i {
+      font-size: 20px;
+      transition: 0.3s;
+    }
+    
+    .like-btn:hover i {
+      transform: scale(1.15);
+    }
+    
+    .like-btn .fa-solid {
+      color: #ff3040;
+    }
+    
+    .post-actions {
+      margin-top: 18px;
+    
+      display: flex;
+    
+      gap: 10px;
+    }
+    
+    .save-btn {
+      text-decoration: none;
+    
+      padding: 10px 16px;
+    
+      border-radius: 12px;
+    
+      font-size: 14px;
+    
+      font-weight: 600;
+    
+      border: none;
+    
+      cursor: pointer;
+    
+      color: white;
+    
+      transition: 0.3s;
+    }
+    
+    .save-btn {
+      display: flex;
+    
+      align-items: center;
+    
+      gap: 8px;
+    
+      background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
+    }
+    
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    
+    .post-title {
+      margin: 0;
+      flex: 1;
+      font-size: 22px;
+      color: #fff;
+    }
+    
+    .post-menu {
+      position: relative;
+      margin-left: 15px;
+      flex-shrink: 0;
+    }
+    
+    .menu-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    
+    .menu-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .menu-dropdown {
+      position: absolute;
+      top: 38px;
+      right: 0;
+      width: 170px;
+      background: #32313b;
+      border: 1px solid #444;
+      border-radius: 10px;
+      display: none;
+      overflow: hidden;
+      z-index: 1000;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .menu-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .menu-dropdown a:hover {
+      background: #3d3c47;
+    }
+    
+    .menu-dropdown i {
+      width: 18px;
+    }
+    /* =======================
+                       LIKES POPUP
+                    ======================= */
+    
+    .likes-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .likes-box {
+      width: 360px;
+      max-height: 500px;
+      background: #27262e;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .likes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .likes-header span {
+      font-size: 26px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .likes-header span:hover {
+      color: #ff4d67;
+    }
+    
+    #likesList {
+      max-height: 420px;
+      overflow-y: auto;
+    }
+    
+    .like-user {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
+    }
+    
+    .like-user:hover {
+      background: #32313b;
+    }
+    
+    .like-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #444;
+    }
+    
+    .like-user span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    /* Scrollbar */
+    
+    #likesList::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #likesList::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 10px;
+    }
+    
+    #likesList::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .no-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #e19c63;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      border: 2px solid #444;
+      flex-shrink: 0;
+    }
   </style>
 {% endblock %}
 
@@ -89,36 +260,59 @@
         </div>
       {% endif %}
 
-      <div class="profile-posts">Posts: {{ posts.count }}</div>
+      <div class="profile-posts">Posts : {{ posts.count }}</div>
     </div>
 
     <!-- RIGHT POSTS -->
     <div class="profile-right">
       {% for post in posts %}
         <div class="post-card">
-          <h2 class="post-title">{{ post.title }}</h2>
+          <!-- HEADER -->
+          <div class="post-header">
+            <h2 class="post-title">{{ post.title }}</h2>
 
+            <div class="post-menu">
+              <button type="button" class="menu-btn" onclick="toggleMenu(event,this)"><i class="fa-solid fa-ellipsis"></i></button>
+
+              <div class="menu-dropdown">
+                {% if current_user.id == post.user.id %}
+                  <a href="{% url 'edit_post' post.id %}">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                  </a>
+
+                  <a href="{% url 'delete_post' post.id %}">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete
+                  </a>
+                {% endif %}
+
+                <a href="#" onclick="showLikes(event, {{ post.id }}); return false;">
+                  <i class="fa-solid fa-heart"></i>
+                  Likes List
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTENT -->
           <p class="post-content">{{ post.content }}</p>
 
+          <!-- IMAGE -->
           {% if post.image %}
             <img src="{{ post.image.url }}" class="post-image" />
           {% endif %}
 
+          <!-- ACTIONS -->
           <div class="post-actions">
-            {% if current_user.id == post.user.id %}
-              <a href="{% url 'edit_post' post.id %}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
-
-              <a href="{% url 'delete_post' post.id %}" class="delete-btn"><i class="fa-solid fa-trash-can"></i> Delete</a>
-            {% endif %}
-
             <button class="like-btn" data-id="{{ post.id }}">
               {% if post.id in liked_posts %}
                 <i class="fa-solid fa-heart"></i>
-                <span>{{ post.total_likes }}</span>
               {% else %}
                 <i class="fa-regular fa-heart"></i>
-                <span>{{ post.total_likes }}</span>
               {% endif %}
+
+              <span>{{ post.total_likes }}</span>
             </button>
 
             <button class="save-btn" data-id="{{ post.id }}">
@@ -136,45 +330,17 @@
         <div class="empty">No posts yet 🚀</div>
       {% endfor %}
     </div>
+    <div class="likes-popup" id="likesPopup">
+      <div class="likes-box">
+        <div class="likes-header">
+          <span>Likes</span>
+          <span onclick="closeLikes()">&times;</span>
+        </div>
+
+        <div id="likesList"></div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    document.querySelectorAll('.save-btn').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        let postId = this.dataset.id
-    
-        fetch(`/save_post/${postId}/`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.saved) {
-              this.innerHTML = '<i class="fa-solid fa-bookmark"></i><span>Unsave</span>'
-            } else {
-              this.innerHTML = '<i class="fa-regular fa-bookmark"></i><span>Save</span>'
-            }
-          })
-      })
-    })
-    
-    document.querySelectorAll('.like-btn').forEach((btn) => {
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation()
-    
-        let postId = this.dataset.id
-    
-        fetch(`/like/${postId}/`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Request failed')
-            }
-            return response.json()
-          })
-          .then((data) => {
-            this.innerHTML = data.liked ? `<i class="fa-solid fa-heart" style="color:red;"></i><span>${data.total_likes}</span>` : `<i class="fa-regular fa-heart"></i><span>${data.total_likes}</span>`
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      })
-    })
-  </script>
+  <script src="{% static 'js/user_profile.js' %}"></script>
 {% endblock %}

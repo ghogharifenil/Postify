@@ -158,12 +158,117 @@
       transform: translateY(-4px);
       box-shadow: 0 8px 20px rgba(225, 85, 168, 0.35);
     }
+    /* =======================
+                   LIKES POPUP
+                ======================= */
+    
+    .likes-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .likes-box {
+      width: 360px;
+      max-height: 500px;
+      background: #27262e;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+    
+    .likes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .likes-header span {
+      font-size: 26px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .likes-header span:hover {
+      color: #ff4d67;
+    }
+    
+    #likesList {
+      max-height: 420px;
+      overflow-y: auto;
+    }
+    
+    .like-user {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
+    }
+    
+    .like-user:hover {
+      background: #32313b;
+    }
+    
+    .like-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #444;
+    }
+    
+    .like-user span {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    
+    /* Scrollbar */
+    
+    #likesList::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #likesList::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 10px;
+    }
+    
+    #likesList::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .no-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #e19c63;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      border: 2px solid #444;
+      flex-shrink: 0;
+    }
   </style>
 {% endblock %}
 
 {% block content %}
   <div class="home-layout">
     <div class="feed-container">
+      <!-- TOP CREATORS -->
       <div class="top-container">
         <div class="top-heading">🔥 Top Creators</div>
 
@@ -184,12 +289,15 @@
         </div>
       </div>
 
+      <!-- POSTS -->
+
       {% for post in posts %}
         <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{% if post.first_image %}{{ post.first_image }}{% endif %}">
           <!-- HEADER -->
+
           <div class="post-header">
             <div class="user-info">
-              <a href="{% url 'user_profile' post.user.id %}">
+              <a href="{% url 'user_profile' post.user.id %}" style="text-decoration: none;">
                 <div class="profile-circle">
                   {% if post.user.profile_pic %}
                     <img src="{{ post.user.profile_pic.url }}" class="profile-img" />
@@ -201,15 +309,18 @@
 
               <div>
                 <div class="username">{{ post.user.name }}</div>
+
                 <div class="date">{{ post.created_at|date:'d M Y' }}</div>
               </div>
             </div>
 
-            {% if current_user.id == post.user.id %}
-              <div class="post-menu">
-                <button type="button" class="menu-btn" onclick="toggleMenu(event,this)"><i class="fa-solid fa-ellipsis"></i></button>
+            <!-- MENU -->
 
-                <div class="menu-dropdown">
+            <div class="post-menu">
+              <button type="button" class="menu-btn" onclick="toggleMenu(event,this)"><i class="fa-solid fa-ellipsis"></i></button>
+
+              <div class="menu-dropdown">
+                {% if current_user.id == post.user.id %}
                   <a href="{% url 'edit_post' post.id %}">
                     <i class="fa-solid fa-pen"></i>
                     Edit
@@ -219,18 +330,26 @@
                     <i class="fa-solid fa-trash"></i>
                     Delete
                   </a>
-                </div>
+                {% endif %}
+
+                <a href="#" onclick="showLikes(event, {{ post.id }}); return false;">
+                  <i class="fa-solid fa-heart"></i>
+                  Likes List
+                </a>
               </div>
-            {% endif %}
+            </div>
           </div>
 
           <!-- TITLE -->
+
           <h3 class="post-title">{{ post.title }}</h3>
 
           <!-- CONTENT -->
+
           <p class="post-content">{{ post.content|truncatechars:100 }}</p>
 
           <!-- IMAGE -->
+
           {% if post.total_images > 0 %}
             <div class="slider-container">
               {% for img in post.images.all %}
@@ -248,7 +367,10 @@
           {% endif %}
 
           <!-- ACTIONS -->
+
           <div class="post-actions">
+            <!-- LIKE BUTTON -->
+
             <button class="like-btn" data-id="{{ post.id }}">
               {% if post.id in liked_posts %}
                 <i class="fa-solid fa-heart"></i>
@@ -258,22 +380,16 @@
 
               <span>{{ post.total_likes }}</span>
             </button>
-            <div class="likes-popup" id="likesPopup">
-              <div class="likes-box">
-                <div class="likes-header">
-                  Likes
-                  <span onclick="closeLikes()">×</span>
-                </div>
+            <!-- SAVE BUTTON -->
 
-                <div id="likesList"></div>
-              </div>
-            </div>
             <button class="save-btn" data-id="{{ post.id }}">
               {% if current_user in post.saved_by.all %}
                 <i class="fa-solid fa-bookmark"></i>
+
                 <span>Unsave</span>
               {% else %}
                 <i class="fa-regular fa-bookmark"></i>
+
                 <span>Save</span>
               {% endif %}
             </button>
@@ -281,6 +397,8 @@
         </div>
       {% endfor %}
     </div>
+
+    <!-- RIGHT SIDE POST POPUP -->
 
     <div class="side-post" id="sidePost">
       <span class="close-side" onclick="closePost()">×</span>
@@ -295,97 +413,17 @@
 
       <img id="detailImage" class="popup-image" />
     </div>
-  </div>
 
-  <script>
-    function openPost(card) {
-      let panel = document.getElementById('sidePost')
-    
-      panel.classList.add('show')
-    
-      detailName.innerText = card.dataset.name
-    
-      detailDate.innerText = card.dataset.date
-    
-      detailTitle.innerText = card.dataset.title
-    
-      detailContent.innerText = card.dataset.content
-    
-      let img = document.getElementById('detailImage')
-    
-      if (card.dataset.image) {
-        img.src = card.dataset.image
-    
-        img.style.display = 'block'
-      } else {
-        img.style.display = 'none'
-      }
-    }
-    
-    function closePost() {
-      document.getElementById('sidePost').classList.remove('show')
-    }
-    
-    document.querySelectorAll('.save-btn').forEach((btn) => {
-      btn.addEventListener('click', function () {
-        let postId = this.dataset.id
-    
-        fetch(`/save_post/${postId}/`)
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.saved) {
-              this.innerHTML = '<i class="fa-solid fa-bookmark"></i><span>Unsave</span>'
-            } else {
-              this.innerHTML = '<i class="fa-regular fa-bookmark"></i><span>Save</span>'
-            }
-          })
-      })
-    })
-    
-    function toggleMenu(event, button) {
-      event.stopPropagation()
-    
-      document.querySelectorAll('.menu-dropdown').forEach((menu) => {
-        if (menu !== button.nextElementSibling) {
-          menu.style.display = 'none'
-        }
-      })
-    
-      const menu = button.nextElementSibling
-    
-      if (menu.style.display === 'block') {
-        menu.style.display = 'none'
-      } else {
-        menu.style.display = 'block'
-      }
-    }
-    
-    document.addEventListener('click', function () {
-      document.querySelectorAll('.menu-dropdown').forEach((menu) => {
-        menu.style.display = 'none'
-      })
-    })
-    document.querySelectorAll('.like-btn').forEach((btn) => {
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation()
-    
-        let postId = this.dataset.id
-    
-        fetch(`/like/${postId}/`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Request failed')
-            }
-            return response.json()
-          })
-          .then((data) => {
-            this.innerHTML = data.liked ? `<i class="fa-solid fa-heart" style="color:red;"></i><span>${data.total_likes}</span>` : `<i class="fa-regular fa-heart"></i><span>${data.total_likes}</span>`
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      })
-    })
-    
-  </script>
+    <div class="likes-popup" id="likesPopup">
+      <div class="likes-box">
+        <div class="likes-header">
+          <span>Likes</span>
+          <span onclick="closeLikes()">&times;</span>
+        </div>
+
+        <div id="likesList"></div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

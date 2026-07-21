@@ -631,3 +631,17 @@ body {
 #likesList::-webkit-scrollbar-track{
     background:transparent;
 }
+.no-avatar{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#E19C63;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:700;
+    border:2px solid #444;
+    flex-shrink:0;
+}

@@ -459,3 +459,27 @@ def toggle_like(request, post_id):
         "liked": liked,
         "total_likes": post.total_likes(),
     })
+
+from django.http import JsonResponse
+from .models import Post
+
+@login_require
+def like_users(request, post_id):
+
+    post = get_object_or_404(Post, id=post_id)
+
+    likes = []
+
+    for like in post.likes.select_related("user"):
+
+        profile = like.user
+
+        likes.append({
+            "id": profile.id,
+            "name": profile.name,
+            "profile_pic": profile.profile_pic.url if profile.profile_pic else ""
+        })
+
+    return JsonResponse({
+        "likes": likes
+    })
