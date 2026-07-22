@@ -22,7 +22,7 @@ body {
   font-size: 42px;
   margin-bottom: 12px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -60,7 +60,7 @@ body {
   font-size: 25px;
   margin-top: 5px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .left h3 {

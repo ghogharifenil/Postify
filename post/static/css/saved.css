@@ -59,7 +59,7 @@ body {
   font-size: 17px;
   font-weight: 700;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .user-info small {
@@ -71,7 +71,7 @@ body {
   margin-bottom: 12px;
   font-weight: 700;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 /* CONTENT */

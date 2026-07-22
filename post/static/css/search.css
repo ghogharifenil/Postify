@@ -10,7 +10,7 @@ body {
   text-align: center;
   margin-bottom: 35px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .search-title span {
@@ -75,7 +75,7 @@ body {
   font-size: 24px;
   margin: 15px 0;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .post-card p {

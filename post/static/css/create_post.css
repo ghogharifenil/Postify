@@ -20,7 +20,7 @@ body {
   font-weight: 700;
   margin-bottom: 30px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

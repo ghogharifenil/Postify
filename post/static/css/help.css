@@ -21,7 +21,7 @@ body {
   font-size: 45px;
   margin-bottom: 15px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -61,7 +61,7 @@ body {
   font-size: 38px;
   margin-bottom: 15px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -92,7 +92,7 @@ body {
 .support-box h2 {
   margin-bottom: 15px;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -143,7 +143,7 @@ body {
   cursor: pointer;
   transition: 0.4s;
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
