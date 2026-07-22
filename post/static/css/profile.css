@@ -1,295 +1,177 @@
 body {
   background: #14131b;
-
   font-family: Arial, sans-serif;
 }
-
 /* MAIN LAYOUT */
-
 .profile-layout {
   display: flex;
-
   gap: 25px;
-
-  padding: 25px;
+ padding: 25px;
 }
-
 /* LEFT PANEL */
-
 .profile-left {
   width: 30%;
-
   padding: 30px;
-
   text-align: center;
-
   position: sticky;
-
   top: 100px;
-
   height: fit-content;
-
   background: rgba(31, 29, 43, 0.95);
-
   border-radius: 25px;
-
   border: 1px solid rgba(255, 255, 255, 0.05);
-
   backdrop-filter: blur(15px);
-
   box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
 }
-
 /* PROFILE IMAGE */
-
 .profile-pic {
   width: 140px;
   height: 140px;
-
   border-radius: 50%;
-
   object-fit: cover;
-
   padding: 4px;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   box-shadow: 0 0 25px rgba(225, 85, 168, 0.35);
 }
-
 .default-pic {
   width: 140px;
   height: 140px;
-
   margin: auto;
-
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   font-size: 45px;
-
   font-weight: bold;
-
   color: white;
-
   border-radius: 50%;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   box-shadow: 0 0 25px rgba(225, 85, 168, 0.35);
 }
-
 /* NAME */
-
 .profile-name {
   margin-top: 18px;
-
   font-size: 28px;
-
   font-weight: 700;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
-
 /* CITY */
-
 .profile-city {
   margin-top: 10px;
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
   gap: 8px;
-
   font-size: 14px;
-
   color: #b8b8c8;
 }
-
 .profile-city i {
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
-
 /* POSTS COUNT */
-
 .profile-posts {
   margin-top: 18px;
-
   padding: 12px;
-
   border-radius: 15px;
-
   background: #1f1d2b;
-
   color: #d8d8d8;
-
   font-weight: 600;
 }
-
 /* RIGHT SIDE */
-
 .profile-right {
   width: 70%;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 20px;
 }
-
 /* POST CARD */
-
 .post-card {
   padding: 22px;
-
   border-radius: 25px;
-
   background: rgba(31, 29, 43, 0.95);
-
   border: 1px solid rgba(255, 255, 255, 0.05);
-
   backdrop-filter: blur(15px);
-
   box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
-
   transition: 0.4s;
 }
-
 .post-card:hover {
   transform: translateY(-6px);
-
-  box-shadow: 0 0 30px rgba(225, 85, 168, 0.25);
+ box-shadow: 0 0 30px rgba(225, 85, 168, 0.25);
 }
-
 /* TITLE */
-
 .post-title {
   font-size: 22px;
-
   margin-bottom: 12px;
-
   font-weight: 700;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
 background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
-
 /* CONTENT */
-
 .post-content {
   line-height: 1.8;
-
   font-size: 14px;
-
   color: #b8b8c8;
 }
-
 /* IMAGE */
-
 .post-image {
   width: 100%;
-
   max-height: 300px;
-
   margin-top: 15px;
-
   object-fit: contain;
-
   border-radius: 15px;
-
   border: 2px solid rgba(255, 255, 255, 0.05);
-
   transition: 0.4s;
 }
-
 .post-image:hover {
   transform: scale(1.02);
 }
-
 /* ACTIONS */
-
 .post-actions {
   margin-top: 20px;
-
   display: flex;
-
   gap: 12px;
 }
-
 /* BUTTONS */
-
 .edit-btn,
 .delete-btn {
   text-decoration: none;
-
   padding: 10px 16px;
-
   border-radius: 12px;
-
   font-size: 14px;
-
   font-weight: 600;
-
   color: white;
-
   transition: 0.4s;
 }
-
 .edit-btn {
   background: linear-gradient(135deg, #0e67b8, #8a47d6);
 }
-
 .delete-btn {
   background: linear-gradient(135deg, #e155a8, #ff9567);
 }
-
 .edit-btn:hover,
 .delete-btn:hover {
   transform: translateY(-4px);
-
   box-shadow: 0 8px 20px rgba(225, 85, 168, 0.35);
 }
-
 /* EMPTY POST */
-
 .post-card:empty {
   text-align: center;
-
   color: #b8b8c8;
 }
-
 /* RESPONSIVE */
-
 @media (max-width: 900px) {
   .profile-layout {
     flex-direction: column;
   }
-
   .profile-left,
   .profile-right {
     width: 100%;
   }
-
   .profile-left {
     position: relative;
-
     top: 0;
   }
 }

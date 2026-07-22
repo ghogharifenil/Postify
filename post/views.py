@@ -16,9 +16,13 @@ def home(request):
         id=request.session["profile_id"]
     )
 
-    posts = Post.objects.filter(
-        user__public_profile=True
-    ).order_by("-created_at")
+    posts = (
+    Post.objects
+    .filter(user__public_profile=True)
+    .select_related("user")
+    .prefetch_related("images", "likes", "saved_by")
+    .order_by("-created_at")
+)
 
     top_users = Profile.objects.annotate(
         total_posts=Count("posts")
@@ -128,7 +132,12 @@ def user_profile(request, id):
             "profile_user": user
         })
 
-    posts = Post.objects.filter(user=user)
+    posts = (
+    Post.objects
+    .filter(user=user)
+    .select_related("user")
+    .prefetch_related("images", "likes", "saved_by")
+)
 
     return render(request, "post/user_profile.html", {
         "profile_user": user,
@@ -240,9 +249,13 @@ def profile(request):
         id=request.session['profile_id']
     )
 
-    posts = Post.objects.filter(
-        user=current_user
-    ).order_by('-id')
+    posts = (
+    Post.objects
+    .filter(user=current_user)
+    .select_related("user")
+    .prefetch_related("images", "likes", "saved_by")
+    .order_by("-id")
+    )
 
     liked_posts = Like.objects.filter(
         user=current_user
@@ -294,7 +307,11 @@ def saved_posts(request):
         id=request.session['profile_id']
     )
 
-    posts = profile.saved_posts.all()
+    posts = (
+    profile.saved_posts
+    .select_related("user")
+    .prefetch_related("images", "likes", "saved_by")
+)
 
     return render(
         request,

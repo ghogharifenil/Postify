@@ -1,259 +1,164 @@
 body {
   background: #14131b;
 }
-
 /* MAIN */
-
 .privacy-container {
   max-width: 900px;
-
   margin: auto;
 }
-
 /* HEADER */
-
 .privacy-header {
   text-align: center;
-
   margin-bottom: 40px;
-
   padding: 30px;
-
   background: rgba(31, 29, 43, 0.95);
-
   border-radius: 25px;
-
   border: 1px solid rgba(255, 255, 255, 0.05);
-
   backdrop-filter: blur(15px);
-
   box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
 }
 
 .privacy-header h1 {
   font-size: 42px;
-
   margin-bottom: 12px;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   -webkit-background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
 
 .privacy-header p {
   color: #b8b8c8;
-
   line-height: 1.8;
 }
-
 /* MAIN BOX */
-
 .privacy-box {
   padding: 35px;
-
   border-radius: 25px;
-
   background: rgba(31, 29, 43, 0.95);
-
   border: 1px solid rgba(255, 255, 255, 0.05);
-
   backdrop-filter: blur(15px);
-
   box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
 }
-
 /* ITEM */
-
 .privacy-item {
   display: flex;
-
   justify-content: space-between;
-
   align-items: flex-start;
-
   padding: 25px 0;
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
-
 .privacy-item:last-child {
   border: none;
 }
-
 /* LEFT */
-
 .left {
   display: flex;
-
   gap: 18px;
-
   max-width: 80%;
 }
-
 .left i {
   font-size: 25px;
-
   margin-top: 5px;
-
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-
   -webkit-background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
-
 .left h3 {
   margin-bottom: 8px;
-
   color: white;
-
   font-size: 20px;
 }
 
 .left p {
   font-size: 14px;
-
   line-height: 1.8;
-
   color: #b8b8c8;
 }
-
 /* TOGGLE */
-
 .switch {
   position: relative;
-
   display: inline-block;
-
   width: 55px;
-
   height: 30px;
 }
 
 .switch input {
   display: none;
 }
-
 .slider {
   position: absolute;
-
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-
   cursor: pointer;
-
   background: #2a2937;
-
   border-radius: 30px;
-
   transition: 0.4s;
-
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 .slider:before {
   content: "";
-
   position: absolute;
-
   height: 22px;
-
   width: 22px;
-
   left: 4px;
-
   bottom: 3px;
-
   background: white;
-
   border-radius: 50%;
-
   transition: 0.4s;
 }
-
 input:checked + .slider {
   background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8);
 }
-
 input:checked + .slider:before {
   transform: translateX(25px);
 }
-
 /* BUTTON AREA */
-
 .btn-area {
   margin-top: 35px;
-
   display: flex;
-
   justify-content: center;
-
   gap: 15px;
 }
-
 /* BUTTONS */
-
 .save-btn,
 .delete-btn {
   padding: 13px 25px;
-
   border: none;
-
   border-radius: 14px;
-
   cursor: pointer;
-
   font-size: 15px;
-
   font-weight: 700;
-
   color: white;
-
   transition: 0.4s;
 }
-
 /* SAVE */
-
 .save-btn {
   background: linear-gradient(135deg, #0e67b8, #8a47d6);
 }
-
 /* DELETE */
-
 .delete-btn {
   background: linear-gradient(135deg, #e155a8, #ff9567);
 }
-
 /* HOVER */
-
 .save-btn:hover,
 .delete-btn:hover {
   transform: translateY(-4px);
-
-  box-shadow: 0 10px 25px rgba(225, 85, 168, 0.35);
+ box-shadow: 0 10px 25px rgba(225, 85, 168, 0.35);
 }
-
 /* MOBILE */
-
 @media (max-width: 700px) {
   .privacy-item {
     flex-direction: column;
-
     gap: 20px;
   }
-
   .left {
     max-width: 100%;
   }
-
   .privacy-header h1 {
     font-size: 32px;
   }
-
   .privacy-box {
     padding: 25px;
   }
