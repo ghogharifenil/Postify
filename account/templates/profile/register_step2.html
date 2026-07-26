@@ -1,7 +1,11 @@
-{% extends "Ac_base/Accountbase.html" %}
 {% load static %}
-
-{% block head %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png"
+          href="{% static 'images/weblogo1.png' %}">
 <title>Postify | Complete Profile</title>
 
 <style>
@@ -239,11 +243,8 @@ padding:25px;
 }
 
 </style>
-
-{% endblock head %}
-
-
-{% block content %}
+</head>
+<body>
 
 <div class="box">
 
@@ -273,4 +274,5 @@ Your profile helps people connect with you on POSTIFY 🚀
 
 </div>
 
-{% endblock content %}
+</body>
+</html>
