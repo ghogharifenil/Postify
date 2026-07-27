@@ -200,15 +200,6 @@ body {
 
     overflow:hidden;
 }
-.image-box{
-    width:100%;
-    max-width:500px;
-    aspect-ratio:500 / 350;
-    margin:15px auto 0;
-    border-radius:15px;
-    overflow:hidden;
-    background:#1f1d2b;
-}
 
 .image-box img{
     width:100%;
