@@ -12,131 +12,233 @@
 <title>Postify | Registration</title>
 
 <style>
+/* =========================
+   RESET
+========================= */
 
-/* BACKGROUND (same app theme) */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
 body{
-font-family:"Segoe UI",sans-serif;
-min-height:100vh;
-margin:0;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-background:linear-gradient(135deg,#1e1e2f,#2c2c44);
+    width:100%;
+    min-height:100%;
 }
 
-/* GLASS BOX */
+/* =========================
+   BODY
+========================= */
+
+body{
+    font-family:"Segoe UI",sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:20px;
+    overflow-x:hidden;
+    background:linear-gradient(135deg,#1e1e2f,#2c2c44);
+}
+
+/* =========================
+   GLASS BOX
+========================= */
+
 .box{
-width:430px;
-padding:40px;
-
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(14px);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,0.08);
-
-box-shadow:0 20px 60px rgba(0,0,0,0.4);
-
-transition:.3s;
-
-text-align:center;
+    width:100%;
+    max-width:430px;
+    padding:40px 30px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    text-align:center;
 }
 
-.box:hover{
-transform:translateY(-5px);
-}
+/* =========================
+   TITLE
+========================= */
 
-/* TITLE */
 .box h2{
-color:white;
-font-size:30px;
-font-weight:800;
-margin-bottom:8px;
+    color:#fff;
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:8px;
 }
 
-/* SUB TEXT */
 .helper{
-color:#bdbdbd;
-font-size:13px;
-margin-bottom:25px;
+    color:#bdbdbd;
+    font-size:13px;
+    margin-bottom:25px;
+    line-height:1.5;
 }
 
-/* INPUTS */
+/* =========================
+   INPUTS
+========================= */
+
 input{
-width:100%;
-padding:14px 16px;
-
-margin:10px 0;
-
-border:none;
-border-radius:14px;
-
-font-size:14px;
-
-outline:none;
-
-background:rgba(255,255,255,0.08);
-color:white;
-
-transition:.3s;
+    width:100%;
+    padding:14px 16px;
+    margin:10px 0;
+    border:none;
+    border-radius:14px;
+    outline:none;
+    font-size:14px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    transition:.3s;
 }
 
 input::placeholder{
-color:rgba(255,255,255,0.6);
+    color:rgba(255,255,255,.6);
 }
 
 input:focus{
-background:rgba(255,255,255,0.15);
-box-shadow:0 0 0 3px rgba(74,108,247,0.3);
+    background:rgba(255,255,255,.15);
+    box-shadow:0 0 0 3px rgba(74,108,247,.3);
 }
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
+
 button{
-width:100%;
-padding:14px;
-
-margin-top:18px;
-
-border:none;
-border-radius:14px;
-
-font-size:15px;
-font-weight:700;
-
-cursor:pointer;
-
-background:linear-gradient(135deg,#4a6cf7,#6a11cb);
-color:white;
-
-transition:.3s;
+    width:100%;
+    padding:14px;
+    margin-top:18px;
+    border:none;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    color:#fff;
+    background:linear-gradient(135deg,#4a6cf7,#6a11cb);
+    transition:.3s;
 }
 
 button:hover{
-transform:translateY(-3px);
-box-shadow:0 12px 25px rgba(74,108,247,0.35);
+    transform:translateY(-3px);
+    box-shadow:0 12px 25px rgba(74,108,247,.35);
 }
 
-/* ERROR */
+/* =========================
+   ERROR
+========================= */
+
 .error{
-background:rgba(255,0,0,0.15);
-color:#ffb3b3;
-padding:10px;
-border-radius:10px;
-font-size:13px;
-margin-bottom:15px;
+    background:rgba(255,0,0,.15);
+    color:#ffb3b3;
+    padding:10px;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:15px;
 }
 
-/* MOBILE */
-@media(max-width:500px){
-.box{
-width:90%;
-padding:25px;
-}
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .box{
+        max-width:400px;
+        padding:35px 25px;
+    }
+
+    .box h2{
+        font-size:28px;
+    }
+
 }
 
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    body{
+        padding:15px;
+        align-items:center;
+    }
+
+    .box{
+        width:100%;
+        padding:28px 20px;
+        border-radius:20px;
+    }
+
+    .box h2{
+        font-size:24px;
+    }
+
+    .helper{
+        font-size:12px;
+        margin-bottom:20px;
+    }
+
+    input{
+        padding:13px 14px;
+        font-size:14px;
+    }
+
+    button{
+        padding:13px;
+        font-size:14px;
+    }
+
+    .error{
+        font-size:12px;
+    }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:360px){
+
+    body{
+        padding:10px;
+    }
+
+    .box{
+        padding:22px 15px;
+    }
+
+    .box h2{
+        font-size:22px;
+    }
+
+    .helper{
+        font-size:11px;
+    }
+
+    input{
+        padding:12px;
+        font-size:13px;
+    }
+
+    button{
+        padding:12px;
+        font-size:13px;
+    }
+
+    .error{
+        font-size:11px;
+    }
+
+}
 </style>
 
 </head>
