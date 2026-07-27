@@ -152,7 +152,6 @@ This project is developed for learning and portfolio purposes.
 Python Django Developer
 
 GitHub: https://github.com/ghogharifenil
-Repo : https://github.com/ghogharifenil/Postify
 ---
 
 ⭐ If you like this project, don't forget to Star this repository!
