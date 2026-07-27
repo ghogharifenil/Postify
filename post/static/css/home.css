@@ -293,18 +293,7 @@ body {
   object-fit: contain;
 }
 
-/* MOBILE */
 
-@media (max-width: 900px) {
-  .home-layout {
-    flex-direction: column;
-  }
-
-  .feed-container,
-  .side-post {
-    width: 100%;
-  }
-}
 
 /* SCROLLBAR */
 
@@ -541,4 +530,255 @@ body {
     font-weight:700;
     border:2px solid #444;
     flex-shrink:0;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:1024px){
+
+.home-layout{
+    flex-direction:column;
+    padding:15px;
+    gap:20px;
+}
+
+.feed-container{
+    width:100%;
+}
+
+.side-post{
+    width:100%;
+    position:relative;
+    top:0;
+    display:none;
+}
+
+.side-post.show{
+    display:block;
+}
+
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width:768px){
+
+.home-layout{
+    padding:12px;
+}
+
+.post-card{
+    padding:16px;
+}
+
+.top-container{
+    padding:16px;
+}
+
+.top-heading{
+    font-size:20px;
+}
+
+.user-round{
+    width:60px;
+    height:60px;
+}
+
+.profile-circle{
+    width:48px;
+    height:48px;
+}
+
+.username{
+    font-size:15px;
+}
+
+.post-title{
+    font-size:18px;
+}
+
+.post-content{
+    font-size:14px;
+}
+
+.post-actions{
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.popup-image,
+.post-image{
+    max-height:250px;
+}
+
+.likes-box{
+    width:95%;
+}
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width:480px){
+
+.home-layout{
+    padding:10px;
+}
+
+.top-container{
+    padding:14px;
+    border-radius:15px;
+}
+
+.post-card{
+    padding:14px;
+    border-radius:15px;
+}
+
+.top-users{
+    gap:14px;
+}
+
+.user-item{
+    min-width:65px;
+}
+
+.user-round{
+    width:55px;
+    height:55px;
+    font-size:18px;
+}
+
+.user-name{
+    font-size:11px;
+}
+
+.profile-circle{
+    width:42px;
+    height:42px;
+}
+
+.username{
+    font-size:14px;
+}
+
+.date{
+    font-size:11px;
+}
+
+.post-title{
+    font-size:17px;
+    margin:12px 0;
+}
+
+.post-content{
+    font-size:13px;
+    line-height:1.6;
+}
+
+.post-image{
+    max-height:200px;
+    border-radius:10px;
+}
+
+.post-actions{
+    gap:12px;
+}
+
+.like-btn,
+.save-btn{
+    font-size:13px;
+}
+
+.like-btn i,
+.save-btn i{
+    font-size:18px;
+}
+
+.menu-dropdown{
+    width:140px;
+}
+
+.likes-box{
+    width:96%;
+    max-height:80vh;
+}
+
+.like-user{
+    padding:12px;
+}
+
+.like-avatar,
+.no-avatar{
+    width:40px;
+    height:40px;
+}
+
+.side-post{
+    padding:18px;
+}
+
+.close-side{
+    font-size:28px;
+}
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width:360px){
+
+.home-layout{
+    padding:8px;
+}
+
+.post-card,
+.top-container{
+    padding:12px;
+}
+
+.user-round{
+    width:48px;
+    height:48px;
+}
+
+.profile-circle{
+    width:38px;
+    height:38px;
+}
+
+.username{
+    font-size:13px;
+}
+
+.post-title{
+    font-size:15px;
+}
+
+.post-content{
+    font-size:12px;
+}
+
+.post-image{
+    max-height:170px;
+}
+
+.post-actions{
+    flex-wrap:wrap;
+}
+
+.menu-dropdown{
+    width:130px;
+}
+
+.likes-header{
+    font-size:16px;
+}
+
 }
