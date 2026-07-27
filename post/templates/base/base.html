@@ -19,12 +19,13 @@
         font-family: Arial, sans-serif;
       }
       
-      body {
-        background: #14131b;
-        min-height: 100vh;
-        display: flex;
-        color: white;
-      }
+      body{
+    background:#14131b;
+    margin:0;
+    color:#fff;
+    font-family:"Segoe UI",sans-serif;
+    overflow-x:hidden;
+}
       
       /* SIDEBAR */
       
@@ -285,12 +286,13 @@
         transform: scale(1.1);
       }
       /* MAIN CONTENT */
-      .main-content {
-        margin-left: 250px;
-        margin-top: 100px;
-        padding: 30px;
-        width: 100%;
-      }
+   .main-content{
+    margin-left:230px;
+    margin-top:80px;
+    padding:30px;
+    width:calc(100% - 230px);
+    min-height:calc(100vh - 80px);
+}
       
       /* ================= MOBILE ================= */
 
