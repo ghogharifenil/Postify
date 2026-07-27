@@ -34,9 +34,7 @@
       <!-- POSTS -->
 
       {% for post in posts %}
-        <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{% if post.first_image %}{{ post.first_image }}{% endif %}">
-          <!-- HEADER -->
-
+        <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{{ post.first_image|default:'' }}">
           <div class="post-header">
             <div class="user-info">
               <a href="{% url 'user_profile' post.user.id %}" style="text-decoration: none;">
@@ -90,32 +88,17 @@
 
           <p class="post-content">{{ post.content|truncatechars:100 }}</p>
 
-          {% comment %} <!-- IMAGE -->
+          <!-- IMAGE -->
 
-          {% if post.total_images > 0 %}
-            <div class="slider-container">
-              {% for img in post.images.all %}
-                <img src="{{ img.image.url }}" class="slide {% if forloop.first %}active{% endif %}" />
-              {% endfor %}
+          <!-- IMAGE -->
 
-              {% if post.total_images > 1 %}
-                <button class="prev-btn" onclick="changeSlide(event,this,-1)">❮</button>
-
-                <button class="next-btn" onclick="changeSlide(event,this,1)">❯</button>
-              {% endif %}
-            </div>
-          {% elif post.image %}
-            <img src="{{ post.image.url }}" class="post-image" />
-          {% endif %} {% endcomment %}
-
-          {% if post.image %}
+          {% if post.first_image %}
             <div class="image-box">
-              <img src="{{ post.image.url }}" alt="Post Image" class="post-image" />
+              <img src="{{ post.first_image }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
             </div>
           {% endif %}
           <!-- ACTIONS -->
-<p>{{ post.image }}</p>
-<p>{{ post.image.url }}</p>
+
           <div class="post-actions">
             <!-- LIKE BUTTON -->
 
