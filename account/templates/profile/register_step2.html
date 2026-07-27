@@ -10,226 +10,256 @@
 
 <style>
 
-/* BACKGROUND */
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BODY
+========================= */
 
 body{
-font-family:"Segoe UI",sans-serif;
-
-margin:0;
-min-height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-background:linear-gradient(
-135deg,
-#1e1e2f,
-#2c2c44
-);
+    font-family:"Segoe UI",sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+    background:linear-gradient(135deg,#1e1e2f,#2c2c44);
 }
 
-
-/* GLASS CARD */
+/* =========================
+   GLASS CARD
+========================= */
 
 .box{
-
-width:430px;
-
-padding:40px;
-
-background:rgba(255,255,255,.05);
-
-backdrop-filter:blur(14px);
-
-border-radius:25px;
-
-border:1px solid rgba(255,255,255,.08);
-
-box-shadow:
-0 20px 60px rgba(0,0,0,.4);
-
-transition:.3s;
-
-text-align:center;
-
+    width:100%;
+    max-width:430px;
+    padding:35px 28px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(14px);
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    text-align:center;
 }
 
-
-.box:hover{
-
-transform:translateY(-5px);
-
-}
-
-
-/* HEADING */
+/* =========================
+   TITLE
+========================= */
 
 h2{
-
-font-size:30px;
-
-font-weight:800;
-
-color:white;
-
-margin-bottom:8px;
-
+    font-size:30px;
+    font-weight:800;
+    color:#fff;
+    margin-bottom:8px;
 }
-
 
 .sub{
-
-font-size:14px;
-
-color:#bdbdbd;
-
-margin-bottom:25px;
-
+    font-size:14px;
+    color:#bdbdbd;
+    line-height:1.5;
+    margin-bottom:25px;
 }
 
-
-/* BIO */
+/* =========================
+   BIO
+========================= */
 
 textarea{
-
-width:100%;
-
-height:120px;
-
-padding:15px;
-
-margin-bottom:18px;
-
-border:none;
-
-border-radius:14px;
-
-outline:none;
-
-resize:none;
-
-font-size:14px;
-
-background:rgba(255,255,255,.08);
-
-color:white;
-
-transition:.3s;
-
+    width:100%;
+    height:120px;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    resize:none;
+    outline:none;
+    margin-bottom:18px;
+    font-size:14px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    transition:.3s;
 }
-
 
 textarea::placeholder{
-
-color:rgba(255,255,255,.55);
-
+    color:rgba(255,255,255,.6);
 }
-
 
 textarea:focus{
-
-background:rgba(255,255,255,.15);
-
-box-shadow:
-0 0 0 3px rgba(74,108,247,.35);
-
+    background:rgba(255,255,255,.15);
+    box-shadow:0 0 0 3px rgba(74,108,247,.3);
 }
 
+/* =========================
+   FILE INPUT
+========================= */
 
-/* FILE INPUT */
-
-input[type=file]{
-
-width:100%;
-
-padding:14px;
-
-margin-top:8px;
-
-border-radius:14px;
-
-border:2px dashed rgba(255,255,255,.15);
-
-background:rgba(255,255,255,.06);
-
-color:#d8d8d8;
-
-cursor:pointer;
-
-transition:.3s;
-
+input[type="file"]{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:2px dashed rgba(255,255,255,.15);
+    background:rgba(255,255,255,.06);
+    color:#d8d8d8;
+    cursor:pointer;
+    transition:.3s;
 }
 
-
-input[type=file]:hover{
-
-background:rgba(255,255,255,.1);
-
-border-color:#E19C63;
-
+input[type="file"]:hover{
+    background:rgba(255,255,255,.1);
+    border-color:#E19C63;
 }
 
-
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 
 button{
-
-width:100%;
-
-padding:14px;
-
-margin-top:25px;
-
-border:none;
-
-border-radius:14px;
-
-font-size:15px;
-
-font-weight:700;
-
-cursor:pointer;
-
-background:linear-gradient(
-135deg,
-#4a6cf7,
-#6a11cb
-);
-
-color:white;
-
-transition:.3s;
-
+    width:100%;
+    margin-top:22px;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    color:#fff;
+    background:linear-gradient(135deg,#4a6cf7,#6a11cb);
+    transition:.3s;
 }
-
 
 button:hover{
-
-transform:translateY(-3px);
-
-box-shadow:
-0 12px 25px rgba(74,108,247,.35);
-
+    transform:translateY(-2px);
 }
 
-
-/* HELPER */
+/* =========================
+   FOOTER
+========================= */
 
 .helper{
+    margin-top:20px;
+    font-size:13px;
+    color:#aaa;
+    line-height:1.6;
+}
 
-margin-top:20px;
+/* =========================
+   TABLET
+========================= */
 
-font-size:13px;
+@media (max-width:768px){
 
-color:#a8a8a8;
+    .box{
+        max-width:400px;
+        padding:30px 24px;
+    }
 
-line-height:1.6;
+    h2{
+        font-size:28px;
+    }
 
 }
 
+/* =========================
+   MOBILE
+========================= */
 
+@media (max-width:480px){
 
+    body{
+        padding:12px;
+    }
+
+    .box{
+        padding:24px 18px;
+        border-radius:18px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    .sub{
+        font-size:12px;
+        margin-bottom:18px;
+    }
+
+    textarea{
+        height:100px;
+        padding:12px;
+        font-size:13px;
+    }
+
+    input[type="file"]{
+        padding:12px;
+        font-size:13px;
+    }
+
+    button{
+        padding:13px;
+        font-size:14px;
+    }
+
+    .helper{
+        font-size:12px;
+    }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:360px){
+
+    body{
+        padding:8px;
+    }
+
+    .box{
+        padding:20px 15px;
+    }
+
+    h2{
+        font-size:22px;
+    }
+
+    .sub{
+        font-size:11px;
+    }
+
+    textarea{
+        height:90px;
+        font-size:12px;
+    }
+
+    input[type="file"]{
+        font-size:12px;
+        padding:10px;
+    }
+
+    button{
+        padding:12px;
+        font-size:13px;
+    }
+
+    .helper{
+        font-size:11px;
+    }
+
+}
 
 </style>
 </head>
