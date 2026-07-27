@@ -14,21 +14,21 @@
 <style>
 /* BACKGROUND */
 
+
+html{
+    height:100%;
+}
+
 body{
-    font-family:"Segoe UI",sans-serif;
     margin:0;
-    min-height:100vh;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
-    background:linear-gradient(
-        135deg,
-        #1e1e2f,
-        #2c2c44
-    );
+    overflow:hidden; /* Scroll બંધ */
+    font-family:"Segoe UI",sans-serif;
+    background:linear-gradient(135deg,#1e1e2f,#2c2c44);
 }
-
 
 /* LOGIN CARD */
 
@@ -44,7 +44,11 @@ body{
     transition:.3s;
     text-align:center;
 }
-
+.box{
+    width:min(400px,90vw);
+    max-height:90vh;
+    overflow:auto;
+}
 .box:hover{
     transform:translateY(-5px);
 }
