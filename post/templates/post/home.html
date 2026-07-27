@@ -6,276 +6,7 @@
 
   <link rel="stylesheet" href="{% static 'css/home.css' %}" />
 
-  <style>
-    .like-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #fff;
-      font-size: 15px;
-    }
-    
-    .like-btn i {
-      font-size: 20px;
-      transition: 0.3s;
-    }
-    
-    .like-btn:hover i {
-      transform: scale(1.15);
-    }
-    
-    .like-btn .fa-solid {
-      color: #ff3040;
-    }
-    
-    .post-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .post-menu {
-      position: relative;
-    }
-    
-    .menu-btn {
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      padding: 5px;
-    }
-    
-    .menu-dropdown {
-      position: absolute;
-      top: 35px;
-      right: 0;
-      width: 150px;
-      background: #32313b;
-      border-radius: 10px;
-      border: 1px solid #444;
-      display: none;
-      overflow: hidden;
-      z-index: 1000;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-    /* ---------- 3 DOT MENU ---------- */
-    
-    .post-menu {
-      position: relative;
-    }
-    
-    .menu-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 50%;
-      transition: 0.3s;
-    }
-    
-    .menu-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-    
-    .menu-dropdown {
-      position: absolute;
-      top: 38px;
-      right: 0;
-      width: 160px;
-      background: #32313b;
-      border: 1px solid #444;
-      border-radius: 10px;
-      display: none;
-      overflow: hidden;
-      z-index: 1000;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    }
-    
-    .menu-dropdown a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 15px;
-      color: #fff;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    
-    .menu-dropdown a:hover {
-      background: #3d3c47;
-    }
-    
-    .menu-dropdown i {
-      width: 18px;
-    }
-    .save-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #fff;
-      font-size: 15px;
-      padding: 0;
-      transition: 0.3s;
-    }
-    
-    .save-btn i {
-      font-size: 20px;
-      transition: 0.3s;
-    }
-    
-    .save-btn:hover i {
-      transform: scale(1.15);
-    }
-    
-    .save-btn .fa-solid {
-      color: #e19c63;
-    }
-    
-    .save-btn:hover {
-      transform: none;
-      box-shadow: none;
-    }
-    
-    .edit-btn:hover,
-    .delete-btn:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(225, 85, 168, 0.35);
-    }
-    /* =======================
-                   LIKES POPUP
-      ======================= */
-    
-    .likes-popup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    
-    .likes-box {
-      width: 360px;
-      max-height: 500px;
-      background: #27262e;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-    }
-    
-    .likes-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .likes-header span {
-      font-size: 26px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    
-    .likes-header span:hover {
-      color: #ff4d67;
-    }
-    
-    #likesList {
-      max-height: 420px;
-      overflow-y: auto;
-    }
-    
-    .like-user {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      text-decoration: none;
-      color: #fff;
-      transition: 0.3s;
-    }
-    
-    .like-user:hover {
-      background: #32313b;
-    }
-    
-    .like-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #444;
-    }
-    
-    .like-user span {
-      font-size: 15px;
-      font-weight: 500;
-    }
-    
-    /* Scrollbar */
-    
-    #likesList::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    #likesList::-webkit-scrollbar-thumb {
-      background: #555;
-      border-radius: 10px;
-    }
-    
-    #likesList::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .no-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: #e19c63;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: 700;
-      border: 2px solid #444;
-      flex-shrink: 0;
-    }
-    
 
-.post-image{
-    width:100%;
-    max-width:500px;
-    height:350px;
-    margin:15px auto 0;
-    display:block;
-    border-radius:15px;
-    object-fit:contain; /* આખી image દેખાશે */
-    background:#1f1d2b;
-    border:2px solid rgba(255,255,255,.05);
-}
-  </style>
 {% endblock %}
 
 {% block content %}
@@ -329,28 +60,28 @@
 
             <!-- MENU -->
 
-              <div class="post-menu">
-                <button type="button" class="menu-btn" onclick="toggleMenu(event,this)"><i class="fa-solid fa-ellipsis"></i></button>
+            <div class="post-menu">
+              <button type="button" class="menu-btn" onclick="toggleMenu(event,this)"><i class="fa-solid fa-ellipsis"></i></button>
 
-                <div class="menu-dropdown">
-                  {% if current_user.id == post.user.id %}
-                    <a href="{% url 'edit_post' post.id %}">
-                      <i class="fa-solid fa-pen"></i>
-                      Edit
-                    </a>
-
-                    <a href="{% url 'delete_post' post.id %}">
-                      <i class="fa-solid fa-trash"></i>
-                      Delete
-                    </a>
-                  {% endif %}
-
-                  <a href="#" onclick="showLikes(event, {{ post.id }}); return false;">
-                    <i class="fa-solid fa-heart"></i>
-                    Likes List
+              <div class="menu-dropdown">
+                {% if current_user.id == post.user.id %}
+                  <a href="{% url 'edit_post' post.id %}">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
                   </a>
-                </div>
+
+                  <a href="{% url 'delete_post' post.id %}">
+                    <i class="fa-solid fa-trash"></i>
+                    Delete
+                  </a>
+                {% endif %}
+
+                <a href="#" onclick="showLikes(event, {{ post.id }}); return false;">
+                  <i class="fa-solid fa-heart"></i>
+                  Likes List
+                </a>
               </div>
+            </div>
           </div>
 
           <!-- TITLE -->
@@ -361,7 +92,7 @@
 
           <p class="post-content">{{ post.content|truncatechars:100 }}</p>
 
-          <!-- IMAGE -->
+          {% comment %} <!-- IMAGE -->
 
           {% if post.total_images > 0 %}
             <div class="slider-container">
@@ -377,8 +108,10 @@
             </div>
           {% elif post.image %}
             <img src="{{ post.image.url }}" class="post-image" />
-          {% endif %}
-
+          {% endif %} {% endcomment %}
+          <div class="image-box">
+            <img src="{{ post.image.url }}" class="post-image" />
+          </div>
           <!-- ACTIONS -->
 
           <div class="post-actions">
