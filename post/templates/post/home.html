@@ -5,8 +5,6 @@
   <title>POSTIFY | Home</title>
 
   <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-
-
 {% endblock %}
 
 {% block content %}
@@ -109,9 +107,11 @@
           {% elif post.image %}
             <img src="{{ post.image.url }}" class="post-image" />
           {% endif %} {% endcomment %}
-          <div class="image-box">
-            <img src="{{ img.image.url }}" class="post-image" />
-          </div>
+          {% if post.image %}
+            <div class="image-box">
+              <img src="{{ post.image.url }}" alt="Post Image" class="post-image" />
+            </div>
+          {% endif %}
           <!-- ACTIONS -->
 
           <div class="post-actions">
