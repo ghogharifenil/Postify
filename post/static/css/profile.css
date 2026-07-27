@@ -5,9 +5,7 @@ body{
     padding:0;
 }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
+/* MAIN LAYOUT */
 
 .profile-layout{
     display:flex;
@@ -16,9 +14,7 @@ body{
     align-items:flex-start;
 }
 
-/* =========================
-   LEFT PANEL
-========================= */
+/* LEFT PANEL */
 
 .profile-left{
     width:30%;
@@ -34,9 +30,7 @@ body{
     box-shadow:0 8px 30px rgba(138,71,214,.15);
 }
 
-/* =========================
-   PROFILE IMAGE
-========================= */
+/* PROFILE IMAGE */
 
 .profile-pic{
     width:140px;
@@ -55,24 +49,21 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    border-radius:50%;
     font-size:45px;
     font-weight:bold;
     color:#fff;
-    border-radius:50%;
     background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
     box-shadow:0 0 25px rgba(225,85,168,.35);
 }
 
-/* =========================
-   TEXT
-========================= */
+/* TEXT */
 
 .profile-name{
     margin-top:18px;
     font-size:28px;
     font-weight:700;
     background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
-    background-clip:text;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
@@ -89,23 +80,20 @@ body{
 
 .profile-city i{
     background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
-    background-clip:text;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
 .profile-posts{
-    margin-top:18px;
+    margin-top:20px;
     padding:12px;
-    border-radius:15px;
+    border-radius:12px;
     background:#1f1d2b;
-    color:#d8d8d8;
+    color:#fff;
     font-weight:600;
 }
 
-/* =========================
-   RIGHT SIDE
-========================= */
+/* RIGHT */
 
 .profile-right{
     width:70%;
@@ -114,48 +102,42 @@ body{
     gap:20px;
 }
 
-/* =========================
-   POST CARD
-========================= */
+/* POST CARD */
 
 .post-card{
     padding:22px;
-    border-radius:25px;
+    border-radius:20px;
     background:rgba(31,29,43,.95);
     border:1px solid rgba(255,255,255,.05);
     backdrop-filter:blur(15px);
-    box-shadow:0 8px 30px rgba(138,71,214,.15);
-    transition:.35s;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    transition:.3s;
 }
 
 .post-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 0 30px rgba(225,85,168,.25);
+    transform:translateY(-5px);
 }
 
-/* =========================
-   TITLE & CONTENT
-========================= */
+/* TITLE */
 
 .post-title{
-    font-size:22px;
-    margin-bottom:12px;
+    margin:0 0 15px;
+    font-size:24px;
     font-weight:700;
     background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
-    background-clip:text;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
+/* CONTENT */
+
 .post-content{
+    color:#c5c5d4;
     line-height:1.8;
-    font-size:14px;
-    color:#b8b8c8;
+    font-size:15px;
 }
 
-/* =========================
-   IMAGE (FIXED)
-========================= */
+/* IMAGE */
 
 .image-box{
     width:100%;
@@ -163,43 +145,38 @@ body{
     overflow:hidden;
     border-radius:15px;
     background:#1f1d2b;
-    border:2px solid rgba(255,255,255,.05);
 }
 
 .post-image{
     width:100%;
-    height:auto;
-    max-height:350px;
-    display:block;
+    max-height:450px;
     object-fit:cover;
-    object-position:center;
-    transition:.35s;
+    display:block;
+    transition:.3s;
 }
 
 .post-image:hover{
-    transform:scale(1.02);
+    transform:scale(1.03);
 }
 
-/* =========================
-   ACTIONS
-========================= */
+/* ACTIONS */
 
 .post-actions{
-    margin-top:20px;
     display:flex;
+    align-items:center;
     gap:12px;
-    flex-wrap:wrap;
+    margin-top:20px;
 }
 
 .edit-btn,
 .delete-btn{
     text-decoration:none;
-    padding:10px 16px;
-    border-radius:12px;
+    padding:10px 18px;
+    border-radius:10px;
+    color:#fff;
     font-size:14px;
     font-weight:600;
-    color:#fff;
-    transition:.35s;
+    transition:.3s;
 }
 
 .edit-btn{
@@ -212,23 +189,19 @@ body{
 
 .edit-btn:hover,
 .delete-btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 8px 20px rgba(225,85,168,.35);
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(225,85,168,.3);
 }
 
-/* =========================
-   EMPTY POST
-========================= */
+/* EMPTY */
 
 .post-card:empty{
     text-align:center;
-    color:#b8b8c8;
-    padding:40px 20px;
+    color:#aaa;
+    padding:40px;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
+/* SCROLLBAR */
 
 ::-webkit-scrollbar{
     width:8px;
@@ -242,7 +215,6 @@ body{
     background:linear-gradient(#0e67b8,#8a47d6,#e155a8,#ff9567);
     border-radius:20px;
 }
-
 /* =========================
    TABLET
 ========================= */
