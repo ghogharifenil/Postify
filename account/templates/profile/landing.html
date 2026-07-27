@@ -7,163 +7,247 @@
 <title>POSTIFY</title>
 <link rel="icon" type="image/png"
           href="{% static 'images/weblogo.png' %}">
-<style>
-
+          <style>
 /* RESET */
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Segoe UI",sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
 }
 
 /* BACKGROUND */
 body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#1e1e2f,#2c2c44);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg,#1e1e2f,#2c2c44);
 }
 
 /* MAIN CARD */
 .container{
-width:420px;
-padding:40px;
-text-align:center;
-background:rgba(255,255,255,0.05);
-backdrop-filter: blur(12px);
-border-radius:25px;
-box-shadow:0 20px 60px rgba(0,0,0,0.4);
-border:1px solid rgba(255,255,255,0.08);
+    width:100%;
+    max-width:420px;
+    padding:40px 30px;
+    text-align:center;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    border:1px solid rgba(255,255,255,.08);
 }
 
 /* LOGO */
-.logo img{
-width:95px;
-height:95px;
-border-radius:22px;
-object-fit:cover;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+.logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:25px;
+    text-decoration:none;
+    transform:none !important;
+    transition:none !important;
 }
 
+.logo:hover{
+    transform:none !important;
+}
+
+.logo-img{
+    width:340px;
+    max-width:100%;
+    height:auto;
+    display:block;
+    object-fit:contain;
+    margin:0;
+    padding:0;
+    transform:none !important;
+    transition:none !important;
+}
+
+.logo-img:hover{
+    transform:none !important;
+}
+
+/* LOGO TEXT */
 .logo-text{
-font-size:36px;
-font-weight:800;
-margin-top:15px;
-letter-spacing:1px;
-color:white;
+    font-size:36px;
+    font-weight:800;
+    margin-top:15px;
+    letter-spacing:1px;
+    color:#fff;
 }
 
 .logo-text span{
-color:#E19C63;
+    color:#E19C63;
 }
 
 /* TAGLINE */
 .tagline{
-margin-top:10px;
-font-size:14px;
-color:#cfcfcf;
-line-height:1.6;
+    margin-top:10px;
+    font-size:14px;
+    color:#cfcfcf;
+    line-height:1.6;
 }
 
 /* BUTTONS */
 .buttons{
-margin-top:30px;
-display:flex;
-flex-direction:column;
-gap:14px;
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 
 .btn{
-text-decoration:none;
-padding:13px;
-border-radius:14px;
-font-weight:600;
-font-size:15px;
-transition:0.3s;
-display:block;
+    width:100%;
+    text-decoration:none;
+    padding:14px;
+    border-radius:14px;
+    font-weight:600;
+    font-size:15px;
+    transition:.3s;
+    display:block;
 }
 
-/* LOGIN BUTTON */
+/* LOGIN */
 .login{
-background:#4a6cf7;
-color:white;
-box-shadow:0 10px 20px rgba(74,108,247,0.3);
+    background:#4a6cf7;
+    color:#fff;
+    box-shadow:0 10px 20px rgba(74,108,247,.3);
 }
 
 .login:hover{
-transform:translateY(-3px);
-background:#3a57d6;
+    transform:translateY(-3px);
+    background:#3a57d6;
 }
 
-/* REGISTER BUTTON */
+/* REGISTER */
 .register{
-background:#E19C63;
-color:#1a1a1a;
-box-shadow:0 10px 20px rgba(225,156,99,0.25);
+    background:#E19C63;
+    color:#1a1a1a;
+    box-shadow:0 10px 20px rgba(225,156,99,.25);
 }
 
 .register:hover{
-transform:translateY(-3px);
-opacity:0.9;
+    transform:translateY(-3px);
+    opacity:.9;
 }
 
 /* FOOTER */
 .footer-text{
-margin-top:25px;
-font-size:12px;
-color:#aaa;
-}
-/* LOGO */
-
-.logo{
-display:flex;
-justify-content:center;
-align-items:center;
-
-margin-bottom:25px;
-
-text-decoration:none;
-
-/* hover zoom remove */
-transform:none !important;
-transition:none !important;
+    margin-top:25px;
+    font-size:12px;
+    color:#aaa;
 }
 
-.logo:hover{
-transform:none !important;
+/* ========================= */
+/* TABLET */
+/* ========================= */
+
+@media (max-width:768px){
+
+    body{
+        padding:20px;
+    }
+
+    .container{
+        max-width:100%;
+        padding:35px 25px;
+        border-radius:22px;
+    }
+
+    .logo-img{
+        width:260px;
+    }
+
+    .logo-text{
+        font-size:30px;
+    }
+
+    .tagline{
+        font-size:13px;
+    }
+
+    .btn{
+        font-size:15px;
+        padding:13px;
+    }
+
 }
 
-.logo-img{
-width:340px;
-height:90px;
-
-display:block;
-
-object-fit:contain;
-
-/* remove extra space */
-margin:0;
-padding:0;
-
-/* remove hover effect */
-transform:none !important;
-transition:none !important;
-
-
-.logo-img:hover{
-transform:none !important;
-}
-
+/* ========================= */
 /* MOBILE */
+/* ========================= */
 
-@media(max-width:700px){
+@media (max-width:480px){
 
-.logo-img{
-width:50px;
-height:50px;
+    body{
+        padding:15px;
+        align-items:center;
+    }
+
+    .container{
+        padding:28px 20px;
+        border-radius:18px;
+    }
+
+    .logo-img{
+        width:200px;
+    }
+
+    .logo-text{
+        font-size:26px;
+    }
+
+    .tagline{
+        font-size:12px;
+        line-height:1.5;
+    }
+
+    .buttons{
+        margin-top:22px;
+        gap:12px;
+    }
+
+    .btn{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .footer-text{
+        font-size:11px;
+        margin-top:20px;
+    }
+
 }
+
+/* ========================= */
+/* EXTRA SMALL DEVICES */
+/* ========================= */
+
+@media (max-width:320px){
+
+    .container{
+        padding:22px 15px;
+    }
+
+    .logo-img{
+        width:170px;
+    }
+
+    .logo-text{
+        font-size:22px;
+    }
+
+    .tagline{
+        font-size:11px;
+    }
+
+    .btn{
+        font-size:13px;
+        padding:11px;
+    }
 
 }
 </style>
