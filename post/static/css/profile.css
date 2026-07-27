@@ -1,177 +1,485 @@
-body {
-  background: #14131b;
-  font-family: Arial, sans-serif;
+body{
+    background:#14131b;
+    font-family:Arial,sans-serif;
+    margin:0;
+    padding:0;
 }
-/* MAIN LAYOUT */
-.profile-layout {
-  display: flex;
-  gap: 25px;
- padding: 25px;
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.profile-layout{
+    display:flex;
+    gap:25px;
+    padding:25px;
+    align-items:flex-start;
 }
-/* LEFT PANEL */
-.profile-left {
-  width: 30%;
-  padding: 30px;
-  text-align: center;
-  position: sticky;
-  top: 100px;
-  height: fit-content;
-  background: rgba(31, 29, 43, 0.95);
-  border-radius: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.profile-left{
+    width:30%;
+    padding:30px;
+    text-align:center;
+    position:sticky;
+    top:100px;
+    height:fit-content;
+    background:rgba(31,29,43,.95);
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.05);
+    backdrop-filter:blur(15px);
+    box-shadow:0 8px 30px rgba(138,71,214,.15);
 }
-/* PROFILE IMAGE */
-.profile-pic {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  padding: 4px;
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  box-shadow: 0 0 25px rgba(225, 85, 168, 0.35);
+
+/* =========================
+   PROFILE IMAGE
+========================= */
+
+.profile-pic{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    padding:4px;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    box-shadow:0 0 25px rgba(225,85,168,.35);
 }
-.default-pic {
-  width: 140px;
-  height: 140px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 45px;
-  font-weight: bold;
-  color: white;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  box-shadow: 0 0 25px rgba(225, 85, 168, 0.35);
+
+.default-pic{
+    width:140px;
+    height:140px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:45px;
+    font-weight:bold;
+    color:#fff;
+    border-radius:50%;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    box-shadow:0 0 25px rgba(225,85,168,.35);
 }
-/* NAME */
-.profile-name {
-  margin-top: 18px;
-  font-size: 28px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+/* =========================
+   TEXT
+========================= */
+
+.profile-name{
+    margin-top:18px;
+    font-size:28px;
+    font-weight:700;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
-/* CITY */
-.profile-city {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #b8b8c8;
+
+.profile-city{
+    margin-top:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    color:#b8b8c8;
 }
-.profile-city i {
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+.profile-city i{
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
-/* POSTS COUNT */
-.profile-posts {
-  margin-top: 18px;
-  padding: 12px;
-  border-radius: 15px;
-  background: #1f1d2b;
-  color: #d8d8d8;
-  font-weight: 600;
+
+.profile-posts{
+    margin-top:18px;
+    padding:12px;
+    border-radius:15px;
+    background:#1f1d2b;
+    color:#d8d8d8;
+    font-weight:600;
 }
-/* RIGHT SIDE */
-.profile-right {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.profile-right{
+    width:70%;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
 }
-/* POST CARD */
-.post-card {
-  padding: 22px;
-  border-radius: 25px;
-  background: rgba(31, 29, 43, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(15px);
-  box-shadow: 0 8px 30px rgba(138, 71, 214, 0.15);
-  transition: 0.4s;
+
+/* =========================
+   POST CARD
+========================= */
+
+.post-card{
+    padding:22px;
+    border-radius:25px;
+    background:rgba(31,29,43,.95);
+    border:1px solid rgba(255,255,255,.05);
+    backdrop-filter:blur(15px);
+    box-shadow:0 8px 30px rgba(138,71,214,.15);
+    transition:.35s;
 }
-.post-card:hover {
-  transform: translateY(-6px);
- box-shadow: 0 0 30px rgba(225, 85, 168, 0.25);
+
+.post-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 30px rgba(225,85,168,.25);
 }
-/* TITLE */
-.post-title {
-  font-size: 22px;
-  margin-bottom: 12px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #0e67b8, #8a47d6, #e155a8, #ff9567);
-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
+/* =========================
+   TITLE & CONTENT
+========================= */
+
+.post-title{
+    font-size:22px;
+    margin-bottom:12px;
+    font-weight:700;
+    background:linear-gradient(135deg,#0e67b8,#8a47d6,#e155a8,#ff9567);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
-/* CONTENT */
-.post-content {
-  line-height: 1.8;
-  font-size: 14px;
-  color: #b8b8c8;
+
+.post-content{
+    line-height:1.8;
+    font-size:14px;
+    color:#b8b8c8;
 }
-/* IMAGE */
-.post-image {
-  width: 100%;
-  max-height: 300px;
-  margin-top: 15px;
-  object-fit: contain;
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.05);
-  transition: 0.4s;
+
+/* =========================
+   IMAGE (FIXED)
+========================= */
+
+.image-box{
+    width:100%;
+    margin:18px 0;
+    overflow:hidden;
+    border-radius:15px;
+    background:#1f1d2b;
+    border:2px solid rgba(255,255,255,.05);
 }
-.post-image:hover {
-  transform: scale(1.02);
+
+.post-image{
+    width:100%;
+    height:auto;
+    max-height:350px;
+    display:block;
+    object-fit:cover;
+    object-position:center;
+    transition:.35s;
 }
-/* ACTIONS */
-.post-actions {
-  margin-top: 20px;
-  display: flex;
-  gap: 12px;
+
+.post-image:hover{
+    transform:scale(1.02);
 }
-/* BUTTONS */
+
+/* =========================
+   ACTIONS
+========================= */
+
+.post-actions{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
 .edit-btn,
-.delete-btn {
-  text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  transition: 0.4s;
+.delete-btn{
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:12px;
+    font-size:14px;
+    font-weight:600;
+    color:#fff;
+    transition:.35s;
 }
-.edit-btn {
-  background: linear-gradient(135deg, #0e67b8, #8a47d6);
+
+.edit-btn{
+    background:linear-gradient(135deg,#0e67b8,#8a47d6);
 }
-.delete-btn {
-  background: linear-gradient(135deg, #e155a8, #ff9567);
+
+.delete-btn{
+    background:linear-gradient(135deg,#e155a8,#ff9567);
 }
+
 .edit-btn:hover,
-.delete-btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(225, 85, 168, 0.35);
+.delete-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 20px rgba(225,85,168,.35);
 }
-/* EMPTY POST */
-.post-card:empty {
-  text-align: center;
-  color: #b8b8c8;
+
+/* =========================
+   EMPTY POST
+========================= */
+
+.post-card:empty{
+    text-align:center;
+    color:#b8b8c8;
+    padding:40px 20px;
 }
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .profile-layout {
-    flex-direction: column;
-  }
-  .profile-left,
-  .profile-right {
-    width: 100%;
-  }
-  .profile-left {
-    position: relative;
-    top: 0;
-  }
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:#1f1d2b;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#0e67b8,#8a47d6,#e155a8,#ff9567);
+    border-radius:20px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:992px){
+
+.profile-layout{
+    flex-direction:column;
+    padding:20px;
+    gap:20px;
+}
+
+.profile-left,
+.profile-right{
+    width:100%;
+}
+
+.profile-left{
+    position:relative;
+    top:0;
+}
+
+.profile-pic,
+.default-pic{
+    width:120px;
+    height:120px;
+}
+
+.profile-name{
+    font-size:24px;
+}
+
+.post-title{
+    font-size:20px;
+}
+
+.post-image{
+    max-height:300px;
+}
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+.profile-layout{
+    padding:15px;
+}
+
+.profile-left{
+    padding:20px;
+    border-radius:20px;
+}
+
+.profile-right{
+    gap:16px;
+}
+
+.post-card{
+    padding:18px;
+    border-radius:20px;
+}
+
+.profile-pic,
+.default-pic{
+    width:100px;
+    height:100px;
+}
+
+.default-pic{
+    font-size:34px;
+}
+
+.profile-name{
+    font-size:22px;
+}
+
+.profile-city{
+    font-size:13px;
+}
+
+.profile-posts{
+    font-size:14px;
+}
+
+.post-title{
+    font-size:18px;
+}
+
+.post-content{
+    font-size:13px;
+    line-height:1.7;
+}
+
+.image-box{
+    margin-top:15px;
+}
+
+.post-image{
+    max-height:250px;
+}
+
+.post-actions{
+    justify-content:space-between;
+    gap:10px;
+}
+
+.edit-btn,
+.delete-btn{
+    flex:1;
+    text-align:center;
+    font-size:13px;
+    padding:10px;
+}
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+.profile-layout{
+    padding:10px;
+}
+
+.profile-left{
+    padding:16px;
+}
+
+.post-card{
+    padding:15px;
+}
+
+.profile-pic,
+.default-pic{
+    width:85px;
+    height:85px;
+}
+
+.default-pic{
+    font-size:28px;
+}
+
+.profile-name{
+    font-size:20px;
+}
+
+.profile-city{
+    font-size:12px;
+}
+
+.profile-posts{
+    padding:10px;
+    font-size:13px;
+}
+
+.post-title{
+    font-size:17px;
+}
+
+.post-content{
+    font-size:12px;
+}
+
+.image-box{
+    border-radius:12px;
+}
+
+.post-image{
+    max-height:220px;
+    border-radius:12px;
+}
+
+.post-actions{
+    flex-direction:column;
+}
+
+.edit-btn,
+.delete-btn{
+    width:100%;
+}
+
+}
+
+/* =========================
+   EXTRA SMALL DEVICES
+========================= */
+
+@media (max-width:360px){
+
+.profile-layout{
+    padding:8px;
+}
+
+.profile-left{
+    padding:14px;
+}
+
+.post-card{
+    padding:14px;
+}
+
+.profile-pic,
+.default-pic{
+    width:75px;
+    height:75px;
+}
+
+.default-pic{
+    font-size:24px;
+}
+
+.profile-name{
+    font-size:18px;
+}
+
+.post-title{
+    font-size:16px;
+}
+
+.post-content{
+    font-size:11px;
+}
+
+.post-image{
+    max-height:180px;
+}
+
+.edit-btn,
+.delete-btn{
+    font-size:12px;
+    padding:9px;
+}
+
 }
