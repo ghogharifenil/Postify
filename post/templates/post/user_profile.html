@@ -33,7 +33,7 @@
     <!-- RIGHT POSTS -->
     <div class="profile-right">
       {% for post in posts %}
-        <div class="post-card">
+        <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{{ post.first_image|default:'' }}">
           <!-- HEADER -->
           <div class="post-header">
             <h2 class="post-title">{{ post.title }}</h2>
@@ -66,10 +66,11 @@
           <p class="post-content">{{ post.content }}</p>
 
           <!-- IMAGE -->
-          {% if post.image %}
-            <img src="{{ post.image.url }}" class="post-image" />
+          {% if post.first_image %}
+            <img src="{{ post.first_image }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
           {% endif %}
-
+          
+           
           <!-- ACTIONS -->
           <div class="post-actions">
             <button class="like-btn" data-id="{{ post.id }}">
