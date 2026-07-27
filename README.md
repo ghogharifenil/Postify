@@ -1,4 +1,3 @@
-# Postify
 # 🚀 POSTIFY
 
 A modern Social Media Web Application built with **Python Django** where users can create posts, connect with others, like, save, and manage their profiles.
@@ -109,37 +108,14 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-### Create Superuser
 
-```bash
-python manage.py createsuperuser
-```
 
 ### Run Server
 
 ```bash
 python manage.py runserver
-```
-
-Open
 
 ```
-http://127.0.0.1:8000/
-```
-
----
-
-## 📸 Screenshots
-
-Add your screenshots here.
-
-- Home Page
-- Login Page
-- Register Page
-- Profile Page
-- Create Post
-- Notifications
-
 ---
 
 ## 🔮 Future Improvements
@@ -147,9 +123,7 @@ Add your screenshots here.
 - 💬 Real-time Chat
 - 📹 Video Posts
 - 📖 Stories
-- 📞 Voice & Video Calling
 - 🌙 Dark/Light Mode
-- 🤖 AI Content Suggestions
 
 ---
 
@@ -177,8 +151,8 @@ This project is developed for learning and portfolio purposes.
 
 Python Django Developer
 
-GitHub: https://github.com/YOUR_USERNAME
-
+GitHub: https://github.com/ghogharifenil
+Repo : https://github.com/ghogharifenil/Postify
 ---
 
 ⭐ If you like this project, don't forget to Star this repository!
