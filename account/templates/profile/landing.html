@@ -8,246 +8,246 @@
 <link rel="icon" type="image/png"
           href="{% static 'images/weblogo.png' %}">
           <style>
-/* RESET */
+/* =========================
+   RESET
+========================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Segoe UI",sans-serif;
 }
 
-/* BACKGROUND */
+html{
+    width:100%;
+    height:100%;
+}
+
 body{
+    width:100%;
     min-height:100vh;
+    margin:0;
+    padding:20px;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:20px;
+    overflow-x:hidden;
+    font-family:"Segoe UI",sans-serif;
     background:linear-gradient(135deg,#1e1e2f,#2c2c44);
 }
 
-/* MAIN CARD */
+/* =========================
+   CARD
+========================= */
+
 .container{
     width:100%;
     max-width:420px;
-    padding:40px 30px;
+    padding:35px 28px;
     text-align:center;
-    background:rgba(255,255,255,0.05);
+
+    background:rgba(255,255,255,.05);
     backdrop-filter:blur(12px);
-    border-radius:25px;
-    box-shadow:0 20px 60px rgba(0,0,0,.4);
+
+    border-radius:24px;
     border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
-/* LOGO */
-.logo{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:25px;
-    text-decoration:none;
-    transform:none !important;
-    transition:none !important;
-}
+/* =========================
+   IMAGES
+========================= */
 
-.logo:hover{
-    transform:none !important;
-}
-
-.logo-img{
-    width:340px;
+img{
     max-width:100%;
     height:auto;
     display:block;
+}
+
+.logo{
+    display:flex;
+    justify-content:center;
+    margin-bottom:18px;
+}
+
+.logo img{
+    width:90px;
+    height:90px;
     object-fit:contain;
-    margin:0;
-    padding:0;
-    transform:none !important;
-    transition:none !important;
 }
 
-.logo-img:hover{
-    transform:none !important;
-}
-
-/* LOGO TEXT */
 .logo-text{
-    font-size:36px;
-    font-weight:800;
-    margin-top:15px;
-    letter-spacing:1px;
-    color:#fff;
+    display:flex;
+    justify-content:center;
+    margin-bottom:15px;
 }
 
-.logo-text span{
-    color:#E19C63;
+.logo-img{
+    width:100%;
+    max-width:260px;
+    object-fit:contain;
 }
 
-/* TAGLINE */
+/* =========================
+   TAGLINE
+========================= */
+
 .tagline{
-    margin-top:10px;
+    color:#d4d4d4;
     font-size:14px;
-    color:#cfcfcf;
     line-height:1.6;
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
+
 .buttons{
-    margin-top:30px;
     display:flex;
     flex-direction:column;
-    gap:14px;
+    gap:15px;
+    margin-top:28px;
 }
 
 .btn{
     width:100%;
-    text-decoration:none;
     padding:14px;
     border-radius:14px;
-    font-weight:600;
+    text-decoration:none;
     font-size:15px;
+    font-weight:600;
     transition:.3s;
-    display:block;
 }
 
-/* LOGIN */
 .login{
     background:#4a6cf7;
     color:#fff;
-    box-shadow:0 10px 20px rgba(74,108,247,.3);
 }
 
 .login:hover{
-    transform:translateY(-3px);
-    background:#3a57d6;
+    background:#3559e5;
 }
 
-/* REGISTER */
 .register{
     background:#E19C63;
-    color:#1a1a1a;
-    box-shadow:0 10px 20px rgba(225,156,99,.25);
+    color:#1b1b1b;
 }
 
 .register:hover{
-    transform:translateY(-3px);
     opacity:.9;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
+
 .footer-text{
-    margin-top:25px;
-    font-size:12px;
+    margin-top:24px;
     color:#aaa;
+    font-size:12px;
 }
 
-/* ========================= */
-/* TABLET */
-/* ========================= */
+/* =========================
+   TABLET
+========================= */
 
-@media (max-width:768px){
+@media(max-width:768px){
 
-    body{
-        padding:20px;
-    }
+.container{
+    max-width:400px;
+    padding:30px 24px;
+}
 
-    .container{
-        max-width:100%;
-        padding:35px 25px;
-        border-radius:22px;
-    }
+.logo img{
+    width:80px;
+    height:80px;
+}
 
-    .logo-img{
-        width:260px;
-    }
+.logo-img{
+    max-width:220px;
+}
 
-    .logo-text{
-        font-size:30px;
-    }
-
-    .tagline{
-        font-size:13px;
-    }
-
-    .btn{
-        font-size:15px;
-        padding:13px;
-    }
+.tagline{
+    font-size:13px;
+}
 
 }
 
-/* ========================= */
-/* MOBILE */
-/* ========================= */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width:480px){
+@media(max-width:480px){
 
-    body{
-        padding:15px;
-        align-items:center;
-    }
+body{
+    padding:15px;
+}
 
-    .container{
-        padding:28px 20px;
-        border-radius:18px;
-    }
+.container{
+    padding:24px 18px;
+    border-radius:20px;
+}
 
-    .logo-img{
-        width:200px;
-    }
+.logo img{
+    width:70px;
+    height:70px;
+}
 
-    .logo-text{
-        font-size:26px;
-    }
+.logo-img{
+    max-width:180px;
+}
 
-    .tagline{
-        font-size:12px;
-        line-height:1.5;
-    }
+.tagline{
+    font-size:12px;
+}
 
-    .buttons{
-        margin-top:22px;
-        gap:12px;
-    }
+.btn{
+    padding:13px;
+    font-size:14px;
+}
 
-    .btn{
-        padding:12px;
-        font-size:14px;
-    }
-
-    .footer-text{
-        font-size:11px;
-        margin-top:20px;
-    }
+.footer-text{
+    font-size:11px;
+}
 
 }
 
-/* ========================= */
-/* EXTRA SMALL DEVICES */
-/* ========================= */
+/* =========================
+   SMALL MOBILE
+========================= */
 
-@media (max-width:320px){
+@media(max-width:360px){
 
-    .container{
-        padding:22px 15px;
-    }
+body{
+    padding:10px;
+}
 
-    .logo-img{
-        width:170px;
-    }
+.container{
+    padding:20px 15px;
+}
 
-    .logo-text{
-        font-size:22px;
-    }
+.logo img{
+    width:60px;
+    height:60px;
+}
 
-    .tagline{
-        font-size:11px;
-    }
+.logo-img{
+    max-width:150px;
+}
 
-    .btn{
-        font-size:13px;
-        padding:11px;
-    }
+.tagline{
+    font-size:11px;
+}
+
+.btn{
+    padding:12px;
+    font-size:13px;
+}
+
+.footer-text{
+    font-size:10px;
+}
 
 }
 </style>
@@ -257,10 +257,10 @@ body{
 
 <div class="container">
 
-    {% comment %} <!-- LOGO -->
+    <!-- LOGO -->
     <div class="logo">
         <img src="{% static 'img/weblogo1.png' %}" alt="POSTIFY Logo">
-    </div> {% endcomment %}
+    </div>
 
     <!-- TITLE -->
     <div class="logo-text">
