@@ -2,117 +2,179 @@
 {% load static %}
 
 {% block head %}
-  <title>POSTIFY | Profile</title>
+  <title>POSTIFY | My Profile</title>
 
   <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
-   <style>
-    .like-btn{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:none;
-    border:none;
-    cursor:pointer;
-    color:#fff;
-    font-size:15px;
-}
 
-.like-btn i{
-    font-size:20px;
-    transition:.3s;
-}
-
-.like-btn:hover i{
-    transform:scale(1.15);
-}
-
-.like-btn .fa-solid{
-    color:#ff3040;
-}
-
-
-
+  <style>
+    .like-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: #fff;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+    
+    .like-btn i {
+      font-size: 20px;
+      transition: 0.3s;
+    }
+    
+    .like-btn:hover i {
+      transform: scale(1.15);
+    }
+    
+    .like-btn .fa-solid {
+      color: #ff365f;
+    }
   </style>
 {% endblock %}
 
 {% block content %}
-  <div class="profile-layout">
-    <!-- LEFT -->
-    <div class="profile-left">
-      {% if current_user.profile_pic %}
-        <img src="{{ current_user.profile_pic.url }}" class="profile-pic" />
-      {% else %}
-        <div class="default-pic">{{ current_user.name|first|upper }}</div>
-      {% endif %}
+  <div class="profile-page">
+    <!-- LEFT PROFILE -->
 
-      <div class="profile-name">{{ current_user.name }}</div>
-
-      {% if current_user.city %}
-        <div class="profile-city">
-          <i class="fa-solid fa-location-dot"></i>
-          {{ current_user.city }}
+    <aside class="profile-sidebar">
+      <div class="profile-card">
+        <div class="profile-image-box">
+          {% if current_user.profile_pic %}
+            <img src="{{ current_user.profile_pic.url }}" class="profile-image" alt="{{ current_user.name }}" />
+          {% else %}
+            <div class="default-avatar">{{ current_user.name|first|upper }}</div>
+          {% endif %}
         </div>
-      {% endif %}
 
-      <div class="profile-posts">Posts: {{ posts.count }}</div>
-    </div>
+        <div class="profile-info">
+          <h2 class="profile-name">{{ current_user.name }}</h2>
 
-    <!-- RIGHT -->
-    <div class="profile-right">
-      {% for post in posts %}
-        <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{{ post.first_image|default:'' }}">
-          <div class="post-header">
-          <h2 class="post-title">{{ post.title }}</h2>
+          {% if current_user.city %}
+            <div class="profile-location">
+              <i class="fa-solid fa-location-dot"></i>
 
-          <p class="post-content">{{ post.content }}</p>
-
-            <!-- IMAGE -->
-
-          {% if post.first_image %}
-            <div class="image-box">
-              <img src="{{ post.first_image }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
+              <span>{{ current_user.city }}</span>
             </div>
           {% endif %}
 
-          <div class="post-actions">
-            <a href="{% url 'edit_post' post.id %}" class="edit-btn"><i class="fa-solid fa-pen"></i> Edit</a>
-            <a href="#" class="delete-btn">🗑 Delete</a>
-            <button class="like-btn" data-id="{{ post.id }}">
-              {% if post.id in liked_posts %}
-                <i class="fa-solid fa-heart"></i>
-                <span>{{ post.total_likes }}</span>
-              {% else %}
-                <i class="fa-regular fa-heart"></i>
-                <span>{{ post.total_likes }}</span>
-              {% endif %}
-            </button>
+          <div class="profile-stats">
+            <div class="stat-box">
+              <h3>{{ posts.count }}</h3>
+
+              <span>Posts</span>
+            </div>
           </div>
         </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT POSTS -->
+
+    <section class="profile-content">
+      {% for post in posts %}
+        <article class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{{ post.first_image|default:'' }}">
+          <div class="post-top">
+            <div class="post-user">
+              {% if current_user.profile_pic %}
+                <img src="{{ current_user.profile_pic.url }}" class="mini-profile" />
+              {% else %}
+                <div class="mini-avatar">{{ current_user.name|first|upper }}</div>
+              {% endif %}
+
+              <div class="post-user-info">
+                <h4>{{ current_user.name }}</h4>
+
+                <span>{{ post.created_at|date:'d M Y' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-body">
+            <h2 class="post-title">{{ post.title }}</h2>
+
+            <p class="post-content">{{ post.content }}</p>
+
+            {% if post.first_image %}
+              <div class="post-image-box">
+                <img src="{{ post.first_image }}" class="post-image" alt="{{ post.title }}" loading="lazy" />
+              </div>
+            {% endif %}
+            <div class="post-actions">
+              <a href="{% url 'edit_post' post.id %}" class="profile-edit-btn">
+                <i class="fa-solid fa-pen"></i>
+
+                Edit
+              </a>
+
+              <a href="#" class="profile-delete-btn">
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+              </a>
+
+              <button class="profile-like-btn" data-id="{{ post.id }}">
+                {% if post.id in liked_posts %}
+                  <i class="fa-solid fa-heart"></i>
+
+                  <span>{{ post.total_likes }}</span>
+                {% else %}
+                  <i class="fa-regular fa-heart"></i>
+
+                  <span>{{ post.total_likes }}</span>
+                {% endif %}
+              </button>
+            </div>
+          </div>
+        </article>
       {% empty %}
-        <div class="post-card">No posts yet 🚀</div>
+        <div class="empty-post-card">
+          <h2>No Posts Yet 🚀</h2>
+
+          <p>Start sharing your first post on POSTIFY.</p>
+        </div>
       {% endfor %}
-    </div>
+    </section>
   </div>
 
   <script>
-    document.querySelectorAll('.like-btn').forEach((btn) => {
+    document.querySelectorAll('.profile-like-btn').forEach((btn) => {
       btn.addEventListener('click', function (e) {
         e.stopPropagation()
     
         let postId = this.dataset.id
     
         fetch(`/like/${postId}/`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Request failed')
-            }
-            return response.json()
-          })
+          .then((response) => response.json())
+    
           .then((data) => {
-            this.innerHTML = data.liked ? `<i class="fa-solid fa-heart" style="color:red;"></i><span>${data.total_likes}</span>` : `<i class="fa-regular fa-heart"></i><span>${data.total_likes}</span>`
+            if (data.liked) {
+              this.innerHTML = `
+    
+                    <i class="fa-solid fa-heart"></i>
+    
+                    <span>
+                        ${data.total_likes}
+                    </span>
+    
+                    `
+            } else {
+              this.innerHTML = `
+    
+                    <i class="fa-regular fa-heart"></i>
+    
+                    <span>
+                        ${data.total_likes}
+                    </span>
+    
+                    `
+            }
           })
-          .catch((err) => {
-            console.log(err)
+    
+          .catch((error) => {
+            console.log(error)
           })
       })
     })
