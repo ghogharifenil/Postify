@@ -29,6 +29,29 @@
 .like-btn .fa-solid{
     color:#ff3040;
 }
+
+
+/* ==========================
+   IMAGE
+========================== */
+
+.image-box{
+    width:100%;
+    max-width:500px;
+    margin:15px auto 0;
+    border-radius:15px;
+    overflow:hidden;
+    background:#1f1d2b;
+    border:2px solid rgba(255,255,255,.05);
+}
+
+.image-box img{
+    width:100%;
+    display:block;
+    height:auto;
+    object-fit:cover;
+}
+
   </style>
 {% endblock %}
 
@@ -57,13 +80,18 @@
     <!-- RIGHT -->
     <div class="profile-right">
       {% for post in posts %}
-        <div class="post-card">
+        <div class="post-card" onclick="openPost(this)" data-name="{{ post.user.name }}" data-date="{{ post.created_at|date:'d M Y' }}" data-title="{{ post.title }}" data-content="{{ post.content }}" data-image="{{ post.first_image|default:'' }}">
+          <div class="post-header">
           <h2 class="post-title">{{ post.title }}</h2>
 
           <p class="post-content">{{ post.content }}</p>
 
-          {% if post.image %}
-            <img src="{{ post.image.url }}" class="post-image" />
+            <!-- IMAGE -->
+
+          {% if post.first_image %}
+            <div class="image-box">
+              <img src="{{ post.first_image }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
+            </div>
           {% endif %}
 
           <div class="post-actions">
