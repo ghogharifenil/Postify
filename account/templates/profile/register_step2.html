@@ -267,29 +267,37 @@ button:hover{
 
 <div class="box">
 
-<h2>Complete Profile</h2>
+    <h2>Complete Profile</h2>
 
-<div class="sub">
-Add bio & profile photo to personalize your account
-</div>
+    <div class="sub">
+        Add bio & profile photo to personalize your account
+    </div>
 
-<form method="POST" enctype="multipart/form-data">
+    {% if form.non_field_errors %}
+    <div class="error">
+        {% for error in form.non_field_errors %}
+            {{ error }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-{% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
 
-{{ form.bio }}
+        {% csrf_token %}
 
-{{ form.profile_pic }}
+        {{ form.bio }}
 
-<button type="submit">
-Finish Registration
-</button>
+        {{ form.profile_pic }}
 
-</form>
+        <button type="submit">
+            Finish Registration
+        </button>
 
-<div class="helper">
-Your profile helps people connect with you on POSTIFY 🚀
-</div>
+    </form>
+
+    <div class="helper">
+        Your profile helps people connect with you on POSTIFY 🚀
+    </div>
 
 </div>
 

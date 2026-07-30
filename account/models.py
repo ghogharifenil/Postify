@@ -31,5 +31,5 @@ class Profile(models.Model):
     )
 
 
-def __str__(self):
-    return self.username
+    def __str__(self):
+        return self.username

@@ -5,7 +5,27 @@
   <title>User Profile</title>
   <link rel="stylesheet" href="{% static 'css/user_profile.css' %}" />
 
- 
+  <style>
+    .profile-bio{
+    width:100%;
+    margin-top:18px;
+    padding:14px 16px;
+    background:#32313B;
+    border-radius:12px;
+    color:#ddd;
+    font-size:14px;
+    line-height:1.7;
+    text-align:left;
+    white-space:pre-wrap;
+    word-break:break-word;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.empty-bio{
+    color:#888;
+    font-style:italic;
+}
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -25,6 +45,14 @@
           <i class="fa-solid fa-location-dot"></i>
           {{ profile_user.city }}
         </div>
+      {% endif %}
+
+      <div class="profile-posts">Posts : {{ posts.count }}</div>
+
+      {% if profile_user.bio %}
+        <div class="profile-bio">{{ profile_user.bio|linebreaksbr }}</div>
+      {% else %}
+        <div class="profile-bio empty-bio">No bio added yet.</div>
       {% endif %}
 
       <div class="profile-posts">Posts : {{ posts.count }}</div>
@@ -69,8 +97,7 @@
           {% if post.first_image %}
             <img src="{{ post.first_image }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
           {% endif %}
-          
-           
+
           <!-- ACTIONS -->
           <div class="post-actions">
             <button class="like-btn" data-id="{{ post.id }}">
