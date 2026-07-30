@@ -4,7 +4,13 @@ from .models import Profile
 from .forms import RegisterStep1Form, RegisterStep2Form
 from django.contrib.auth.decorators import login_required
 
+def landing(request):
 
+
+    if request.session.get("profile_id"):
+        return redirect("home")
+
+    return render(request, "profile/landing.html")
 
 # --------------------------------------------------------------------------------
 # ------------------------- Register Step 1 ---------------------------------------
@@ -117,6 +123,7 @@ def register_step2(request):
         "profile/register_step2.html",
         {"form": form}
     )
+
 
 # --------------------------------------------------------------------------------
 # ----------------------------+ LOGIN +-------------------------------------------
