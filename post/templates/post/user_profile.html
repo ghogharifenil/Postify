@@ -44,9 +44,6 @@
           {{ profile_user.city }}
         </div>
       {% endif %}
-
-      <div class="profile-posts">Posts : {{ posts.count }}</div>
-
       {% if profile_user.bio %}
         <div class="profile-bio">{{ profile_user.bio|linebreaksbr }}</div>
       {% endif %}
