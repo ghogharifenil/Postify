@@ -4,7 +4,7 @@ from .models import Post, Profile, Notification, Like, PostImage
 from django.db.models import Q,  Count
 from .decorators import login_require
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_require
+from .decorators import login_require
 from django.utils import timezone
 from datetime import timedelta
 
