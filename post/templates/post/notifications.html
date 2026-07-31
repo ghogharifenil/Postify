@@ -159,22 +159,8 @@
 
           <div class="notification-body">
             <h4><strong>{{ notification.sender.name }}</strong> created a new post.</h4>
-
             <div class="notification-time">{{ notification.created_at|naturaltime }}</div>
 
-            {% if notification.post %}
-              <div class="notification-post">
-                <strong>{{ notification.post.title }}</strong>
-
-                <p>{{ notification.post.content|truncatewords:25 }}</p>
-
-                {% if notification.post.first_image %}
-                  <img src="{{ notification.post.first_image.url }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
-                {% endif %}
-
-                
-              </div>
-            {% endif %}
           </div>
         </div>
       {% endfor %}
