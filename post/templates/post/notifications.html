@@ -168,9 +168,11 @@
 
                 <p>{{ notification.post.content|truncatewords:25 }}</p>
 
-                {% if notification.post.image %}
-                  <img src="{{ notification.post.image.url }}" alt="" />
+                {% if notification.post.first_image %}
+                  <img src="{{ notification.post.first_image.url }}" alt="{{ post.title }}" class="post-image" loading="lazy" />
                 {% endif %}
+
+                
               </div>
             {% endif %}
           </div>
