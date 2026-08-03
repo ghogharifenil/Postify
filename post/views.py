@@ -352,7 +352,7 @@ def notifications(request):
     if "profile_id" not in request.session:
         return redirect("login")
 
-    # 24 કલાકથી જૂની notifications delete
+   
     Notification.objects.filter(
         created_at__lt=timezone.now() - timedelta(hours=24)
     ).delete()
@@ -417,7 +417,7 @@ def edit_post(request, post_id):
 
         post.save()
 
-        return redirect("home")   # અથવા home
+        return redirect("home")   
 
     return render(
         request,
@@ -444,7 +444,7 @@ def delete_post(request, post_id):
 
     if request.method == "POST":
         post.delete()
-        return redirect("home")   # અથવા home
+        return redirect("home")  
 
     return render(
         request,
